@@ -34,11 +34,16 @@ const path = require('path');
 
 //got this code from: https://medium.com/@chloechong.us/how-to-deploy-a-create-react-app-with-an-express-backend-to-heroku-32decfee6d18
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'frontend/build')))
+
+ app.use(express.static(path.join(__dirname, 'frontend/build')))
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/frontend/build/index.html'))
-})
+}) 
+
+
+
+
 
 const uri = "mongodb+srv://dbUserKev:ky131886@cluster0-nn52z.mongodb.net/test?retryWrites=true";
 const olduri = "mongodb://localhost:27017/reference_demo";
