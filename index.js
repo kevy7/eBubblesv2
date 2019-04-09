@@ -55,9 +55,6 @@ if(process.env.NODE_ENV === 'production') {
 
 
 
-
-
-
 //const olduri = "mongodb://localhost:27017/reference_demo";
 mongoose.connect(uri, { useNewUrlParser: true }, function(err, client) {
     if(err){

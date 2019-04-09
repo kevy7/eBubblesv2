@@ -9,6 +9,7 @@ class SignUp extends Component {
         return (
             <div className="SignUp">
                 <h1>Sign Up PAge</h1>
+                <h1>This is a sign up page</h1>
             </div>
         );
     }
