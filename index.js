@@ -49,7 +49,7 @@ if(process.env.NODE_ENV === 'production') {
 
     //For any routes that gets hit here, we're going to load the react index.html file
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(_dirname, 'frontend', 'build', 'index.html'));
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     });
 }
 
