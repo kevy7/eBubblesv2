@@ -31,23 +31,34 @@ app.use(bodyParser.json()); //This is going to allow us to access data stored in
 app.use(bodyParser.urlencoded({extended: true}));
 var mongoose = require("mongoose"); //This is so we can connect to our database via by mongoosedb
 const path = require('path');
+var uri = require("./config/key").mongoURI;
 
 //got this code from: https://medium.com/@chloechong.us/how-to-deploy-a-create-react-app-with-an-express-backend-to-heroku-32decfee6d18
 // Serve static files from the React frontend app
 
-app.use(express.static(path.join(__dirname, 'frontend/build')))
-// Anything that doesn't match the above, send back index.html
+//app.use(express.static(path.join(__dirname, 'frontend/build')))
+
+
 /*
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/frontend/build/index.html'))
-}) 
+New code written here
 */
+//check to see if we're on heroku
+if(process.env.NODE_ENV === 'production') {
+    //Basically, if we're in production then run the code below
+    app.use(express.static('frontend/build'));
+
+    //For any routes that gets hit here, we're going to load the react index.html file
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(_dirname, 'frontend', 'build', 'index.html'));
+    });
+}
 
 
 
 
-const uri = "mongodb+srv://dbUserKev:ky131886@cluster0-nn52z.mongodb.net/test?retryWrites=true";
-const olduri = "mongodb://localhost:27017/reference_demo";
+
+
+//const olduri = "mongodb://localhost:27017/reference_demo";
 mongoose.connect(uri, { useNewUrlParser: true }, function(err, client) {
     if(err){
         console.log(err);
