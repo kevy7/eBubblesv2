@@ -48,7 +48,11 @@ class createEvent extends Component {
             eventDescription: this.state.eventDescription,
             userName: this.props.auth.userInfo.name,
             userID: this.props.auth.userInfo.id
+
+            
         }
+
+        //console.log(event);
 
         this.props.postEvent(event, this.props.history);
         //console.log(event);

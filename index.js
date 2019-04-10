@@ -301,7 +301,7 @@ app.post('/api/events', function(req, res){
         eventDate: req.body.eventDate,
         timestamp: new Date(),
         eventDescription: req.body.eventDescription,
-        eventStreetAddress: req.body.streetAddress,
+        eventStreetAddress: req.body.eventStreetAddress,
         eventCity: req.body.eventCity,
         eventState: req.body.eventState,
         eventZipCode: req.body.eventZipCode,
