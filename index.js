@@ -45,7 +45,7 @@ New code written here
 //check to see if we're on heroku
 if(process.env.NODE_ENV === 'production') {
     //Basically, if we're in production then run the code below
-    app.use(express.static(path.join(__dirname, 'frontend/build')));
+    app.use(express.static('frontend/build'));
 
     //For any routes that gets hit here, we're going to load the react index.html file
     app.get('*', (req, res) => {
