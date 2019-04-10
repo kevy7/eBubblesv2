@@ -43,7 +43,7 @@ var uri = require("./config/key").mongoURI;
 New code written here
 */
 //check to see if we're on heroku
-if(process.env.NODE_ENV === 'production') {
+/* if(process.env.NODE_ENV === 'production') {
     //Basically, if we're in production then run the code below
     app.use(express.static(path.join(__dirname, 'frontend/build')));
 
@@ -52,6 +52,21 @@ if(process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     });
 }
+ */
+
+
+ //New
+ if (process.env.NODE_ENV === 'production') {
+     app.use(express.static('frontend/build'));
+
+    app.get('/^\/(?!api).*/', (req, res) => {
+        res.sendFile(path.join(__dirname, './frontend/build/index.html'));
+    });
+    console.log("Serving React App");
+ };
+
+
+
 
 
 
