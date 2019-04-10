@@ -39,22 +39,6 @@ var uri = require("./config/key").mongoURI;
 //app.use(express.static(path.join(__dirname, 'frontend/build')))
 
 
-/*
-New code written here
-*/
-//check to see if we're on heroku
-if(process.env.NODE_ENV === 'production') {
-    //Basically, if we're in production then run the code below
-    app.use(express.static('frontend/build'));
-
-    //For any routes that gets hit here, we're going to load the react index.html file
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-    });
-}
- 
-
-
 
 
 
@@ -490,6 +474,22 @@ app.post('/api/events/:id/comment', function(req, res){
 
 
 //Our api requests/routes should be complete
+
+
+
+
+
+//check to see if we're on heroku
+if(process.env.NODE_ENV === 'production') {
+    //Basically, if we're in production then run the code below
+    app.use(express.static('frontend/build'));
+
+    //For any routes that gets hit here, we're going to load the react index.html file
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    });
+}
+ 
 
 
 
