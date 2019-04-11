@@ -47,14 +47,7 @@ class eventEditPage extends Component {
             eventDate: this.state.eventDate
         }
 
-        console.log("...Making a post request");
-
-        //You want to pass in this.props.history
-
         this.props.updateCurrentEvent(event, this.props.history);
-
-
-
     }
 
     componentWillReceiveProps = (nextProps) => {
