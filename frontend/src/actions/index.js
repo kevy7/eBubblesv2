@@ -141,3 +141,21 @@ export const getCurrentEvent = (eventID) => dispatch => {
         dispatch(setCurrentError(err.response.data));
     });
 }
+
+
+export const updateCurrentEvent = (event, history) => dispatch => {
+
+    //Make an axios call to update your event
+
+    const url = "/api/events/" + event.eventID;
+    const redirectURL = "/events/" + event.eventID; 
+
+    axios.put(url, event)
+    .then(res => {
+        history.push(redirectURL);
+    })
+    .catch(err => [
+        dispatch(setCurrentError(err.response.data))
+    ])
+
+}

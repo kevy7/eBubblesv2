@@ -20,11 +20,10 @@ class EventDescription extends Component {
         //This is soon going to be deprecated
         this.props.removeCurrentEvent(); //This will remove the selectedEvent from our state first before the render
             //In that way, we won't have previous data loaded in our eventDescriptions page
+        
         this.props.getCurrentEvent(this.props.match.params.id);
+        
     }
-
-    componentDidMount = () => {
-   }
 
     render(){
         //const { selectedEvent } = this.props.selectedEvent;
