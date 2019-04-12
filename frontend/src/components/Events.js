@@ -21,29 +21,21 @@ class Events extends Component {
         
     }
 
+    //This is needed for when events are deleted, when events are deleted, reload this page with new events
+    componentWillReceiveProps = (nextProps) => {
+        if(nextProps){
+            this.props.getEvents();
+        }
+    }
+
     render(){
-
-     /*    
-       if(this.props.events.events){
-                this.props.events.events.map(event => {
-                    return <EventBubble 
-                        img={event.eventImage}
-                        eventName={event.eventName}
-                        eventID={event._id}
-                        key={event._id}
-                    />
-                });
-            }   
-         */
-        
-
-
         return(
             <div>
                 <UserHero userName={this.props.auth.userInfo.name}/>
                 <EventsNavigation />
                 <AddButton />
                 <div className="container is-mobile">
+                    <br />
                     <div className="contianer is-multiline columns">
                         <EventBubble 
                             img="https://images.unsplash.com/photo-1506598417715-e3c191368ac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
@@ -63,12 +55,11 @@ class Events extends Component {
                                 />
                             }) 
                             //console.log(this.props.events.events) //it says no token was sent
-                            
                         }
                         
                     </div>
+                    <br />
                 </div>   
-                
             </div>
         );
     }

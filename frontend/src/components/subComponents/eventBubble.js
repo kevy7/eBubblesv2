@@ -8,13 +8,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
+import { deleteCurrentEvent } from '../../actions/index';
+import { getEvents } from '../../actions/index';
 import "../../styles/eventBubble.css";
 
 class EventBubble extends Component {
 
+    deleteEvent = (e) =>  {
+        e.preventDefault();
 
+        const eventID = this.props.eventID;
+        
+        if (window.confirm("Are you sure you want to delete this event")) {
+            this.props.deleteCurrentEvent(eventID, this.props.history);
+            this.props.getEvents();
 
+            //console.log("You pressed the confirm button");
+        } else {
+            //console.log("You pressed the cancel button");
+            //do nothing when user clicks cancel
+        }
+    }
 
     render() {
 
@@ -22,6 +38,7 @@ class EventBubble extends Component {
             console.log("throw err");
         }
         const url = "/events/" + this.props.eventID
+        const editURL = url + "/edit";
 
         const displayRemoveButton = () => {
             /*
@@ -32,21 +49,17 @@ class EventBubble extends Component {
                     <button className="delete"></button>
                 </div>
 
-
-
                 compare this.props.userInfo.id with this.props.userId
 
                 I need to create my backend, where the user who created the event, their id is stored in there
             */
         }
 
-        return (
-
-            
+        return (    
             <div className="eventBubble column is-one-quarter">
                 <div className="navbar-end eventIcons">
-                    <button className="far fa-edit editButton"></button>
-                    <button className="delete"></button>
+                    <Link to={editURL} className="far fa-edit editButton"></Link>
+                    <button className="delete" onClick={this.deleteEvent}></button>
                 </div>
                 
                 <Link to={url}>
@@ -64,38 +77,7 @@ class EventBubble extends Component {
                     
                 </Link>
                 <br />
-                
-
-
-
-                {/* 
-                Not sure if I will need the following code below anymore
-
-                <article className="media">
-                    <figure className="media-left">
-                        <p className="image is-64x64 level-item">
-                            <img src="https://bulma.io/images/placeholders/128x128.png" />
-                        </p>
-                        
-                        <small className="has-text-centered level-item">username Here</small>
-                    </figure>
-
-                    
-                    <div className="media-content">
-                        <div className="content">
-                            <p>
-                                <strong>{this.props.userName}</strong> <small>31 Views</small>
-                                <br />
-                                random words will go in here
-                            </p>  
-                        </div>
-                    </div>
-                </article>
-                */}
-
-
-            </div>
-            
+            </div>    
         );
     }
 }
@@ -106,4 +88,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default EventBubble;
+export default withRouter(connect(mapStateToProps, {
+    deleteCurrentEvent: deleteCurrentEvent,
+    getEvents: getEvents
+})(EventBubble));

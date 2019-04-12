@@ -159,3 +159,20 @@ export const updateCurrentEvent = (event, history) => dispatch => {
     ])
 
 }
+
+
+export const deleteCurrentEvent = (eventID, history) => dispatch => {
+
+    ///api/events/:id
+    const url = "/api/events/" + eventID;
+
+    axios.delete(url)
+    .then(res => {
+        //history.push("/events")
+        console.log(res.data);
+        
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+}
