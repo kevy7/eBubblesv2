@@ -22,9 +22,11 @@ class Events extends Component {
     }
 
     //This is needed for when events are deleted, when events are deleted, reload this page with new events
+    //There is an error with this function, the page will constantly be refreshing because this page will aways be receiving new props
     componentWillReceiveProps = (nextProps) => {
         if(nextProps){
-            this.props.getEvents();
+            //this.props.getEvents();
+            console.log("component received new props");
         }
     }
 

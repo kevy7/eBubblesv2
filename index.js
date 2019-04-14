@@ -94,24 +94,20 @@ const validateLoginInput = require("./validation/login");
 const validateRegisterInput = require("./validation/register");
 const keys = require("./config/key");
 
+//ERROR - check this
+const returnUser = require("./services/returnUser");
+//import returnUser from "./services/returnUser";
+
 //JSON WEB Token Middleware
 //Below, is my personally created JSON Web token middleware
 
 verifyToken = (req, res, next) => {
-    
-    //Grab the token from the response
-
     const userToken = req.headers.authorization;
-
     if(!userToken){
         res.json({ errorMessage: "No Token was sent"});
     }
-
-    //We want to split the token
-    //Change: Check this!!!
     else {
         const token = userToken.split(" "); //We're splitting the token based on space
-
         jwt.verify(token[1], keys.secretOrKey, function(err, decoded){
             if(err){
                 //if the json token cannot be verified, an error will be thrown in here
@@ -125,23 +121,33 @@ verifyToken = (req, res, next) => {
     }
 }
 
-
 //Middleware for authenticating token and authorizing the user
 //Create the middleware here when needed
+authorizeUser = (req, res, next) => {
+    //authenticate the token first
+    //Only call an api request to this route if your're authenticated to access this post route
+    const eventID = req.params.id; //gets the eventID from the url
+    const userToken = req.headers.authorization;
 
+    Events.findById(eventID).populate("createdby").exec(function(err, event){
+        if(err){
+            res.send("couldn't find the event");
+        }
+        else {
+            const user = returnUser(userToken, keys);
 
-
-
-
-
-
-
-
-
-
-
-
-
+            if(event.createdby._id == user.id) {
+                //console.log(returnUser(userToken, keys));
+                console.log("event id's match");
+                next();
+            }
+            else{
+                //next();
+                res.json("unable to make that request. User is unathorized to edit/delete this event.");
+            }
+        }
+    });
+}
 
 /*
 User registration route
@@ -346,7 +352,7 @@ app.post('/api/events', function(req, res){
 
 //This code works
 //Get a specific event based on id
-app.get("/api/events/:id", function(req, res){
+app.get("/api/events/:id", verifyToken, function(req, res){
     //console.log("this get request is working" + req.params.id);
     var eventID = req.params.id; //This will allow us to gain access to the id placed in the url
 
@@ -355,15 +361,12 @@ app.get("/api/events/:id", function(req, res){
             res.send(err);
         }
         else {
-            //console.log("Event was found "+ event.eventAddress[0]._id);
-            
             res.json(event);
-            //console.log(event.createdBy);
         }
     });
 });
 
-app.put('/api/events/:id', function(req, res){
+app.put('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
     const eventId = req.params.id;
 
     Events.findById(eventId, function(err, event){
@@ -371,7 +374,6 @@ app.put('/api/events/:id', function(req, res){
             res.send(err);
         }
         else {
-
             //Need to write a code here that checks if a req.body is empty, if it is then don't update the event within our database
             event.eventName = req.body.eventName;
             event.eventImage = req.body.eventImage;
@@ -397,7 +399,7 @@ app.put('/api/events/:id', function(req, res){
     });
 });
 
-app.delete('/api/events/:id', function(req, res){
+app.delete('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
     const eventId = req.params.id;
 
     Events.findById(eventId, function(err, event){

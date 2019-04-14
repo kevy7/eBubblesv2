@@ -20,7 +20,7 @@ export const registerUserAction = (userInfo, history) => dispatch => {
         history.push("/login");
     }) 
     .catch(err => {
-        dispatch(setCurrentError(err.response.data))
+        dispatch(setCurrentError(err))
     });
 }
 
@@ -47,7 +47,7 @@ export const loginUserAction = (userInfo, history) => dispatch => {
         history.push("/events");
     })
     .catch(err => {
-        dispatch(setCurrentError(err.response.data));
+        dispatch(setCurrentError(err));
     });
 }
 
@@ -90,7 +90,7 @@ export const getEvents = () => dispatch => {
         dispatch(setEvents(response.data));
     })
     .catch((err) => {
-        dispatch(setCurrentError(err.response.data));
+        dispatch(setCurrentError(err));
     });
 }
 
@@ -111,7 +111,7 @@ export const postEvent = (event, history) => dispatch => {
         history.push("/events");
     })
     .catch(err => {
-        dispatch(setCurrentError(err.resonse.data));
+        dispatch(setCurrentError(err));
     });
 }
 
@@ -125,6 +125,8 @@ export const getCurrentEvent = (eventID) => dispatch => {
     /*
         axios call to get your current event
     */
+    setAuthTokenHeader(window.localStorage.getItem("token"));
+
     const url = "/api/events/" + eventID;
 
     axios.get(url)
@@ -138,12 +140,13 @@ export const getCurrentEvent = (eventID) => dispatch => {
 
     })
     .catch(err => {
-        dispatch(setCurrentError(err.response.data));
+        dispatch(setCurrentError(err));
     });
 }
 
 
 export const updateCurrentEvent = (event, history) => dispatch => {
+    setAuthTokenHeader(window.localStorage.getItem("token"));
 
     //Make an axios call to update your event
 
@@ -155,13 +158,13 @@ export const updateCurrentEvent = (event, history) => dispatch => {
         history.push(redirectURL);
     })
     .catch(err => [
-        dispatch(setCurrentError(err.response.data))
+        dispatch(setCurrentError(err))
     ])
-
 }
 
 
 export const deleteCurrentEvent = (eventID, history) => dispatch => {
+    setAuthTokenHeader(window.localStorage.getItem("token"));
 
     ///api/events/:id
     const url = "/api/events/" + eventID;

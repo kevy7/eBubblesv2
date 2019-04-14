@@ -17,7 +17,7 @@ import "../../styles/eventBubble.css";
 class EventBubble extends Component {
 
     deleteEvent = (e) =>  {
-        e.preventDefault();
+        //e.preventDefault();
 
         const eventID = this.props.eventID;
         
@@ -30,6 +30,8 @@ class EventBubble extends Component {
             //console.log("You pressed the cancel button");
             //do nothing when user clicks cancel
         }
+
+        //this.props.getEvents();
     }
 
     render() {
