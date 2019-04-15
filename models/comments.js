@@ -11,7 +11,7 @@ var commentSchema = new mongoose.Schema({
          ref: "User"
          
       },
-    username: String
+    userName: String
 });
 
 module.exports = mongoose.model("Comments", commentSchema);

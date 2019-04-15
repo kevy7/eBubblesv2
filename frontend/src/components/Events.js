@@ -15,7 +15,6 @@ class Events extends Component {
     }
    
     componentDidMount = () => {
-        console.log("events were retreived");
         
         this.props.getEvents(); //This action is called to make an api request to get a list of events from our database for us
         
@@ -24,9 +23,15 @@ class Events extends Component {
     //This is needed for when events are deleted, when events are deleted, reload this page with new events
     //There is an error with this function, the page will constantly be refreshing because this page will aways be receiving new props
     componentWillReceiveProps = (nextProps) => {
-        if(nextProps){
+        if(nextProps.events !== this.props.events){
             //this.props.getEvents();
-            console.log("component received new props");
+            /* console.log("Props do not match");
+            console.log(nextProps);
+            console.log(this.props); */
+            console.log(this.state);
+        }
+        else {
+            console.log("props do match");
         }
     }
 
@@ -44,8 +49,6 @@ class Events extends Component {
                             eventName="Event Name Here"
                             eventID="ID is going to be placed in here"
                         />
-                        
-                        
                         {
                             //This code doesn't work when we refresh the page
                             this.props.events && this.props.events.events.map(event => {
@@ -58,7 +61,6 @@ class Events extends Component {
                             }) 
                             //console.log(this.props.events.events) //it says no token was sent
                         }
-                        
                     </div>
                     <br />
                 </div>   

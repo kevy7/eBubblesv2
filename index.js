@@ -422,6 +422,8 @@ app.delete('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
 
 
 
+
+
 //Comment routes/request
 
 app.post('/api/events/:id/comment', function(req, res){
@@ -430,8 +432,8 @@ app.post('/api/events/:id/comment', function(req, res){
     var comment = {
         comment: req.body.comment,
         timestamp: new Date(),
-        username: "test_user"
-        //commentCreatedBy: req.user._id, how would we get access to the current user's id?
+        commentCreatedBy: req.body.userID,
+        userName: req.body.userName
     }
 
     //Create the comment first,
@@ -443,8 +445,12 @@ app.post('/api/events/:id/comment', function(req, res){
             res.send(err);
         }
         else {
+
+            //    Events.findById(eventID).populate("eventComments").populate("createdby").exec(function(err, event){
+
+
             //find the event based on it's id above
-            Events.findById(eventId, function(err, event){
+            Events.findById(eventId).populate("eventComments").exec(function(err, event){
                 if(err){
                     res.send(err);
                 }

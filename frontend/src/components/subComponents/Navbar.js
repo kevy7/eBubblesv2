@@ -28,15 +28,6 @@ class Navbar extends Component {
 
     }
 
-    fakeFunction = (e) => {
-        e.preventDefault();
-
-        //this.props.getEvents();
-        
-        window.localStorage.clear();
-
-    }
-
     logOutUser = (e) => {
         e.preventDefault();
         this.props.logoutUser(this.props.history);
@@ -66,7 +57,6 @@ class Navbar extends Component {
                 </a>
             );
         }
-
     }
 
     render(){
@@ -74,7 +64,7 @@ class Navbar extends Component {
             <div className="">
                 <nav className="navbar" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
-                        <a className="navbar-item" onClick={this.fakeFunction}>
+                        <a className="navbar-item">
                             Event Bubbles
                         </a>
 
@@ -105,8 +95,8 @@ class Navbar extends Component {
                                     New Event
                                 </Link>
                                 <hr className="navbar-divider" />
-                                <a className="navbar-item" onClick={this.fakeFunction}>
-                                    Fake Button
+                                <a className="navbar-item">
+                                    About
                                 </a>
                             </div>
                         </div>

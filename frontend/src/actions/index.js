@@ -132,7 +132,8 @@ export const getCurrentEvent = (eventID) => dispatch => {
     axios.get(url)
     .then(res => {
         //Dispatch the actions here into your state
-        //console.log(res);
+        //console.log(res.data);
+        
         dispatch({
             type: SELECT_EVENT,
             payload: res.data
@@ -174,6 +175,29 @@ export const deleteCurrentEvent = (eventID, history) => dispatch => {
         //history.push("/events")
         console.log(res.data);
         
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+}
+
+
+export const addComment = (commentInfo) => dispatch => {
+    const eventID = commentInfo.eventID;
+    const url = "/api/events/" + eventID + "/comment";
+
+    axios.post(url, commentInfo)
+    .then(res => {
+        //Comment should be added in the database in here
+        //Re-get the current event and load refresh the state
+        //getCurrentEvent(eventID);
+
+        //console.log(res.data);
+
+         dispatch({
+             type: SELECT_EVENT,
+             payload: res.data
+         });
     })
     .catch(err => {
         dispatch(setCurrentError(err));

@@ -10,25 +10,91 @@ import { Link } from "react-router-dom";
 
 import { getCurrentEvent } from '../actions';
 import { removeCurrentEvent } from '../actions';
+import { addComment } from '../actions';
 
 import EventHero from './subComponents/eventHero';
+import EventComment from './subComponents/eventComment';
 
 import "../styles/eventDescription.css";
 
 class EventDescription extends Component {
+    state = {
+        comment: ""
+    }
+
     componentWillMount = () => {
-        //This is soon going to be deprecated
-        this.props.removeCurrentEvent(); //This will remove the selectedEvent from our state first before the render
+        
+        //The code below is not needed, it seems my code still works
+        //this.props.removeCurrentEvent(); //This will remove the selectedEvent from our state first before the render
             //In that way, we won't have previous data loaded in our eventDescriptions page
         
         this.props.getCurrentEvent(this.props.match.params.id);
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        /* console.log(nextProps);
+        console.log(this.props); */
+    }
+
+    //checks if userName exists first
+    returnUser = () => {
+        if(this.props.selectedEvent.selectedEvent.createdby){
+            return this.props.selectedEvent.selectedEvent.createdby.userName;
+        }
+        else {
+            return "nothing";
+        }
+    }
+
+    returnComments = () => {
+
+        if(this.props.selectedEvent.selectedEvent.eventComments){
+            //console.log(this.props.selectedEvent.selectedEvent.eventComments);
+            return this.props.selectedEvent.selectedEvent.eventComments.map(comment => {
+                
+                return <EventComment 
+                            key={comment._id}
+                            userComment = {comment.comment}
+                            userName ={comment.userName}
+                        />
+            });
+        }
+        else {
+            return "there is nothing here";
+        }
+    }
+
+    //calls api to 
+    onSubmit = (e) => {
+        //e.preventDefault();
+
+        // '/api/events/:id/comment'
+
+        const eventID = this.props.match.params.id;
+        const comment = this.state.comment;
+        const commentCreatedBy = this.props.selectedEvent.selectedEvent.createdby._id;
+        const userName = this.props.auth.userInfo.name;
+
+        const commentInfo = {
+            eventID: eventID,
+            comment: comment,
+            commentCreatedBy: commentCreatedBy,
+            userName: userName
+        }
         
+        this.props.addComment(commentInfo);
+    }
+
+    handleInputChanges = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+        //console.log(e.target.value);
     }
 
     render(){
         //const { selectedEvent } = this.props.selectedEvent;
         //console.log(this.props.selectedEvent.selectedEvent.eventImage)
         const url = "/events/" + this.props.selectedEvent.selectedEvent._id + "/edit";
+
         return(
             <div className="eventDescription">
                 <div className="columns is-mobile">
@@ -41,6 +107,15 @@ class EventDescription extends Component {
                 </div>
                 <EventHero />
                 <br />
+
+                <div className="container">
+                    <div className="content">
+                        <h4 className="title is-4">Created By</h4>
+                        <p className="is-marginless">{this.returnUser()}</p>
+                    </div>
+                </div>
+                <hr />
+
                 <div className="container">
                     <div className="content">
                         <h4 className="title is-4">Description</h4>
@@ -83,13 +158,36 @@ class EventDescription extends Component {
                 <div className="container">
                     <div className="content">
                         <h4 className="title -s-4">Comments</h4>
+
+                        <div className="container">
+                            <div className="content">
+                                <div className="control">
+                                    <textarea className="textarea" name="comment" placeholder="Add a comment here" value={this.state.comment} onChange={this.handleInputChanges}></textarea>
+                                </div>
+                                <br />
+                                <div className="field is-grouped is-grouped-right">
+                                    <div className="control">
+                                        <button className="button is-link" onClick={this.onSubmit}>Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div className="container">
+                            {
+                                this.returnComments()
+                                /* this.props.selectedEvent.selectedEvent.eventComments.map(comment => {
+                                    
+                                }) */
+                                //console.log(this.props.selectedEvent.selectedEvent)
+                            }
+
+                        </div>
+
                     </div>
                 </div>
-
-                <br />
-                
-                 
-                
+                <br /> 
             </div>
         );
     }
@@ -97,11 +195,13 @@ class EventDescription extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectedEvent: state.selectedEvent
+        selectedEvent: state.selectedEvent,
+        auth: state.auth
     }
 }
 
 export default withRouter(connect(mapStateToProps, {
     getCurrentEvent: getCurrentEvent,
-    removeCurrentEvent: removeCurrentEvent
+    removeCurrentEvent: removeCurrentEvent,
+    addComment: addComment
 })(EventDescription));
