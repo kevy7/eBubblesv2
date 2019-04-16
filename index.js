@@ -467,7 +467,50 @@ app.post('/api/events/:id/comment', function(req, res){
     });
 });
 
-//Add route to edit comments
+
+//add route to edit comments
+app.put('/api/events/:id/comment', function(req, res){
+
+    const commentID = req.body.commentID;
+
+    Comments.findById(eventID, function(err, comment){
+        /*
+            data included in comment
+
+            comment: String,
+            timestamp: Date,
+            commentCreatedBy: 
+            {
+                            
+                //The user that created this comment
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+                
+            },
+            userName: String
+        */
+        if(err){
+            res.send(err);
+        }
+        else{
+            comment.comment = req.body.comment;
+
+            comment.save(function(err){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    res.send(comment);
+                }
+            })
+        }
+    })
+});
+
+
+
+
+//Add route to delete comments
 app.delete('/api/events/:id/comment', function(req, res){
 
     const commentID = req.body.commentID;
@@ -486,9 +529,6 @@ app.delete('/api/events/:id/comment', function(req, res){
     });
 
 });
-
-
-//add route to delete comments
 
 
 
