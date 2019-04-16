@@ -28,7 +28,7 @@ class Events extends Component {
             /* console.log("Props do not match");
             console.log(nextProps);
             console.log(this.props); */
-            console.log(this.state);
+            
         }
         else {
             console.log("props do match");

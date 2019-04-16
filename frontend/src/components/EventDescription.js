@@ -1,8 +1,3 @@
-/*
-This is our events description page
-
-we're getting an error within this page with our EventHero component
-*/
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -23,7 +18,6 @@ class EventDescription extends Component {
     }
 
     componentWillMount = () => {
-        
         //The code below is not needed, it seems my code still works
         //this.props.removeCurrentEvent(); //This will remove the selectedEvent from our state first before the render
             //In that way, we won't have previous data loaded in our eventDescriptions page
@@ -47,7 +41,6 @@ class EventDescription extends Component {
     }
 
     returnComments = () => {
-
         if(this.props.selectedEvent.selectedEvent.eventComments){
             //console.log(this.props.selectedEvent.selectedEvent.eventComments);
             return this.props.selectedEvent.selectedEvent.eventComments.map(comment => {
@@ -56,6 +49,8 @@ class EventDescription extends Component {
                             key={comment._id}
                             userComment = {comment.comment}
                             userName ={comment.userName}
+                            commentID = {comment._id}
+                            eventID = {this.props.match.params.id}
                         />
             });
         }
@@ -67,9 +62,6 @@ class EventDescription extends Component {
     //calls api to 
     onSubmit = (e) => {
         //e.preventDefault();
-
-        // '/api/events/:id/comment'
-
         const eventID = this.props.match.params.id;
         const comment = this.state.comment;
         const commentCreatedBy = this.props.selectedEvent.selectedEvent.createdby._id;
@@ -182,9 +174,7 @@ class EventDescription extends Component {
                                 }) */
                                 //console.log(this.props.selectedEvent.selectedEvent)
                             }
-
                         </div>
-
                     </div>
                 </div>
                 <br /> 

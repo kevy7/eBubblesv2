@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
-import withRouter from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+//import { strictEqual } from 'assert'; //what is this? I never imported this
+
+import { removeComment } from "../../actions/index";
+
 
 class eventComment extends Component {
+
+    onSubmit = (e) => {
+        //e.preventDefault();
+
+        //console.log(this.props.commentID);
+        const commentInfo = {
+            commentID: this.props.commentID,
+            eventID: this.props.eventID
+        }
+
+        this.props.removeComment(commentInfo);
+    }
+
     render(){
         return (
             <div className="eventComment">
@@ -37,7 +54,12 @@ class eventComment extends Component {
                     </div>
                     {/* This should only be displayed to the user who created this comment */}
                     <div className="media-right">
-                        <button className="delete"></button>
+                        <span className="icon is-small"><a className="far fa-edit"></a></span>
+                        
+                    </div>
+
+                    <div className="media-right">
+                        <button className="delete" onClick={this.onSubmit}></button>
                     </div>
                 </article>
             </div>
@@ -45,4 +67,12 @@ class eventComment extends Component {
     }
 }
 
-export default eventComment;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+export default withRouter(connect(mapStateToProps, {
+    removeComment: removeComment
+})(eventComment));

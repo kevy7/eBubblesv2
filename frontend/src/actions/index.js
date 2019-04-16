@@ -76,7 +76,7 @@ export const logoutUser = (history) => dispatch => {
             -set the currentUser to be empty
     */
     
-    console.log("Removing the token.....");
+    //console.log("Removing the token.....");
     window.localStorage.removeItem("token");
     setAuthTokenHeader(false);
     dispatch(setCurrentUser({})); //We pass in an empty object because the current user is going to be nobody
@@ -173,7 +173,7 @@ export const deleteCurrentEvent = (eventID, history) => dispatch => {
     axios.delete(url)
     .then(res => {
         //history.push("/events")
-        console.log(res.data);
+        //console.log(res.data);
         
     })
     .catch(err => {
@@ -183,6 +183,7 @@ export const deleteCurrentEvent = (eventID, history) => dispatch => {
 
 
 export const addComment = (commentInfo) => dispatch => {
+    
     const eventID = commentInfo.eventID;
     const url = "/api/events/" + eventID + "/comment";
 
@@ -202,4 +203,19 @@ export const addComment = (commentInfo) => dispatch => {
     .catch(err => {
         dispatch(setCurrentError(err));
     })
+}
+
+export const removeComment = (commentInfo) => dispatch => {
+
+    const url = "/api/events/" + commentInfo.eventID + "/comment";
+
+    //to pass in body data via a delete requust, it is different compared to a get, post, and put request
+    axios.delete(url, {data: commentInfo})
+    .then(res => {
+        console.log(res.data);
+
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    });
 }

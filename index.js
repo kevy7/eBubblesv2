@@ -2,26 +2,6 @@
 
 git push -u origin master
 
-This is going to be our express backend route
-    not going to worry about making a helper route at the moment
-
-
-    A couple side notes:
-    req.user will output us the id of the current user that is logged in
-
-
-    To work on:
-        -Creating all of my api routes for my database
-        -all routes currently work
-            -we're able to succesfully store things into our database
-        -user can be registered
-        -user can login and create a token
-        -however, after the user logs in, they can't access the /api/events route even if they're logged in or not
-
-
-        -This entire backedn api works
-        -I just need to create my own middleware to verify my tokens along with auhtorization verification
-            -Bascically, check if the user is logged in based on the token they passed in and if they're authorize to do certain things based on their userid
 */
 
 var express = require("express");
@@ -148,6 +128,29 @@ authorizeUser = (req, res, next) => {
         }
     });
 }
+
+//Verify user comment
+authorizeUserComment = (req, res, next) => {
+    const commentID = req.body.commentID;
+    const userToken = req.headers.authorization;
+
+    Comments.findById(commentID, function(err, comment){
+        if(err){
+            res.send(err);
+        }
+        else{
+            const user = returnUser(userToken, keys);
+
+            if(comment.commentCreatedBy == user.id){
+                next();
+            }
+            else {
+                res.json("unable to make the request. User is unauthorized to edit/delete this comment");
+            }
+        }
+    });
+}
+
 
 /*
 User registration route
@@ -427,7 +430,7 @@ app.delete('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
 //Comment routes/request
 
 app.post('/api/events/:id/comment', function(req, res){
-    
+    //console.log(req.body);
     var eventId = req.params.id;
     var comment = {
         comment: req.body.comment,
@@ -436,19 +439,11 @@ app.post('/api/events/:id/comment', function(req, res){
         userName: req.body.userName
     }
 
-    //Create the comment first,
-    //then, find the event based on it's id
-    //finally, push the comment into that event
-
     Comments.create(comment, function(err, comment){
         if(err){
             res.send(err);
         }
         else {
-
-            //    Events.findById(eventID).populate("eventComments").populate("createdby").exec(function(err, event){
-
-
             //find the event based on it's id above
             Events.findById(eventId).populate("eventComments").exec(function(err, event){
                 if(err){
@@ -463,7 +458,7 @@ app.post('/api/events/:id/comment', function(req, res){
                             res.send(err);
                         }
                         else {
-                            res.json(data); //send back the motherfuck'n data
+                            res.json(data); //send back the data
                         }
                     })
                 }
@@ -472,9 +467,25 @@ app.post('/api/events/:id/comment', function(req, res){
     });
 });
 
-
-
 //Add route to edit comments
+app.delete('/api/events/:id/comment', function(req, res){
+
+    const commentID = req.body.commentID;
+
+    //Events.findOneAndRemove({ _id: event._id }, function(err){
+    Comments.findOneAndRemove({_id: commentID}, function(err, res){
+        if(err){
+            res.send(err);
+        }
+        else {
+            console.log("the comment should be removed");
+            console.log(res); //This is just sending us the original comment
+
+            //You should find an event here and return it, that way the updated comments will be returned
+        }
+    });
+
+});
 
 
 //add route to delete comments
