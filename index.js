@@ -58,7 +58,6 @@ require("./config/passport")(passport);
 
 
 
-
 /*
 Import models for our database and they're going to be imported here
 */
@@ -424,9 +423,6 @@ app.delete('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
 });
 
 
-
-
-
 //Comment routes/request
 
 app.post('/api/events/:id/comment', function(req, res){
@@ -470,45 +466,33 @@ app.post('/api/events/:id/comment', function(req, res){
 
 //add route to edit comments
 app.put('/api/events/:id/comment', function(req, res){
-
     const commentID = req.body.commentID;
-
-    Comments.findById(eventID, function(err, comment){
-        /*
-            data included in comment
-
-            comment: String,
-            timestamp: Date,
-            commentCreatedBy: 
-            {
-                            
-                //The user that created this comment
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User"
-                
-            },
-            userName: String
-        */
+    Comments.findById(commentID, function(err, comment){
         if(err){
             res.send(err);
         }
         else{
             comment.comment = req.body.comment;
-
-            comment.save(function(err){
+            comment.save(function(err, data){
                 if(err){
                     res.send(err);
                 }
                 else {
-                    res.send(comment);
+                    //console.log(data);
+                    Events.findById(req.params.id).populate("eventComments").exec(function(err, event){
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            res.send(event);
+                            console.log(event);
+                        }
+                    })
                 }
             })
         }
     })
 });
-
-
-
 
 //Add route to delete comments
 app.delete('/api/events/:id/comment', function(req, res){
@@ -516,18 +500,22 @@ app.delete('/api/events/:id/comment', function(req, res){
     const commentID = req.body.commentID;
 
     //Events.findOneAndRemove({ _id: event._id }, function(err){
-    Comments.findOneAndRemove({_id: commentID}, function(err, res){
+    Comments.findOneAndRemove({_id: commentID}, function(err, comment){
         if(err){
             res.send(err);
         }
         else {
-            console.log("the comment should be removed");
-            console.log(res); //This is just sending us the original comment
 
-            //You should find an event here and return it, that way the updated comments will be returned
+            Events.findById(req.params.id).populate("eventComments").exec(function(err, event){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    res.send(event);
+                }
+            })
         }
     });
-
 });
 
 

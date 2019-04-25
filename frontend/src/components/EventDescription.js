@@ -23,6 +23,18 @@ class EventDescription extends Component {
             //In that way, we won't have previous data loaded in our eventDescriptions page
         
         this.props.getCurrentEvent(this.props.match.params.id);
+
+    }
+
+    componentDidMount = () => {
+        //This does not currently work so far
+        const dropButtons = document.querySelectorAll(".dropButton");
+
+        /* for (var i =0; i < dropButtons.length; i++){
+            dropButtons[i].addEventListener("click", function(){
+                this.classList.toggle("is-active");
+            })
+        } */
     }
 
     componentWillReceiveProps = (nextProps) => {
@@ -80,6 +92,25 @@ class EventDescription extends Component {
     handleInputChanges = (e) => {
         this.setState({[e.target.name]: e.target.value});
         //console.log(e.target.value);
+    }
+
+    //submit a comment via an api call with axios
+    onEnterKeyPress = (target) => {
+        if(target.charCode==13){
+            //alert("you pressed the enter button");
+            target.preventDefault();
+
+            const commentInfo = {
+                eventID: this.props.match.params.id,
+                comment: this.state.comment,
+                commentCreatedBy: this.props.selectedEvent.selectedEvent.createdby._id,
+                userName: this.props.auth.userInfo.name
+            }
+            
+            this.props.addComment(commentInfo);
+
+            //this.commentInput.value = "";
+        } 
     }
 
     render(){
@@ -154,7 +185,16 @@ class EventDescription extends Component {
                         <div className="container">
                             <div className="content">
                                 <div className="control">
-                                    <textarea className="textarea" name="comment" placeholder="Add a comment here" value={this.state.comment} onChange={this.handleInputChanges}></textarea>
+                                    <textarea 
+                                        className="textarea" 
+                                        name="comment" 
+                                        placeholder="Add a comment here" 
+                                        value={this.state.comment} 
+                                        onChange={this.handleInputChanges}
+                                        onKeyPress={this.onEnterKeyPress}
+                                        ref = {(el) => { this.commentInput = el; }}
+                                        >
+                                    </textarea>
                                 </div>
                                 <br />
                                 <div className="field is-grouped is-grouped-right">
@@ -175,6 +215,8 @@ class EventDescription extends Component {
                                 //console.log(this.props.selectedEvent.selectedEvent)
                             }
                         </div>
+
+                        <br />
                     </div>
                 </div>
                 <br /> 

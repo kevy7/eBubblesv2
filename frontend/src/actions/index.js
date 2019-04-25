@@ -205,6 +205,26 @@ export const addComment = (commentInfo) => dispatch => {
     })
 }
 
+//action created to editComment
+export const editComment = (commentInfo) => dispatch => {
+    //const commentID = commentInfo.commentID;
+    const eventID = commentInfo.eventID;
+
+    const url = "/api/events/" + eventID + "/comment";
+
+    axios.put(url, commentInfo)
+    .then(res => {
+        dispatch({
+            type: SELECT_EVENT,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+        console.log(err);
+    })
+}
+
 export const removeComment = (commentInfo) => dispatch => {
 
     const url = "/api/events/" + commentInfo.eventID + "/comment";
@@ -212,7 +232,11 @@ export const removeComment = (commentInfo) => dispatch => {
     //to pass in body data via a delete requust, it is different compared to a get, post, and put request
     axios.delete(url, {data: commentInfo})
     .then(res => {
-        console.log(res.data);
+        //console.log(res.data);
+        dispatch({
+            type: SELECT_EVENT,
+            payload: res.data
+        })
 
     })
     .catch(err => {

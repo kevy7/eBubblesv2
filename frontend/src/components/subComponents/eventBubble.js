@@ -21,7 +21,7 @@ class EventBubble extends Component {
 
         const eventID = this.props.eventID;
         
-        if (window.confirm("Are you sure you want to delete this event")) {
+        if (window.confirm("Are you sure you want to delete this event?")) {
             this.props.deleteCurrentEvent(eventID, this.props.history);
             this.props.getEvents();
 
