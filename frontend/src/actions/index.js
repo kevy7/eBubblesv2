@@ -9,6 +9,8 @@ import { GET_EVENTS } from './types';
 import { SELECT_EVENT } from './types';
 import { REMOVE_EVENT } from './types';
 import { LOAD_COMPONENT } from './types';
+import { GET_USER_LOGS } from './types';
+import { GET_USER_PROFILE } from './types';
 
 //const nothing = null;
 
@@ -238,6 +240,80 @@ export const removeComment = (commentInfo) => dispatch => {
             payload: res.data
         })
 
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    });
+}
+
+
+//Log participant to an event
+export const logUserToEvent = (logInfo) => dispatch => {
+    const url = "/api/events/" + logInfo.eventID + "/join";
+
+    //logInfo needs to have logInfo.userId
+
+    axios.post(url, logInfo)
+    .then(res => {
+        dispatch({
+            type: SELECT_EVENT,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    });
+}
+
+
+
+//remove participant from an event
+export const removeUserFromEvent = (logInfo) => dispatch => {
+
+    const url = "/api/events/" + logInfo.eventID + "/unjoin";
+
+    axios.delete(url, {data: logInfo})
+    .then(res => {
+        dispatch({
+            type: SELECT_EVENT,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    });
+
+}
+
+export const getUserLogs = (logInfo) => dispatch => {
+
+    const url = "/api/user/" + logInfo.userID +"/logs";
+
+    axios.get(url, logInfo)
+    .then( res => {
+        //We need to dispatch our userLogs here
+        //We need to create a userLogs reducer
+        dispatch({
+            type: GET_USER_LOGS,
+            payload: res.data
+        })
+
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+}
+
+export const getUserProfile = (userID) => dispatch => {
+    const url = "/api/user/" + userID;
+
+    axios.get(url)
+    .then(res => {
+        //create a reducer here
+        dispatch({
+            type: GET_USER_PROFILE,
+            payload: res.data
+        })
     })
     .catch(err => {
         dispatch(setCurrentError(err));

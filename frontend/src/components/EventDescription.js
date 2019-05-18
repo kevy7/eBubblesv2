@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { getCurrentEvent } from '../actions';
 import { removeCurrentEvent } from '../actions';
 import { addComment } from '../actions';
+import { logUserToEvent } from '../actions';
+import { removeUserFromEvent } from '../actions';
 
 import EventHero from './subComponents/eventHero';
 import EventComment from './subComponents/eventComment';
@@ -63,6 +65,7 @@ class EventDescription extends Component {
                             userName ={comment.userName}
                             commentID = {comment._id}
                             eventID = {this.props.match.params.id}
+                            userID={comment.commentCreatedBy}
                         />
             });
         }
@@ -76,7 +79,7 @@ class EventDescription extends Component {
         //e.preventDefault();
         const eventID = this.props.match.params.id;
         const comment = this.state.comment;
-        const commentCreatedBy = this.props.selectedEvent.selectedEvent.createdby._id;
+        const commentCreatedBy = this.props.auth.userInfo.id;
         const userName = this.props.auth.userInfo.name;
 
         const commentInfo = {
@@ -103,7 +106,7 @@ class EventDescription extends Component {
             const commentInfo = {
                 eventID: this.props.match.params.id,
                 comment: this.state.comment,
-                commentCreatedBy: this.props.selectedEvent.selectedEvent.createdby._id,
+                commentCreatedBy: this.props.auth.userInfo.id,
                 userName: this.props.auth.userInfo.name
             }
             
@@ -113,21 +116,82 @@ class EventDescription extends Component {
         } 
     }
 
+    joinEvent = (e) => {
+        e.preventDefault();
+
+        //We have to create an action first. I don't think a reducer is needed yet
+
+        const logInfo = {
+            userId: this.props.auth.userInfo.id,
+            eventID: this.props.match.params.id
+        }
+
+        this.props.logUserToEvent(logInfo);
+    }
+
+    unJoinEvent = (e) => {
+        e.preventDefault();
+
+        const logInfo = {
+            userID: this.props.auth.userInfo.id, //This is the currently logged in user
+            eventID: this.props.match.params.id
+        }
+
+        this.props.removeUserFromEvent(logInfo);
+
+        //Pretty much, we're trying to remove the currently logged in user from the events array of listOfParticipants
+    }
+
     render(){
-        //const { selectedEvent } = this.props.selectedEvent;
-        //console.log(this.props.selectedEvent.selectedEvent.eventImage)
-        const url = "/events/" + this.props.selectedEvent.selectedEvent._id + "/edit";
+        let url = "/events/" + this.props.selectedEvent.selectedEvent._id + "/edit";
+
+        //WORK ON THIS CODE RIGHT HERE!!!!!
+        //Maybe this code should only be activated when there is a new incoming prop
+        let joinButton;
+        let editButton;
+
+        if(this.props.selectedEvent.selectedEvent.eventParticipants){
+            //console.log("There is a list of participants")
+            const listOfParticipants = this.props.selectedEvent.selectedEvent.eventParticipants;
+            //console.log(listOfParticipants);
+
+            if(listOfParticipants.includes(this.props.auth.userInfo.id)){
+                //If there is a match, that means that the user is currently participating in this event
+                joinButton = <li><a onClick={this.unJoinEvent} href="#">Unjoin Event</a></li>
+            }
+            else {
+                joinButton = <li><a onClick={this.joinEvent} href="#">Join Event</a></li>
+            }
+        }
+
+        if(this.props.selectedEvent.selectedEvent.createdby){
+            //this.props.auth.userInfo.id
+            if(this.props.selectedEvent.selectedEvent.createdby._id === this.props.auth.userInfo.id){
+                editButton = <li><Link to={url}>Edit</Link></li>;
+            }
+            
+        }
+
+
+
 
         return(
             <div className="eventDescription">
-                <div className="columns is-mobile">
-                    <h1 className="title eventTitle has-text-centered column is-11">
+
+                <nav className="breadcrumb is-right has-dot-separator" id="eventNav" aria-label="breadcrumbs">
+                    <ul>
+                        {editButton}
+                        {/* Only show the edit button below when the user is currently not a particpant of the event */}
+                        {joinButton}
+                    </ul>
+                </nav>
+
+                <div className="is-mobile titleNavBar">
+                    <h1 className="title eventTitle has-text-centered">
                         {this.props.selectedEvent.selectedEvent.eventName}
                     </h1>
-                    <div className="column is-1 editButton">
-                        <Link to={url} className="button">Edit</Link>
-                    </div>
                 </div>
+
                 <EventHero />
                 <br />
 
@@ -137,6 +201,8 @@ class EventDescription extends Component {
                         <p className="is-marginless">{this.returnUser()}</p>
                     </div>
                 </div>
+
+
                 <hr />
 
                 <div className="container">
@@ -235,5 +301,7 @@ const mapStateToProps = (state) => {
 export default withRouter(connect(mapStateToProps, {
     getCurrentEvent: getCurrentEvent,
     removeCurrentEvent: removeCurrentEvent,
-    addComment: addComment
+    addComment: addComment,
+    logUserToEvent: logUserToEvent,
+    removeUserFromEvent, removeUserFromEvent
 })(EventDescription));

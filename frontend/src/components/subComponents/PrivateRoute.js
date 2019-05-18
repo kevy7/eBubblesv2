@@ -12,9 +12,10 @@ function PrivateRoute({ component: Component, ...rest }) {
         {...rest}
         render = {props =>
           //If authenticateUser returns true, then display the component, else redirect the user to '/login'
-          authenticate() ? (
-              <Component {...props} />
-          ) : (
+          authenticate() ? 
+          (<Component {...props} />) : 
+          
+          (
               <Redirect
                 to={{
                   pathname: "/login",

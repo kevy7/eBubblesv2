@@ -6,3 +6,14 @@
 .editButton {
     margin-top: auto;
 }
+
+.titleNavBar {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 1.5rem;
+}
+
+#eventNav {
+    margin-top: 1.5rem;
+    margin-bottom: 0px;
+}

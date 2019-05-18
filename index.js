@@ -64,6 +64,7 @@ Import models for our database and they're going to be imported here
 var User = require("./models/users");
 var Events = require("./models/events");
 var Comments = require("./models/comments");
+var Logs = require("./models/logs");
 
 
 /*
@@ -117,7 +118,6 @@ authorizeUser = (req, res, next) => {
 
             if(event.createdby._id == user.id) {
                 //console.log(returnUser(userToken, keys));
-                console.log("event id's match");
                 next();
             }
             else{
@@ -280,6 +280,8 @@ app.post("/api/login", function(req, res){
 
 //Get Request, to get our events
 app.get('/api/events/', verifyToken, function(req, res){
+
+    //Look up querystrings, to determine how to filter your event searches based on a condition set by a user
     
     //We don't need to res.render anything, we just need to display everything that is currently in our database at the moment
     Events.find({}, function(err, events){
@@ -318,19 +320,48 @@ app.post('/api/events', function(req, res){
         //I'm assuming we can access the user's id via the token that was sent
    };
 
-    console.log(eventData);
+    //console.log(eventData);
 
     Events.create(eventData, function(err, event){
         if(err){
             res.send(err);
         }
         else{
-            User.findById(req.body.userID, function(err, user){
+            
+            //Let's make sure that we create a log in our database first before we send the event back to the user
+            const userLog = {
+                user: req.body.userID,
+                event: event._id,
+                type: "Event",
+                log: "Created an event",
+                timeStamp: new Date()
+            }
+            //This log shows us that the user created an event
+
+            Logs.create(userLog, function(err, log){
                 if(err){
                     res.send(err);
                 }
                 else {
-                    //user exists in here
+                    console.log("User log successfully created");
+                    console.log(log);
+
+                    //Sending my event after my log was succesfully created
+                    res.send(event);
+                }
+            })
+
+
+
+            //res.send(event);
+
+            //I don't think I need this code anymore, I already have the reference to the user who created the event
+            //To view all events created by the user, I just need to create a query
+            /* User.findById(req.body.userID, function(err, user){
+                if(err){
+                    res.send(err);
+                }
+                else {
                     user.events.push(event);
 
                     user.save(function(err, data){
@@ -345,7 +376,9 @@ app.post('/api/events', function(req, res){
                     });
                     
                 }
-            })   
+            })   */
+
+
         }
     }); 
        
@@ -358,6 +391,7 @@ app.get("/api/events/:id", verifyToken, function(req, res){
     //console.log("this get request is working" + req.params.id);
     var eventID = req.params.id; //This will allow us to gain access to the id placed in the url
 
+    //populate("eventParticipants")
     Events.findById(eventID).populate("eventComments").populate("createdby").exec(function(err, event){
         if(err){
             res.send(err);
@@ -431,7 +465,7 @@ app.post('/api/events/:id/comment', function(req, res){
     var comment = {
         comment: req.body.comment,
         timestamp: new Date(),
-        commentCreatedBy: req.body.userID,
+        commentCreatedBy: req.body.commentCreatedBy,
         userName: req.body.userName
     }
 
@@ -454,7 +488,28 @@ app.post('/api/events/:id/comment', function(req, res){
                             res.send(err);
                         }
                         else {
-                            res.json(data); //send back the data
+
+                            //The event is accessible in here as "data"
+                            const userLog = {
+                                user: req.body.commentCreatedBy, //For some reason userID is not being passed into the database
+                                event: data._id,
+                                comment: comment._id,
+                                type: "Comment",
+                                log: "Commented in the event " + data.eventName,
+                                timeStamp: new Date()
+                            }
+                            Logs.create(userLog, function(err, log){
+                                if(err){
+                                    res.send(err);
+                                }
+                                else {
+                                    console.log(log)
+                                    res.json(data);
+                                }
+                            })
+
+
+                            //res.json(data); //send back the data
                         }
                     })
                 }
@@ -519,8 +574,193 @@ app.delete('/api/events/:id/comment', function(req, res){
 });
 
 
+//Api requests here
 
-//Our api requests/routes should be complete
+
+
+//Request to send a connection request
+
+    //User.connectionRequests
+
+
+
+
+
+//Api request to join an event
+    //Events.eventParticipants
+    //this is used to gain access to your event participants
+    // /api/events/:id/join
+
+app.post('/api/events/:id/join', function(req, res){
+    //use req.params.id to gain access to the event's id
+    //test id 5ca577725dc6b05cd85dbbf5
+
+    //            Events.findById(eventId).populate("eventComments").exec(function(err, event){
+
+
+    Events.findById(req.params.id).populate("eventComments").exec(function(err, event){
+        if(err){
+            res.send(err);
+        }
+        else {
+            //the event is located here
+            // user.events.push(event); //an example of how to push data into your array of objects
+            event.eventParticipants.push(req.body.userId);
+
+            event.save(function(err, data){
+                //updated event with the participant added will be returned here
+                if(err){
+                    res.send(err);
+                }
+                else{
+                    //res.send(event);
+                    //send back the updated event
+                    //user joined an event
+                    const userLog = {
+                        user: req.body.userId, //For some reason userID is not being passed into the database
+                        event: data._id,
+                        type: "Event",
+                        log: "Joined the event: " + data.eventName,
+                        timeStamp: new Date()
+                    }
+
+                    Logs.create(userLog, function(err, log){
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            res.send(data); //we're sending back the updated event
+                        }
+                    })
+                }
+            }) 
+        }
+    })
+});
+
+
+//Api request to unjoin from an event
+
+        //Use the below as reference
+
+        /* User.update( {_id: req.user._id}, 
+            { $pull: {posts: req.body.post_id } } 
+            )
+            .then( err => {
+            ...
+        }); */
+
+        /* db.stores.update(
+            { },
+            { $pull: { fruits: { $in: [ "apples", "oranges" ] }, vegetables: "carrots" } },
+            { multi: true }
+        ) */
+
+app.delete("/api/events/:id/unjoin", function(req, res){
+    //This route will remove the user from the event
+
+    Events.update({_id: req.params.id},
+        {$pull: {eventParticipants: req.body.userID}} //This is used to remove data from an array
+    )
+    .then( data => {
+        //With this, we can return our user the selectedEvent with updated data
+        Events.findById(req.params.id).populate("eventComments").exec(function(err, event){
+            if(err){
+                res.send(err);
+            }
+            else {
+                //Create a log here
+
+                const logData = {
+                    user: req.body.userID, //For some reason userID is not being passed into the database
+                    event: req.params.id,
+                    type: "Event",
+                    log: "Unjoined from the event: " + event.eventName,
+                    timeStamp: new Date()
+                }
+
+                Logs.create(logData, function(err, log){
+                    if(err){
+                        res.send(err);
+                    }
+                    else {
+                        res.send(event);
+                    }
+                })
+
+                //console.log(event);
+            }
+        })
+    })
+})
+
+
+
+
+
+
+//Make a request to get all logs from a user
+
+app.get("/api/user/:id/logs", function(req, res){
+    //get information about the user
+
+    //information retreived for a user needs to be filtered based on if you're viewing another user's page or if you're viewing your page
+    //This is not needed as of yet, since my user proile page's are very simple
+    const userID = req.params.id; //User's id will be retreived via from the body upon a request
+
+    User.findById(userID, function(err, user){
+        //We should now not be able to view the user's hashed password
+        if(err){
+            res.send(err);
+        }
+        else {
+
+            //Room.find({}).sort({date: 'descending'}).exec(function(err, docs) { ... });
+            //How to sort based on time stamp
+
+
+
+            Logs.find({user: mongoose.Types.ObjectId(userID)}).populate("event").sort({timeStamp: 'descending'}).exec(function(err, logs){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    //Testing to see if the our logs and user will be returned
+                    res.send(logs);
+                    //console.log(user);
+                }
+            })
+        }
+
+    })
+});
+
+
+//Making a get request to GET profile information from a user
+app.get("/api/user/:id", function(req, res){
+
+    const userID = req.params.id;
+    //Users.find().select("-password")
+
+    //password will be excluded from the query, we don't want anyone to see anybody else's hashed password
+    User.findById(userID).select("-password").exec(function(err, user){
+        if(err){
+            res.send(err);
+        }
+        else {
+            res.send(user);
+            //console.log(user);
+        }
+    })
+});
+
+
+
+//make sure to review RESTful routing
+
+
+
+
 
 
 

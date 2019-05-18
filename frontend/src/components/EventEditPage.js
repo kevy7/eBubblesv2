@@ -21,9 +21,23 @@ class eventEditPage extends Component {
     }
 
     componentWillMount = () => {
+
+        //To get logged in user's id this.props.auth.userInfo.id
+
+        let userID;
+        let userIDEvent;
+
+        userID = this.props.auth.userInfo.id;
+        userIDEvent = this.props.selectedEvent;
+
+        //console.log(userID);
+        //console.log(userIDEvent);
+
         if(this.props.match.params.id){
             this.props.getCurrentEvent(this.props.match.params.id);
         }
+
+
     }
 
     handleInputChanges = (e) => {
@@ -52,8 +66,14 @@ class eventEditPage extends Component {
 
     componentWillReceiveProps = (nextProps) => {
 
-        //nextProps gives us the next prop that was added with our action called in componentWillMount
-        //check if the next Prop is there
+        //Authorization is placed in here, not sure if this is the right way to do it with React
+        //Basically, if the userID does not match with the created User's ID, then redirect the user back a page
+        if(nextProps.selectedEvent.createdby._id !== nextProps.auth.userInfo.id){
+            this.props.history.goBack();
+        }
+
+        //console.log(nextProps.auth.userInfo.id);
+        
         if(nextProps.selectedEvent){
             
             const currentEvent = nextProps.selectedEvent;
@@ -68,6 +88,7 @@ class eventEditPage extends Component {
                 eventZipCode: currentEvent.eventZipCode
             });
         }
+
     }
 
     render(){
@@ -208,7 +229,8 @@ class eventEditPage extends Component {
 
 const mapStateToProp = (state) => {
     return {
-        selectedEvent: state.selectedEvent.selectedEvent
+        selectedEvent: state.selectedEvent.selectedEvent,
+        auth: state.auth
     }
 }
 

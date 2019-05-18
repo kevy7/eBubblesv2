@@ -79,6 +79,41 @@ class eventComment extends Component {
     }
 
     render(){
+
+        let editButton;
+
+        //console.log(this.props.userID);
+
+        if(this.props.auth.userInfo.id){
+            if(this.props.auth.userInfo.id === this.props.userID){
+                editButton = (
+                    <div className="dropdown is-right dropButton" onClick={this.displayDropDown} ref={(el) => this._input = el}>
+                        <div className="dropdown-trigger">
+                            <button className="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+                                <span className="icon is-small">
+                                    <i className="fas fa-ellipsis-h" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+
+
+                        <div className="dropdown-menu" id="dropdown-menu2" role="menu">
+                            <div className="dropdown-content">
+                                <a href="#" className="dropdown-item" onClick={this.editButton}>
+                                    Edit
+                                </a>
+                                <hr className="dropdown-divider" />
+                                <a href="#" className="dropdown-item" onClick={this.onSubmit}>
+                                    Delete
+                                </a>
+                            </div>
+                        </div>     
+                    </div>
+                );
+            }
+        }
+
+
         return (
             <div className="eventComment">
                 <article className="media">
@@ -130,8 +165,10 @@ class eventComment extends Component {
 
                     {/* This is the dropdown box  */}
 
+                    {editButton}
+
+                    {/*
                     <div className="media-right">
-                        {/* <span className="icon is-small" onClick={this.editButton}><a className="fas fa-ellipsis-h"></a></span> */}
 
                         <div className="dropdown is-right dropButton" onClick={this.displayDropDown} ref={(el) => this._input = el}>
                             <div className="dropdown-trigger">
@@ -154,14 +191,19 @@ class eventComment extends Component {
                                     </a>
                                 </div>
                             </div>
+
+
                         </div>
                         
                     </div>
+                    */}
+
 
                     {/* <div className="media-right">
                         <button className="delete" onClick={this.onSubmit}></button>
                     </div> */}
                 </article>
+                <br />
             </div>
         )
     }

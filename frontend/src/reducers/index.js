@@ -3,6 +3,8 @@ import authReducer from './authReducer';
 import errorReducer from './errorReducer';
 import eventsReducer from './eventsReducer';
 import selectEventReducer from './selectEventReducer';
+import userLogsReducer from './userLogsReducer';
+import userProfileReducer from './userProfileReducer';
 
 
 export default combineReducers({
@@ -10,5 +12,7 @@ export default combineReducers({
     auth: authReducer,
     err: errorReducer,
     events: eventsReducer,
-    selectedEvent: selectEventReducer
+    selectedEvent: selectEventReducer,
+    userLogs: userLogsReducer,
+    userProfileInfo: userProfileReducer
 });

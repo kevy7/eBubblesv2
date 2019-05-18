@@ -6,7 +6,7 @@ var eventSchema = new mongoose.Schema({
    eventDate: Date,
    timestamp: Date,
    eventDescription: String,
-   eventParticipant: [
+   eventParticipants: [
         {
             //List of participants/users going to this particular event
             type: mongoose.Schema.Types.ObjectId,
@@ -30,6 +30,15 @@ var eventSchema = new mongoose.Schema({
     eventCity: String,
     eventState: String,
     eventZipCode: String
+
+    /*
+    eventParticipants: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
+    */
 
 });
 

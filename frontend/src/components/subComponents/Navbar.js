@@ -42,6 +42,8 @@ class Navbar extends Component {
 
         //this.props.auth.isAutheticated will return true or false based on if the user is logged in or not
 
+        
+
         if (this.props.auth.isAuthenticated === false){
             return (
                 <Link to="/login" className="button is-light">
@@ -60,6 +62,11 @@ class Navbar extends Component {
     }
 
     render(){
+
+        let url = "/user/" + this.props.auth.userInfo.id;
+        
+        
+
         return(
             <div className="">
                 <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -95,6 +102,9 @@ class Navbar extends Component {
                                     New Event
                                 </Link>
                                 <hr className="navbar-divider" />
+                                <Link to={url} className="navbar-item">
+                                    My Profile
+                                </Link>
                                 <a className="navbar-item">
                                     About
                                 </a>

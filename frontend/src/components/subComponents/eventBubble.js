@@ -57,11 +57,30 @@ class EventBubble extends Component {
             */
         }
 
+        let editButton;
+        let removeButton;
+
+        if(this.props.userInfo.id === this.props.userID){
+            //Testing
+            //If this is true, then that means the user created this event
+            editButton = <Link to={editURL} className="far fa-edit editButton"></Link>;
+            removeButton = <button className="delete" onClick={this.deleteEvent}></button>;
+        }
+        else {
+            editButton = <span></span>;
+            removeButton = <span></span>;
+        }
+
         return (    
             <div className="eventBubble column is-one-quarter">
                 <div className="navbar-end eventIcons">
+
+                {/*
                     <Link to={editURL} className="far fa-edit editButton"></Link>
                     <button className="delete" onClick={this.deleteEvent}></button>
+                */}
+                {editButton}
+                {removeButton}
                 </div>
                 
                 <Link to={url}>

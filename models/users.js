@@ -30,8 +30,10 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+        //select: false //This means that this field will not be queried from the database or is not accessible from the database
     },
     timeStamp: Date,
+    //This should be removed because this is no longer needed and not best practice
     events: [
         {
             //These are the id's or list of events that the user created
@@ -39,11 +41,23 @@ var userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Events'
         }
+    ],
+    connections: [
+        {
+            //Once this user accept's a request, both user will become connections
+            //And the user who is sitting in the connection request will be removed from connectionRequests
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
+    connectionRequests: [
+        {
+            //This userid's will be placed in here if they're trying to request a connection with a user
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     ]
 });
-
-
-
 
 //userSchema.plugin(passportLocalMongoose); //We're basically plugging in methods from passportLocalMongoose into our userSchema
 

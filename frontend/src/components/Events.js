@@ -57,6 +57,7 @@ class Events extends Component {
                                     eventName={event.eventName}
                                     eventID={event._id}
                                     key={event._id}
+                                    userID={event.createdby}
                                 />
                             }) 
                             //console.log(this.props.events.events) //it says no token was sent
