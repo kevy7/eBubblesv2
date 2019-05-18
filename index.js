@@ -317,8 +317,6 @@ app.post('/api/events', function(req, res){
         //I'm assuming we can access the user's id via the token that was sent
    };
 
-    //console.log(eventData);
-
     Events.create(eventData, function(err, event){
         if(err){
             res.send(err);
