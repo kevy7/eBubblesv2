@@ -2,18 +2,19 @@ import { GET_EVENTS, LOAD_COMPONENT } from '../actions/types';
 
 const initialState = {
     loading: false, 
-    events: []
+    events: [],
+    error: null
 };
 
 const eventsReducer = (state = initialState, action) => {
-    /* if (action.type === LOAD_COMPONENT){
+    if (action.type === LOAD_COMPONENT){
         return {
             ...state,
             loading: true,
-
+            error: null
         }
-    } */
-    if(action.type === GET_EVENTS) {
+    }
+    else if(action.type === GET_EVENTS) {
         return {
             ...state,
             loading: false,

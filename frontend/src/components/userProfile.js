@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import { Switch, Route, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import ProfileBackground from './subComponents/profileBackground';
 //import EventsNavigation from './subComponents/eventsNavigation';
 import ProfileNavitation from './subComponents/profileNavigation';
 import UserActivity from './subComponents/userActivity';
+import UserLogs from './subComponents/userLogs';
 
 import { getUserLogs } from '../actions';
 import { getUserProfile } from '../actions';
@@ -20,7 +21,7 @@ class userProfile extends Component {
             userID: this.props.match.params.id
         }
 
-        this.props.getUserLogs(logInfo);
+        //this.props.getUserLogs(logInfo);
         this.props.getUserProfile(this.props.match.params.id);
 
         //this.props.history.push('/');
@@ -60,12 +61,17 @@ class userProfile extends Component {
                             </div>
 
                             <div className="column level">
+
+
+
+
+
                                 
                                 <input className="input is-rounded searchBox" type="text" placeholder="Search in the user's feed..."></input>
                                 
                                 <hr />
 
-                                <div className="">
+                                {/* <div className="">
                                     {
                                         this.props.userLogs.userLogs.map(log => {
                                             return <UserActivity
@@ -77,11 +83,13 @@ class userProfile extends Component {
                                             />
 
                                         })
-
                                     }
+                                </div> */}
+
+                                <UserLogs userID={this.props.match.params.id} />
 
 
-                                </div>
+
 
                             </div>
 

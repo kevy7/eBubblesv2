@@ -1,15 +1,25 @@
 import { SELECT_EVENT } from "../actions/types";
 import { REMOVE_EVENT } from "../actions/types";
+import { LOAD_COMPONENT } from "../actions/types";
 
 const initialState = {
-    selectedEvent: {}
+    selectedEvent: {},
+    loading: false,
+    error: null
 }
 
 const selectEventReducer = (state = initialState, action) => {
-    if(action.type === SELECT_EVENT){
+    if(action.type === LOAD_COMPONENT){
         return {
             ...state,
-            selectedEvent: action.payload
+            loading: true
+        }
+    }
+    else if(action.type === SELECT_EVENT){
+        return {
+            ...state,
+            selectedEvent: action.payload,
+            loading: false
         }
     }
     else if (action.type === REMOVE_EVENT){

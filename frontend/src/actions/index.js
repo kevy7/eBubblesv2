@@ -87,6 +87,11 @@ export const logoutUser = (history) => dispatch => {
 
 export const getEvents = () => dispatch => {
     setAuthTokenHeader(window.localStorage.getItem("token"));
+
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
     axios.get("/api/events")
     .then((response) => {
         dispatch(setEvents(response.data));
@@ -288,6 +293,11 @@ export const removeUserFromEvent = (logInfo) => dispatch => {
 export const getUserLogs = (logInfo) => dispatch => {
 
     const url = "/api/user/" + logInfo.userID +"/logs";
+
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
 
     axios.get(url, logInfo)
     .then( res => {

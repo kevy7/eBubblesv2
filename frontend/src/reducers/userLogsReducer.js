@@ -1,12 +1,21 @@
 import { GET_USER_LOGS } from "../actions/types";
+import { LOAD_COMPONENT } from "../actions/types";
 
 const initialState = {
     loading: false, 
-    userLogs: []
+    userLogs: [],
+    error: null
 };
 
 const userLogsReducer = (state = initialState, action) => {
-    if(action.type === GET_USER_LOGS) {
+    if(action.type === LOAD_COMPONENT){
+        return {
+            ...state,
+            loading: true,
+            error: null
+        }
+    }
+    else if(action.type === GET_USER_LOGS) {
         return {
             ...state,
             loading: false,

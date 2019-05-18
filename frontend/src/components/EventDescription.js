@@ -11,6 +11,7 @@ import { removeUserFromEvent } from '../actions';
 
 import EventHero from './subComponents/eventHero';
 import EventComment from './subComponents/eventComment';
+import ProgressBar from './subComponents/progressBar';
 
 import "../styles/eventDescription.css";
 
@@ -25,7 +26,6 @@ class EventDescription extends Component {
             //In that way, we won't have previous data loaded in our eventDescriptions page
         
         this.props.getCurrentEvent(this.props.match.params.id);
-
     }
 
     componentDidMount = () => {
@@ -174,6 +174,12 @@ class EventDescription extends Component {
 
 
 
+        if(this.props.selectedEvent.loading == true){
+            return <ProgressBar />
+        }
+
+
+
 
         return(
             <div className="eventDescription">
@@ -239,7 +245,9 @@ class EventDescription extends Component {
 
                 <div className="container">
                     <div className="content">
-                        <h4 className="title -s-4">Friends</h4>
+                        <h4 className="title -s-4">Participants</h4>
+                        {/* Place participants element in here  */}
+
                     </div>
                 </div>
                 <hr />

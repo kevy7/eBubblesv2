@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import UserHero from './subComponents/UserHero';
 import EventBubble from './subComponents/eventBubble';
+import ProgressBar from './subComponents/progressBar';
 import { getEvents } from '../actions';
 import EventsNavigation from './subComponents/eventsNavigation';
 import AddButton from './subComponents/addButton';
@@ -31,11 +32,14 @@ class Events extends Component {
             
         }
         else {
-            console.log("props do match");
+            //console.log("props do match");
         }
     }
 
     render(){
+        if(this.props.events.loading === true){
+            return <ProgressBar />
+        }
         return(
             <div>
                 <UserHero userName={this.props.auth.userInfo.name}/>
