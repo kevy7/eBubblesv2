@@ -300,9 +300,6 @@ app.get('/api/events/', verifyToken, function(req, res){
 
 
 app.post('/api/events', function(req, res){
-    //Making a post request via an api request
-    //When making an api post request, we can send data in the 'body' of the url request
-    //In order to access the data from the body, we have to download a package called body-parser
 
     //Event data
     var eventData = { 
