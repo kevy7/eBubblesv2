@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Switch, Route, withRouter} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'; //our 'App' component has to be wrapped within our browerRouter
 import { connect } from 'react-redux';
 
 import ProfileBackground from './subComponents/profileBackground';
@@ -7,6 +8,7 @@ import ProfileBackground from './subComponents/profileBackground';
 import ProfileNavitation from './subComponents/profileNavigation';
 import UserActivity from './subComponents/userActivity';
 import UserLogs from './subComponents/userLogs';
+import ProgressBar from './subComponents/progressBar';
 
 import { getUserLogs } from '../actions';
 import { getUserProfile } from '../actions';
@@ -71,23 +73,15 @@ class userProfile extends Component {
                                 
                                 <hr />
 
-                                {/* <div className="">
-                                    {
-                                        this.props.userLogs.userLogs.map(log => {
-                                            return <UserActivity
-                                                log={log.log}
-                                                date={log.timeStamp}
-                                                img={log.event.eventImage}
-                                                key={log._id}
-                                                eventID={log.event._id}
-                                            />
-
-                                        })
-                                    }
-                                </div> */}
-
                                 <UserLogs userID={this.props.match.params.id} />
 
+                                {/* <Router>
+                                    <Switch>
+                                        <Route path="/user/:id/hello" component={ProgressBar} />
+
+
+                                    </Switch>
+                                </Router> */}
 
 
 

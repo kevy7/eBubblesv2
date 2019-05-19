@@ -12,6 +12,7 @@ import { removeUserFromEvent } from '../actions';
 import EventHero from './subComponents/eventHero';
 import EventComment from './subComponents/eventComment';
 import ProgressBar from './subComponents/progressBar';
+import Participants from './subComponents/participants';
 
 import "../styles/eventDescription.css";
 
