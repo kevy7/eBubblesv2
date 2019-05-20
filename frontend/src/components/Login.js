@@ -57,6 +57,12 @@ class Login extends Component {
                                 </div>
                             </div>
                         </form>
+
+                        <br />
+                        <p>Log in with the following information to demo the app</p>
+                        <br />
+                        <p>User Name: fakeUser</p>
+                        <p>Password: welcome1</p>
                     </div>
             </div>
         );

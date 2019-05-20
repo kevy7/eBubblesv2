@@ -9,6 +9,7 @@ import ProfileNavitation from './subComponents/profileNavigation';
 import UserActivity from './subComponents/userActivity';
 import UserLogs from './subComponents/userLogs';
 import ProgressBar from './subComponents/progressBar';
+import UserConnections from './subComponents/userConnections';
 
 import { getUserLogs } from '../actions';
 import { getUserProfile } from '../actions';
@@ -37,9 +38,6 @@ class userProfile extends Component {
             color: 'blue',
             background: 'url(' + this.props.selectedEvent.selectedEvent.eventImage + ')'
         }; */
-
-        //this.props.userLogs.userLogs.
-
         
 
         return (
@@ -63,27 +61,12 @@ class userProfile extends Component {
                             </div>
 
                             <div className="column level">
-
-
-
-
-
-                                
                                 <input className="input is-rounded searchBox" type="text" placeholder="Search in the user's feed..."></input>
-                                
                                 <hr />
 
-                                <UserLogs userID={this.props.match.params.id} />
-
-                                {/* <Router>
-                                    <Switch>
-                                        <Route path="/user/:id/hello" component={ProgressBar} />
-
-
-                                    </Switch>
-                                </Router> */}
-
-
+                                
+                                <Route exact path="/user/:id/" component={UserLogs} />
+                                <Route exact path="/user/:id/connections" component={UserConnections} />
 
                             </div>
 

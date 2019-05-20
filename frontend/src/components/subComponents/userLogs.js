@@ -12,7 +12,7 @@ class userLogs extends Component {
 
     componentWillMount = () => {
         const logInfo = {
-            userID: this.props.userID
+            userID: this.props.match.params.id
         }
 
         //console.log(this.props.match.params.id);

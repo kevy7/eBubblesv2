@@ -35,7 +35,7 @@ class App extends React.Component {
                     <PrivateRoute exact path="/events/new" component={CreateEvent}/>
                     <PrivateRoute exact path='/events/:id' component={EventDescription} />
                     <PrivateRoute exact path='/events/:id/edit' component={EventEditPage} />
-                    <PrivateRoute exact path="/user/:id" component={UserProfile} 
+                    <PrivateRoute path="/user/:id" component={UserProfile}
                         
                     />
                 </Switch>
