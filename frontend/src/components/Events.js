@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import UserHero from './subComponents/UserHero';
 import EventBubble from './subComponents/eventBubble';
@@ -8,6 +9,7 @@ import ProgressBar from './subComponents/progressBar';
 import { getEvents } from '../actions';
 import EventsNavigation from './subComponents/eventsNavigation';
 import AddButton from './subComponents/addButton';
+import EventBubbles from './subComponents/eventBubbles';
 
 class Events extends Component {
     state = {
@@ -17,56 +19,34 @@ class Events extends Component {
    
     componentDidMount = () => {
         
-        this.props.getEvents(); //This action is called to make an api request to get a list of events from our database for us
+        //this.props.getEvents(); //This action is called to make an api request to get a list of events from our database for us
+        //const values = queryString.parse(this.props.location.search);
         
     }
 
     //This is needed for when events are deleted, when events are deleted, reload this page with new events
     //There is an error with this function, the page will constantly be refreshing because this page will aways be receiving new props
     componentWillReceiveProps = (nextProps) => {
-        if(nextProps.events !== this.props.events){
-            //this.props.getEvents();
-            /* console.log("Props do not match");
-            console.log(nextProps);
-            console.log(this.props); */
-            
-        }
-        else {
-            //console.log("props do match");
-        }
+
     }
 
     render(){
-        if(this.props.events.loading === true){
+        /* if(this.props.events.loading === true){
             return <ProgressBar />
-        }
+        } */
+
         return(
             <div>
-                <UserHero userName={this.props.auth.userInfo.name}/>
+                <UserHero userName={this.props.auth.userInfo.name} />
                 <EventsNavigation />
                 <AddButton />
                 <div className="container is-mobile">
-                    <br />
-                    <div className="contianer is-multiline columns">
-                        <EventBubble 
-                            img="https://images.unsplash.com/photo-1506598417715-e3c191368ac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                            eventName="Event Name Here"
-                            eventID="ID is going to be placed in here"
-                        />
+                    <hr />
+                    {/*<div className="contianer is-multiline columns">*/}
                         {
-                            //This code doesn't work when we refresh the page
-                            this.props.events && this.props.events.events.map(event => {
-                                return <EventBubble 
-                                    img={event.eventImage}
-                                    eventName={event.eventName}
-                                    eventID={event._id}
-                                    key={event._id}
-                                    userID={event.createdby}
-                                />
-                            }) 
-                            //console.log(this.props.events.events) //it says no token was sent
+                            <EventBubbles />
                         }
-                    </div>
+                    {/*</div>*/}
                     <br />
                 </div>   
             </div>

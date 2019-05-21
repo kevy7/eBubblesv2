@@ -85,14 +85,20 @@ export const logoutUser = (history) => dispatch => {
     history.push("/");
 }
 
-export const getEvents = () => dispatch => {
+export const getEvents = (queryString) => dispatch => {
     setAuthTokenHeader(window.localStorage.getItem("token"));
 
     dispatch({
         type: LOAD_COMPONENT
     })
 
-    axios.get("/api/events")
+    const parameter = {
+        params: {
+            eventName: "test"
+        }
+    }
+
+    axios.get("/api/events", parameter)
     .then((response) => {
         dispatch(setEvents(response.data));
     })

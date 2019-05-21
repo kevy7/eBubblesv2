@@ -4,11 +4,26 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import '../../styles/eventsNavigation.css';
+import { getEvents } from '../../actions';
 
 class eventsNavigation extends Component {
 
     state = {
-        fakeDate: ""
+        searchBar: ""
+    }
+
+    handleInputChanges = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+
+        
+
+        console.log(this.state.searchBar);
+
+        /* const queryString = {
+            eventName: this.state.searchBar
+        } */
+
+        this.props.getEvents();
     }
 
     render() {
@@ -22,7 +37,14 @@ class eventsNavigation extends Component {
                         <li><a href="#">Components</a></li>
                         <li><a href="#" aria-current="page">Breadcrumb</a></li>
 
-                        <input className="input is-rounded eventSearch" type="text" placeholder="Search for events..."></input>
+                        <input 
+                            className="input is-rounded eventSearch" 
+                            type="text" 
+                            placeholder="Search for events..."
+                            name="searchBar"
+                            value={this.state.searchBar} 
+                            onChange={this.handleInputChanges}
+                        ></input>
                     </ul>
                 </nav>
             </div>
@@ -32,8 +54,10 @@ class eventsNavigation extends Component {
 
 const mapStateToProp = (state) => {
     return {
-        events: state.events
+        
     }
 }
 
-export default withRouter(connect()(eventsNavigation));
+export default withRouter(connect(mapStateToProp, {
+    getEvents: getEvents
+})(eventsNavigation));

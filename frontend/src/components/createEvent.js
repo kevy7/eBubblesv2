@@ -47,9 +47,7 @@ class createEvent extends Component {
             eventZipCode: this.state.eventZipCode,
             eventDescription: this.state.eventDescription,
             userName: this.props.auth.userInfo.name,
-            userID: this.props.auth.userInfo.id
-
-            
+            userID: this.props.auth.userInfo.id  
         }
 
         //console.log(event);

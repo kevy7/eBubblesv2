@@ -270,18 +270,11 @@ app.post("/api/login", function(req, res){
 
 });
 
-//passport.authenticate('jwt', {session: false})
-
-
-//I'll worry about adding in authentication to my api calls later.
-//Now, I just want to focus more on my routes and I'll do the authentication later
-
-//verifyToken is our middleware used to verify or authenticate a user when they're trying to reach a private route
-
 //Get Request, to get our events
 app.get('/api/events/', verifyToken, function(req, res){
 
     //Look up querystrings, to determine how to filter your event searches based on a condition set by a user
+    console.log(req.query.eventName);
     
     //We don't need to res.render anything, we just need to display everything that is currently in our database at the moment
     Events.find({}, function(err, events){
@@ -289,13 +282,12 @@ app.get('/api/events/', verifyToken, function(req, res){
             res.send(err);
         }
         else {
-            res.json(events); //We're going to send a JSON of all of our events listed in our database
-            //Rather than passing an object to our ejs file, we want to do something different
-            //Now that we're creating an api, we want to write the following code instead
-
+            res.json(events);
         }
     })
 });
+
+
 
 
 
