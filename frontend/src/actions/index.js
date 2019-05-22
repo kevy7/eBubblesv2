@@ -94,7 +94,7 @@ export const getEvents = (queryString) => dispatch => {
 
     const parameter = {
         params: {
-            eventName: "test"
+            eventName: queryString
         }
     }
 
@@ -158,7 +158,6 @@ export const getCurrentEvent = (eventID) => dispatch => {
     });
 }
 
-
 export const updateCurrentEvent = (event, history) => dispatch => {
     setAuthTokenHeader(window.localStorage.getItem("token"));
 
@@ -176,7 +175,6 @@ export const updateCurrentEvent = (event, history) => dispatch => {
     ])
 }
 
-
 export const deleteCurrentEvent = (eventID, history) => dispatch => {
     setAuthTokenHeader(window.localStorage.getItem("token"));
 
@@ -192,7 +190,6 @@ export const deleteCurrentEvent = (eventID, history) => dispatch => {
         dispatch(setCurrentError(err));
     })
 }
-
 
 export const addComment = (commentInfo) => dispatch => {
     

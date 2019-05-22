@@ -23,7 +23,7 @@ class eventsNavigation extends Component {
             eventName: this.state.searchBar
         } */
 
-        this.props.getEvents();
+        this.props.getEvents(this.state.searchBar);
     }
 
     render() {

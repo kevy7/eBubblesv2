@@ -274,10 +274,22 @@ app.post("/api/login", function(req, res){
 app.get('/api/events/', verifyToken, function(req, res){
 
     //Look up querystrings, to determine how to filter your event searches based on a condition set by a user
-    console.log(req.query.eventName);
+    //console.log(req.query.eventName);
+
+    //basically, return null if req.query contains nothing
+    let queryString;
+
+    if(req.query.eventName && req.query.eventName !== ""){
+        queryString = {
+            eventName: req.query.eventName
+        }
+    }
+    else {
+        queryString = null;
+    }
     
     //We don't need to res.render anything, we just need to display everything that is currently in our database at the moment
-    Events.find({}, function(err, events){
+    Events.find(queryString, function(err, events){
         if (err){
             res.send(err);
         }
@@ -286,9 +298,6 @@ app.get('/api/events/', verifyToken, function(req, res){
         }
     })
 });
-
-
-
 
 
 app.post('/api/events', function(req, res){
@@ -595,11 +604,6 @@ app.delete('/api/events/:id/comment', function(req, res){
     // /api/events/:id/join
 
 app.post('/api/events/:id/join', function(req, res){
-    //use req.params.id to gain access to the event's id
-    //test id 5ca577725dc6b05cd85dbbf5
-
-    //            Events.findById(eventId).populate("eventComments").exec(function(err, event){
-
 
     Events.findById(req.params.id).populate("eventComments").exec(function(err, event){
         if(err){
