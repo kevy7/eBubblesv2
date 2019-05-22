@@ -12,8 +12,10 @@ class eventsNavigation extends Component {
         searchBar: ""
     }
 
-    handleInputChanges = (e) => {
-        this.setState({[e.target.name]: e.target.value});
+    handleInputChanges = async (e) => {
+
+        //You need to learn and understand how to use asynchronous functions
+        await this.setState({[e.target.name]: e.target.value});
 
         
 
