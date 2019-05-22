@@ -330,9 +330,6 @@ app.post('/api/events', function(req, res){
                     res.send(err);
                 }
                 else {
-                    console.log("User log successfully created");
-                    console.log(log);
-
                     //Sending my event after my log was succesfully created
                     res.send(event);
                 }
@@ -425,18 +422,37 @@ app.put('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
 app.delete('/api/events/:id', [verifyToken, authorizeUser], function(req, res){
     const eventId = req.params.id;
 
+    //Need to fix this, not sure why I'm finding the event twice
     Events.findById(eventId, function(err, event){
         if(err){
             console.log(err);
         }
         else {
-            Events.findOneAndRemove({ _id: event._id }, function(err){
+            Events.findOneAndRemove({ _id: event._id }, function(err, data){
                 if(err){
                     res.send(err);
                 }
                 else {
                     //The event was removed here
-                    res.json({message: "The event was removed"});
+                    //res.json({message: "The event was removed"});
+
+                    Logs.deleteMany({event: event._id}, function(err, log){
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            Events.find({}, function(err, events){
+                                if(err){
+                                    res.send(err);
+                                }
+                                else {
+
+                                    //I should probably delete all comments associated with the event as well
+                                    res.send(events);
+                                }
+                            })
+                        }
+                    })
                 }
             });
         }

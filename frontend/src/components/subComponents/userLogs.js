@@ -30,6 +30,11 @@ class userLogs extends Component {
             return <ProgressBar />
         }
 
+        let userActivity;
+
+
+        //{log.event.eventImage}
+
         return (
             <div className="userLogs">
                 {
@@ -47,7 +52,6 @@ class userLogs extends Component {
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => {

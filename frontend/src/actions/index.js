@@ -185,8 +185,7 @@ export const deleteCurrentEvent = (eventID, history) => dispatch => {
 
     axios.delete(url)
     .then(res => {
-        //history.push("/events")
-        //console.log(res.data);
+        dispatch(setEvents(res.data));
         
     })
     .catch(err => {
