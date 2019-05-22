@@ -276,12 +276,19 @@ app.get('/api/events/', verifyToken, function(req, res){
     //Look up querystrings, to determine how to filter your event searches based on a condition set by a user
     //console.log(req.query.eventName);
 
-    //basically, return null if req.query contains nothing
+    //Refer to this, to determine how to query based on if an event name will contain the following text
+    //{ "authors": { "$regex": "Alex", "$options": "i" } }
+
+
+
     let queryString;
 
     if(req.query.eventName && req.query.eventName !== ""){
         queryString = {
-            eventName: req.query.eventName
+            eventName: { 
+                "$regex": req.query.eventName, //This is needed so that we can search for an event if it contains what the user types
+                "$options": "i" 
+            }
         }
     }
     else {

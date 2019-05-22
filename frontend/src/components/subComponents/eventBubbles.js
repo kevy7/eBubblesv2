@@ -16,7 +16,7 @@ class eventBubbles extends Component {
     render(){
 
         if(this.props.events.loading === true){
-            return <ProgressBar />
+            return <span></span>
         }
 
         return (
