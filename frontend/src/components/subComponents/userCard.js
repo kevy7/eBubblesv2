@@ -41,8 +41,13 @@ class userCard extends Component {
                     </figure>
                     <hr />
                     <p className="has-text-centered">
-                        Name here
+                        {this.props.userName}
                     </p>
+                    <small>
+                        <p className="has-text-centered">
+                        {this.props.firstName} {this.props.lastName}
+                        </p>
+                    </small>
                 </div>
 
 

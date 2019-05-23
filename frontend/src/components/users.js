@@ -8,12 +8,13 @@ import { getUsers } from '../actions';
 
 //testing
 import UserCard from './subComponents/userCard';
+import DisplayUsers from './subComponents/displayUsers';
 
 class Users extends Component {
 
     componentWillMount = () => {
 
-        this.props.getUsers();
+        //this.props.getUsers();
 
     }
 
@@ -27,13 +28,7 @@ class Users extends Component {
                     {/*
                         Create a displayUsers component here
                     */}
-                    <div className="columns container is-multiline">
-                        <UserCard />
-                        <UserCard />
-                        <UserCard />
-                        <UserCard />
-                        <UserCard />
-                    </div>
+                    <DisplayUsers />
                     
 
                 </div>
