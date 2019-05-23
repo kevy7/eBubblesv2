@@ -6,6 +6,9 @@ import UserHero from './subComponents/UserHero';
 import EventsNavigation from './subComponents/eventsNavigation';
 import { getUsers } from '../actions';
 
+//testing
+import UserCard from './subComponents/userCard';
+
 class Users extends Component {
 
     componentWillMount = () => {
@@ -21,6 +24,16 @@ class Users extends Component {
                 <EventsNavigation />
                 <div className="container is-mobile">
                     <hr />
+                    {/*
+                        Create a displayUsers component here
+                    */}
+                    <div className="columns container is-multiline">
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                    </div>
                     
 
                 </div>
