@@ -37,7 +37,7 @@ class Events extends Component {
 
         return(
             <div>
-                <UserHero userName={this.props.auth.userInfo.name} />
+                <UserHero />
                 <EventsNavigation />
                 <AddButton />
                 <div className="container is-mobile">

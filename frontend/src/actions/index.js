@@ -11,6 +11,7 @@ import { REMOVE_EVENT } from './types';
 import { LOAD_COMPONENT } from './types';
 import { GET_USER_LOGS } from './types';
 import { GET_USER_PROFILE } from './types';
+import { GET_USERS } from "./types";
 
 //const nothing = null;
 
@@ -330,4 +331,34 @@ export const getUserProfile = (userID) => dispatch => {
     .catch(err => {
         dispatch(setCurrentError(err));
     });
+}
+
+export const getUsers = (queryString) => dispatch => {
+
+    const url = "/api/users";
+
+    setAuthTokenHeader(window.localStorage.getItem("token"));
+
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
+    const parameter = {
+        params: {
+            userName: queryString
+        }
+    }
+
+    axios.get(url)
+    .then(res => {
+        //Need to create a users reducer
+        dispatch({
+            type: GET_USERS,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+
 }

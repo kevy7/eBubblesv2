@@ -61,6 +61,7 @@ require("./config/passport")(passport);
 /*
 Import models for our database and they're going to be imported here
 */
+//Models
 var User = require("./models/users");
 var Events = require("./models/events");
 var Comments = require("./models/comments");
@@ -278,8 +279,6 @@ app.get('/api/events/', verifyToken, function(req, res){
 
     //Refer to this, to determine how to query based on if an event name will contain the following text
     //{ "authors": { "$regex": "Alex", "$options": "i" } }
-
-
 
     let queryString;
 
@@ -769,8 +768,45 @@ app.get("/api/user/:id", function(req, res){
 });
 
 
+//Backend api call to get users
+app.get("/api/users", function(req, res){
+
+    let queryString;
+
+    if(req.query.userName && req.query.userName !== ""){
+        queryString = {
+            userName: { 
+                "$regex": req.query.userName, //This is needed so that we can search for an event if it contains what the user types
+                "$options": "i" 
+            }
+        }
+    }
+    else {
+        queryString = null;
+    }
+
+    //    User.findById(userID).select("-password").exec(function(err, user){
+    // this is another way of exluding password from being shown with redux
+    User.find(queryString, "-password", function(err, users){
+        if(err){
+            res.send(err);
+        }
+        else {
+            res.send(users);
+        }
+    })
+})
+
+
+
+
+
+
+
 
 //make sure to review RESTful routing
+
+
 
 
 

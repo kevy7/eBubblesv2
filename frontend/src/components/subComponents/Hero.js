@@ -8,10 +8,10 @@ class Hero extends Component {
                 <section className="hero">
                     <div className="hero-body">
                         <div className="container">
-                            <h1 className="title">
+                            <h1 className="title has-text-centered	">
                                 {this.props.title}
                             </h1>
-                            <h2 className="subtitle">
+                            <h2 className="subtitle has-text-centered	">
                                 {this.props.subtitle}
                             </h2>
                         </div>

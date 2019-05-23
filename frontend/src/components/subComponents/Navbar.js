@@ -64,6 +64,17 @@ class Navbar extends Component {
     render(){
 
         let url = "/user/" + this.props.auth.userInfo.id;
+        let userNavItem;
+
+        //authenticate the user first
+
+        if(this.props.auth.isAuthenticated === true){
+            userNavItem = (
+                <Link to={url} className="navbar-item">
+                    {this.props.auth.userInfo.name}
+                </Link>
+            )
+        }
         
         
 
@@ -71,9 +82,10 @@ class Navbar extends Component {
             <div className="">
                 <nav className="navbar" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
-                        <a className="navbar-item">
+                        <Link to="/" className="navbar-item">
                             Event Bubbles
-                        </a>
+                        </Link>
+                        {userNavItem}
 
                         <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                             <span aria-hidden="true"></span>
@@ -82,19 +94,17 @@ class Navbar extends Component {
                         </a>
                     </div>
 
-
-
                     <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-start">
-                            <Link to="/" className="navbar-item">
-                                Home
-                            </Link>
                             <div className="navbar-item has-dropdown is-hoverable">
                                 <a className="navbar-link">
                                     More
                                 </a>
 
-                                <div className="navbar-dropdown">
+                            <div className="navbar-dropdown">
+                                <a className="navbar-item">
+                                    Requests
+                                </a>
                                 <Link className="navbar-item" to="/events">
                                     Events
                                 </Link>
@@ -106,13 +116,16 @@ class Navbar extends Component {
                                     My Profile
                                 </Link>
                                 <a className="navbar-item">
+                                    Messages
+                                </a>
+                                <a className="navbar-item">
                                     About
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                        <div className="navbar-end">
+                        <div className="navbar-menu navbar-end">
                             <div className="navbar-item">
                                 <div className="buttons">
                                     <a className="button is-info" onClick={this.displaySignUpModal}>

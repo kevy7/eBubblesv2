@@ -14,18 +14,14 @@ class eventsNavigation extends Component {
 
     handleInputChanges = async (e) => {
 
+        //If the route is "/events" then perform the ajax call below
         //You need to learn and understand how to use asynchronous functions
         await this.setState({[e.target.name]: e.target.value});
 
-        
-
-        console.log(this.state.searchBar);
-
-        /* const queryString = {
-            eventName: this.state.searchBar
-        } */
-
         this.props.getEvents(this.state.searchBar);
+
+
+        //However, if the route is "/users", then perform the ajax call below
     }
 
     render() {
@@ -34,8 +30,8 @@ class eventsNavigation extends Component {
             <div className="eventsNavigation container">
                 <nav className="breadcrumb has-dot-separator is-centered is-medium" aria-label="breadcrumbs">
                     <ul>
-                        <li className="is-active"><a href="#">Events</a></li>
-                        <li><a href="#">Friends</a></li>
+                        <li className=""><Link to="/events">Events</Link></li>
+                        <li><Link to="/users">Users</Link></li>
                         <li><a href="#">Components</a></li>
                         <li><a href="#" aria-current="page">Breadcrumb</a></li>
 
