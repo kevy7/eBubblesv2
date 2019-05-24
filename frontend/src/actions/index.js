@@ -362,3 +362,19 @@ export const getUsers = (queryString) => dispatch => {
     })
 
 }
+
+export const sendConnection = (userIDs) => dispatch => {
+    //return userIDs.authUser
+    //userIDs.selectedUser
+
+    const url = "/api/user/" + userIDs.selectedUser + "/connect";
+
+    axios.post(url, userIDs)
+    .then(res => {
+        //dispatch something in here
+        //Nothing needs to be dispatched, we only needed to post something and don't need it to be returned
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+}

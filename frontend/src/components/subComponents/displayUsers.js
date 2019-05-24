@@ -25,6 +25,7 @@ class displayUsers extends Component {
                                 lastName={user.lastName}
                                 userName={user.userName}
                                 userID={user._id}
+                                key={user._id}
                             />
                         })
                     }

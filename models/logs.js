@@ -5,6 +5,10 @@ var logsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    connectedUser: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     event: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Events"

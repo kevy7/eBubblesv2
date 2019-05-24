@@ -6,6 +6,7 @@ import UserActivity from './userActivity';
 import { getUserLogs } from '../../actions';
 import ProgressBar from './progressBar';
 
+
 class userLogs extends Component {
 
     //Is it a bad thing to have a global variable set up here

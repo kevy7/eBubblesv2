@@ -798,6 +798,55 @@ app.get("/api/users", function(req, res){
 })
 
 
+//Route to send connection requests to the user
+app.post("/api/user/:id/connect", function(req, res){
+
+    userID = req.params.id;
+    //req.body.authUser is the user that is currently logged in
+
+    User.findById(userID, function(err, user){
+        user.connectionRequests.push(req.body.authUser);
+
+        user.save(function(err, data){
+
+            
+            if(err){
+                res.send(err);
+            }
+            else {
+                res.send(data); //returning the user back to us, not sure if this is needed but will send back just in case
+            }
+
+
+
+            //Let's make sure that we create a log in our database first before we send the event back to the user
+
+            //don't need to make a log since we're only trying to send a connection request to the user
+            /* const userLog = {
+                user: req.body.authUser,
+                connectedUser: userID,
+                type: "Connection",
+                log: "Connected with the user:" + user.userName,
+                timeStamp: new Date()
+            }
+
+            Logs.create(userLog, function(err, log){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    res.send(data);
+                }
+            }) */
+
+
+
+        })
+    })
+
+})
+
+
 
 
 

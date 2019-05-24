@@ -44,8 +44,6 @@ class userProfile extends Component {
             <div className="userProfile">
 
                 <ProfileBackground bgImage="https://images.unsplash.com/photo-1536365480814-1072b4655d02?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" />
-
-                <ProfileNavitation />
                 <div className="section">
                     <div className="container userProfileContainer">
                         <div className="columns">
@@ -61,11 +59,15 @@ class userProfile extends Component {
                             </div>
 
                             <div className="column level">
+                                <ProfileNavitation 
+                                    authUser = {this.props.auth.userInfo.id}
+                                    selectedUser = {this.props.userProfileInfo.userProfileInfo._id}
+                                />
                                 <input className="input is-rounded searchBox" type="text" placeholder="Search in the user's feed..."></input>
                                 <hr />
 
                                 
-                                <Route exact path="/user/:id/" component={UserLogs} />
+                                <Route exact path="/user/:id" component={UserLogs} />
                                 <Route exact path="/user/:id/connections" component={UserConnections} />
 
                             </div>
@@ -82,7 +84,8 @@ class userProfile extends Component {
 const mapStateToProps = (state) => {
     return {
         userLogs: state.userLogs,
-        userProfileInfo: state.userProfileInfo
+        userProfileInfo: state.userProfileInfo,
+        auth: state.auth
     }
 }
 
