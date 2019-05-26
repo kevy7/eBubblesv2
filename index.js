@@ -230,9 +230,11 @@ app.post("/api/login", function(req, res){
     const userName = req.body.userName;
     const password = req.body.password;
 
+    //Testint the ability to hide and manually populating passwords
+
     //find the user based on it's username
     //if username is not found, let the user know
-    User.findOne({ userName }, function (err, user){
+    User.findOne({ userName }).select("+password").exec(function (err, user){
         if(!user){
             return res.status(404).json({ userNameNotFound: "userName not found"});
         }
@@ -257,7 +259,6 @@ app.post("/api/login", function(req, res){
                             //user succesfully logged in because they were given a token
                         });
                     }
-                    
                 )
             }
             else {
@@ -755,8 +756,23 @@ app.get("/api/user/:id", function(req, res){
     const userID = req.params.id;
     //Users.find().select("-password")
 
+    /*
+        Refer to example here
+
+        path: 'deviceGroup',
+        select: 'devicename',
+        model:'DeviceGroups'
+        populate:{
+            path: 'device',
+            select: 'devicename',
+            model:'Device'
+        }
+    */
+
+    
+
     //password will be excluded from the query, we don't want anyone to see anybody else's hashed password
-    User.findById(userID).select("-password").exec(function(err, user){
+    User.findById(userID).populate("connections").populate("connectionRequests").select("-password").exec(function(err, user){
         if(err){
             res.send(err);
         }

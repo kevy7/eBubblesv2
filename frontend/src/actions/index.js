@@ -373,8 +373,13 @@ export const sendConnection = (userIDs) => dispatch => {
     .then(res => {
         //dispatch something in here
         //Nothing needs to be dispatched, we only needed to post something and don't need it to be returned
+        dispatch({
+            type: GET_USER_PROFILE,
+            payload: res.data
+        })
     })
     .catch(err => {
         dispatch(setCurrentError(err));
     })
 }
+

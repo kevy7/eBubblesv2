@@ -29,8 +29,8 @@ var userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
-        //select: false //This means that this field will not be queried from the database or is not accessible from the database
+        required: true,
+        select: false //This means that this field will not be queried from the database or is not accessible from the database
     },
     timeStamp: Date,
     //This should be removed because this is no longer needed and not best practice
