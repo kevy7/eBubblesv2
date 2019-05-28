@@ -33,13 +33,29 @@ class userLogs extends Component {
 
         let userActivity;
 
+        let img;
+
+
+        const displayActivity = this.props.userLogs.userLogs.map(log => {
+
+            return <UserActivity
+                log={log.log}
+                date={log.timeStamp}
+                img={log.image}
+                key={log._id}
+                eventID={log.event} //this needs to change
+                logType = {log.type}
+                userID={log.connectedUser}
+            />
+        })
+
 
         //{log.event.eventImage}
 
         return (
             <div className="userLogs">
                 {
-                    this.props.userLogs.userLogs.map(log => {
+                    /* this.props.userLogs.userLogs.map(log => {
                         return <UserActivity
                             log={log.log}
                             date={log.timeStamp}
@@ -47,7 +63,8 @@ class userLogs extends Component {
                             key={log._id}
                             eventID={log.event._id}
                         />
-                    })
+                    }) */
+                    displayActivity
                 }
 
             </div>

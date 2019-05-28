@@ -337,7 +337,8 @@ app.post('/api/events', function(req, res){
                 event: event._id,
                 type: "Event",
                 log: "Created an event",
-                timeStamp: new Date()
+                timeStamp: new Date(),
+                image: event.eventImage
             }
             //This log shows us that the user created an event
 
@@ -515,7 +516,8 @@ app.post('/api/events/:id/comment', function(req, res){
                                 comment: comment._id,
                                 type: "Comment",
                                 log: "Commented in the event " + data.eventName,
-                                timeStamp: new Date()
+                                timeStamp: new Date(),
+                                image: data.eventImage
                             }
                             Logs.create(userLog, function(err, log){
                                 if(err){
@@ -635,7 +637,8 @@ app.post('/api/events/:id/join', function(req, res){
                         event: data._id,
                         type: "Event",
                         log: "Joined the event: " + data.eventName,
-                        timeStamp: new Date()
+                        timeStamp: new Date(),
+                        image: data.eventImage
                     }
 
                     Logs.create(userLog, function(err, log){
@@ -734,7 +737,7 @@ app.get("/api/user/:id/logs", function(req, res){
 
 
 
-            Logs.find({user: mongoose.Types.ObjectId(userID)}).populate("event").sort({timeStamp: 'descending'}).exec(function(err, logs){
+            Logs.find({user: mongoose.Types.ObjectId(userID)}).sort({timeStamp: 'descending'}).exec(function(err, logs){
                 if(err){
                     res.send(err);
                 }
@@ -862,7 +865,83 @@ app.post("/api/user/:id/connect", function(req, res){
 
 })
 
+//DELETE request to delete the user from connectionRequest
+app.delete("/api/user/:id/connect", function(req, res){
 
+//selectedUserID
+    console.log("selectedUser: " + req.body.selectedUserID);
+    console.log("authUser: " + req.params.id);
+
+    User.update({_id: req.params.id},
+        {$pull: {connectionRequests: req.body.selectedUserID}} //This is used to remove data from an array
+
+    )
+    .then( data => {
+        //this code works!!!
+
+        User.findById(req.params.id, function(err, user){
+            if(err){
+                res.send(err);
+            }
+            else {
+                //send the user
+                //res.send(user);
+                //no point of creating a log here
+                res.send(user);
+                
+            }
+        })
+    })
+    .catch( err => {
+        res.send(err);
+    })
+})
+
+app.post("/api/user/:id/connections", function(req, res){
+    //req.body.selectedUserID //this gives us the user that will be added to the connections array
+
+    User.findById(req.params.id, function(err, user){
+        if(err){
+            res.send(user);
+        }
+        else {
+            user.connections.push(req.body.selectedUserID);
+
+            user.save(function(err, data){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    //res.send(data);
+                    //console.log(data);
+
+                    //Need to create a user log here as well
+
+                    const userLog = {
+                        user: req.params.id,
+                        connectedUser: req.body.selectedUserID,
+                        type: "Connection",
+                        log: "Connected with the user: " + req.body.selectedUserName,
+                        timeStamp: new Date(),
+                        image: "https://bulma.io/images/placeholders/128x128.png" //this is just a default image for profile images
+                    }
+
+                    Logs.create(userLog, function(err, log){
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            //userLog will be created in here
+                            res.send(data);
+                            console.log(data);
+                        }
+                    })
+
+                }
+            })
+        }
+    })
+})
 
 
 

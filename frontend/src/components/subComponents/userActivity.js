@@ -13,6 +13,15 @@ import "../../styles/userActivity.css";
 class userActivity extends Component {
     render() {
 
+        let url;
+
+        if(this.props.logType === "Connection"){
+            url = "/user/" + this.props.userID;
+        }
+        else {
+            url = "/events/" + this.props.eventID;
+        }
+
         let eventURL = "/events/" + this.props.eventID;
 
         if(this.props.img === null){
@@ -40,7 +49,7 @@ class userActivity extends Component {
             <div className="userActivity">
 
                 <div className="box">
-                    <Link to={eventURL}>
+                    <Link to={url}>
                         <p className="has-text-centered">
                             {this.props.log}
                         </p>
@@ -51,7 +60,7 @@ class userActivity extends Component {
                     <hr />
 
                     <div className="">
-                        <Link to={eventURL}>
+                        <Link to={url}>
                             <figure className="image" style={{width: "180px", height: "180px", marginLeft: "auto", marginRight: "auto"}}>
                                 <img 
                                     className="is-rounded" 

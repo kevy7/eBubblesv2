@@ -10,24 +10,37 @@ class userConnections extends Component {
 
     render(){
 
-        const connections = this.props.userProfileInfo.connectionRequests || []; //set connections equal to an empty array at first if an array isn't returned
+        const connectionsReq = this.props.userProfileInfo.connectionRequests || []; //set connections equal to an empty array at first if an array isn't returned
         //console.log(connections);
 
-        const users = connections.map(user => {
-            return <ConnectionCard key={user}/>
+        const connectionRequests = connectionsReq.map(user => {
+            return <ConnectionCard
+                        key={user._id}
+                        userName={user.userName}
+                        firstName={user.firstName}
+                        lastName={user.lastName}
+                        userID={user._id}
+                        authID={this.props.auth.userInfo.id}
+                    />
         })
+
+        let displayUserConn;
+
+        //only display connection requests if the current user is logged in
+        if(this.props.auth.userInfo.id === this.props.userProfileInfo._id){
+            displayUserConn = connectionRequests;
+        }
+        else {
+            displayUserConn = <p>Show nothing</p>
+        }
 
         return (
             <div className="userConnections">
-                {
-                    /* this.props.userProfileInfo.connectionRequests.map((user) => {
-                        return <ConnectionCard />
-                    }) */
-                    users
-                }
+                { displayUserConn /*Display list of connectionRequests - only display this to the user that's currently logged in*/}
                 <hr />
-                <p>Here, list of connections will be displayed in here</p>
-
+                
+                
+                
             </div>
         )
     }
@@ -35,7 +48,8 @@ class userConnections extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userProfileInfo: state.userProfileInfo.userProfileInfo
+        userProfileInfo: state.userProfileInfo.userProfileInfo,
+        auth: state.auth
     }
 }
 

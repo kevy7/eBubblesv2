@@ -383,3 +383,45 @@ export const sendConnection = (userIDs) => dispatch => {
     })
 }
 
+export const removeUserConnection = (userData) => dispatch => {
+
+    //userdata should contain these two items
+    //selectedUserID
+    //authID
+
+    console.log("you're making an api call to remove user connection");
+
+    const url = "/api/user/" + userData.authID + "/connect";
+
+    console.log(url);
+
+    axios.delete(url, {data: userData})
+    .then(res => {
+        dispatch({
+            type: GET_USER_PROFILE,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+}
+
+export const addConnection = (userData) => dispatch => {
+
+    const url = "/api/user/" + userData.authID + "/connections";
+
+    //create an if statement to only add 
+
+    axios.post(url, userData)
+    .then(res => {
+        dispatch({
+            type: GET_USER_PROFILE,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch(setCurrentError(err));
+    })
+
+}

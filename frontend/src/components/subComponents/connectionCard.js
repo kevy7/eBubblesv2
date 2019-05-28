@@ -1,6 +1,48 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { removeUserConnection } from '../../actions';
+import { addConnection } from '../../actions';
 
 class connectionCard extends Component {
+
+    acceptButton = (e) => {
+        e.preventDefault();
+
+        //userdata should contain these two items
+        //selectedUserID
+        //authID
+
+        let url;
+
+        const userData = {
+            selectedUserID: this.props.userID,
+            authID: this.props.authID,
+            selectedUserName: this.props.userName
+        }
+
+        this.props.removeUserConnection(userData);
+        //now we need to call this.props to addConnection
+        this.props.addConnection(userData); //this will add user to connections
+
+
+
+
+
+
+        //need to make a whole new backend route, with a whole new action as well and need to return back the user
+        //console.log("You clicked on the accept button");
+
+        //delete request to delete user from connection request
+        //post request to place user into connections instead of connectionRequests
+
+    }
+
+    rejectButton = (e) => {
+        e.preventDefault();
+
+        console.log("You clicke on the reject button");
+    }
 
     render(){
         return (
@@ -15,8 +57,8 @@ class connectionCard extends Component {
                                 </figure>
                             </div>
                             <div className="column">
-                                <p className="title is-4">Name Here</p>
-                                <p className="subtitle is-6">username here</p>
+                                <p className="title is-4">{this.props.firstName} {this.props.lastName}</p>
+                                <p className="subtitle is-6">{this.props.userName}</p>
                                 <p>
                                     Sent you a connection request
                                 </p>
@@ -24,8 +66,8 @@ class connectionCard extends Component {
                         </div>
                     <div className="field is-grouped is-grouped-right">
                         <div className="buttons">
-                        <button className="button is-warning">Reject</button>
-                        <button className="button is-info">Accept</button>
+                        <button className="button is-warning" onClick={this.rejectButton} >Reject</button>
+                        <button className="button is-info" onClick={this.acceptButton} >Accept</button>
                         </div>
                     </div>
                 </div>
@@ -35,4 +77,13 @@ class connectionCard extends Component {
     }
 }
 
-export default connectionCard;
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, {
+    removeUserConnection: removeUserConnection,
+    addConnection: addConnection
+})(connectionCard);

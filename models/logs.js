@@ -19,7 +19,8 @@ var logsSchema = new mongoose.Schema({
     },
     type: String, //What type of log will go in here
     log: String, //The log will go in here. i.e. The user created a comment
-    timeStamp: Date
+    timeStamp: Date,
+    image: String
 });
 
 module.exports = mongoose.model("Logs", logsSchema);
