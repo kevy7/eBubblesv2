@@ -21,30 +21,46 @@ class connectionCard extends Component {
             selectedUserName: this.props.userName
         }
 
-        //this.props.removeUserConnection(userData);
-        //now we need to call this.props to addConnection
         this.props.addConnection(userData); //this will add user to connections
 
-
-
-
-
-
-        //need to make a whole new backend route, with a whole new action as well and need to return back the user
-        //console.log("You clicked on the accept button");
-
-        //delete request to delete user from connection request
-        //post request to place user into connections instead of connectionRequests
 
     }
 
     rejectButton = (e) => {
         e.preventDefault();
 
-        console.log("You clicke on the reject button");
+        //console.log("You clicke on the reject button");
+
+        const userData = {
+            selectedUserID: this.props.userID,
+            authID: this.props.authID,
+            selectedUserName: this.props.userName
+        }
+
+        this.props.removeUserConnection(userData);
     }
 
     render(){
+
+        let displayButtons;
+
+        if(this.props.type === "requests"){
+            //Not sure if this is the most efficient way of doing it but it works!!!
+            displayButtons = (
+                <div className="field is-grouped is-grouped-right">
+                    <div className="buttons">
+                        <button className="button is-warning" onClick={this.rejectButton} >Reject</button>
+                        <button className="button is-info" onClick={this.acceptButton} >Accept</button>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            displayButtons = (
+                <span></span>
+            )
+        }
+
         return (
             <div className="connectionCard">
                 <div className="box">
@@ -64,12 +80,18 @@ class connectionCard extends Component {
                                 </p>
                             </div>
                         </div>
-                    <div className="field is-grouped is-grouped-right">
+
+                    {/* only display this is this.props.type === "requests" */}
+                    {/* <div className="field is-grouped is-grouped-right">
                         <div className="buttons">
                         <button className="button is-warning" onClick={this.rejectButton} >Reject</button>
                         <button className="button is-info" onClick={this.acceptButton} >Accept</button>
                         </div>
-                    </div>
+                    </div> */}
+                    {displayButtons}
+
+
+
                 </div>
                 <br />
             </div>
