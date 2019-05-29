@@ -731,12 +731,6 @@ app.get("/api/user/:id/logs", function(req, res){
             res.send(err);
         }
         else {
-
-            //Room.find({}).sort({date: 'descending'}).exec(function(err, docs) { ... });
-            //How to sort based on time stamp
-
-
-
             Logs.find({user: mongoose.Types.ObjectId(userID)}).sort({timeStamp: 'descending'}).exec(function(err, logs){
                 if(err){
                     res.send(err);
@@ -758,21 +752,6 @@ app.get("/api/user/:id", function(req, res){
 
     const userID = req.params.id;
     //Users.find().select("-password")
-
-    /*
-        Refer to example here
-
-        path: 'deviceGroup',
-        select: 'devicename',
-        model:'DeviceGroups'
-        populate:{
-            path: 'device',
-            select: 'devicename',
-            model:'Device'
-        }
-    */
-
-    
 
     //password will be excluded from the query, we don't want anyone to see anybody else's hashed password
     User.findById(userID).populate("connections").populate("connectionRequests").select("-password").exec(function(err, user){
@@ -836,30 +815,6 @@ app.post("/api/user/:id/connect", function(req, res){
                 res.send(data); //returning the user back to us, not sure if this is needed but will send back just in case
             }
 
-
-
-            //Let's make sure that we create a log in our database first before we send the event back to the user
-
-            //don't need to make a log since we're only trying to send a connection request to the user
-            /* const userLog = {
-                user: req.body.authUser,
-                connectedUser: userID,
-                type: "Connection",
-                log: "Connected with the user:" + user.userName,
-                timeStamp: new Date()
-            }
-
-            Logs.create(userLog, function(err, log){
-                if(err){
-                    res.send(err);
-                }
-                else {
-                    res.send(data);
-                }
-            }) */
-
-
-
         })
     })
 
@@ -897,48 +852,73 @@ app.delete("/api/user/:id/connect", function(req, res){
     })
 })
 
+
+//This route finally works!!!!!
 app.post("/api/user/:id/connections", function(req, res){
     //req.body.selectedUserID //this gives us the user that will be added to the connections array
 
+
+    //check to see if this should be removed
     User.findById(req.params.id, function(err, user){
         if(err){
             res.send(user);
         }
         else {
-            user.connections.push(req.body.selectedUserID);
+            //.map function is used to convert the array of objectId's into a string
+            if(user.connections.map(user=>user.toString()).includes(req.body.selectedUserID) !== true){
+                //console.log("user is NOT in the connections list");
+                //if the user is not shown in the list of connections, then add them to it
 
-            user.save(function(err, data){
-                if(err){
-                    res.send(err);
-                }
-                else {
-                    //res.send(data);
-                    //console.log(data);
 
-                    //Need to create a user log here as well
-
-                    const userLog = {
-                        user: req.params.id,
-                        connectedUser: req.body.selectedUserID,
-                        type: "Connection",
-                        log: "Connected with the user: " + req.body.selectedUserName,
-                        timeStamp: new Date(),
-                        image: "https://bulma.io/images/placeholders/128x128.png" //this is just a default image for profile images
+                //we set "new": true, in order to return the updated new information from the user
+                User.findOneAndUpdate({_id: req.params.id}, {$pull: {connectionRequests: req.body.selectedUserID}}, { "new":true }, function(err, updateUser){
+                    if(err){
+                        console.log(err);
                     }
+                    else {
+                        
+                        updateUser.connections.push(req.body.selectedUserID);
 
-                    Logs.create(userLog, function(err, log){
-                        if(err){
-                            res.send(err);
-                        }
-                        else {
-                            //userLog will be created in here
-                            res.send(data);
-                            console.log(data);
-                        }
-                    })
+                        updateUser.save(function(err, newUser){
+                            if(err){
+                                res.send(err);
+                            }
+                            else {
+                                const userLog = {
+                                    user: req.params.id,
+                                    connectedUser: req.body.selectedUserID,
+                                    type: "Connection",
+                                    log: "Connected with the user: " + req.body.selectedUserName,
+                                    timeStamp: new Date(),
+                                    image: "https://bulma.io/images/placeholders/128x128.png" //This is just a default image for profile pictures
+                                }
 
-                }
-            })
+
+                                Logs.create(userLog, function(err, log) {
+                                    if(err){
+                                        res.send(err);
+                                    }
+                                    else {
+                                        //log is created here
+                                        res.send(newUser);
+                                        console.log(newUser);
+                                    }
+                                })
+
+
+                            }
+                        })
+
+
+                    }
+                })
+            }
+            else {
+                //console.log("user is IN the connections lists");
+
+                res.status(400).json({error: "The user is already a connection"});
+
+            }
         }
     })
 })

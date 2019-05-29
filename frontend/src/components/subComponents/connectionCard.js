@@ -21,7 +21,7 @@ class connectionCard extends Component {
             selectedUserName: this.props.userName
         }
 
-        this.props.removeUserConnection(userData);
+        //this.props.removeUserConnection(userData);
         //now we need to call this.props to addConnection
         this.props.addConnection(userData); //this will add user to connections
 
