@@ -320,6 +320,10 @@ export const getUserLogs = (logInfo) => dispatch => {
 export const getUserProfile = (userID) => dispatch => {
     const url = "/api/user/" + userID;
 
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
     axios.get(url)
     .then(res => {
         //create a reducer here
@@ -415,9 +419,11 @@ export const addConnection = (userData) => dispatch => {
 
     axios.post(url, userData)
     .then(res => {
+        console.log(res.data);
         dispatch({
             type: GET_USER_PROFILE,
             payload: res.data
+            
         })
     })
     .catch(err => {

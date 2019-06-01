@@ -14,6 +14,10 @@ class profileNavigation extends Component {
         need to find a more efficient way of doing this
     */
 
+    componentWillUpdate = (nextProps) => {
+        
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
 
@@ -40,30 +44,84 @@ class profileNavigation extends Component {
         //console.log(userIDs);
     }
 
+    disconnectWithUser = (e) => {
+        e.preventDefault();
+
+        alert("Will add code to this button later");
+    }
+
     render(){
 
-        let displayConnect;
-        //if the selectedUser's connectionRequest contains the logged in user's id display "connection sent" else, continue displaying "connect"
-        //this.props.userProfileInfo.userProfileInfo.connectionRequests.includes(this.props.auth.userIfno.id
+        //Work on this
+        let displayConnect;// = <li className="" > <a aria-current="page" onClick={this.connectWithUser}>Connect</a> </li>;
+        let word;
 
-        //console.log(this.props.userProfileInfo.userProfileInfo.connectionRequests)
+        let connectionRequests = this.props.userProfileInfo.userProfileInfo.connectionRequests || [];
+        let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
 
-        let connectionRequests = this.props.userProfileInfo.userProfileInfo.connectionRequests;
 
-        if(connectionRequests){
-            //If the array exists, then do something in here
+            //This is another way of creating a forEach loop
+            //displayConnect = <li className="" > <a aria-current="page" onClick={this.connectWithUser}>Connect</a> </li>;
+            //console.log(connections);
+            //console.log(connectionRequests);
 
-            if(connectionRequests.includes(this.props.auth.userInfo.id)){
-                //console.log("Yes, this user is currently sending a connection request")
-                //yes, so this currently works
-                displayConnect = <li className="is-active" ><a aria-current="page" >Connection Sent</a></li>
-            }
-            else {
-                displayConnect = <li className="" ><a aria-current="page" onClick={this.connectWithUser}>Connect</a></li>
+        //
+        if(connectionRequests.length !== 0){
+            //console.log("connectionRequests is empty");
+        
+            for (let request of connectionRequests){
+                
+                if(request._id === this.props.auth.userInfo.id){
+                    displayConnect = <li className="is-active" ><a aria-current="page" >Connection Sent</a></li>
+                    //console.log("this user contains you as a requester");
+                    word = "in connReq";
+                    //console.log(word);
+                    console.log("logged in user is a connection request");
+                    break;
+                    //console.log(displayConnect);
+                    //break;
+                }
+                else {
+                    displayConnect = <li className="" ><a aria-current="page" onClick={this.connectWithUser}>Connect</a></li>
+                    word = "not in connReq"
+                    //console.log(word);
+                    console.log("logged in user is not a connection req");
+                }
             }
         }
+        else {
+            displayConnect = <li className="" ><a aria-current="page" onClick={this.connectWithUser}>Connect</a></li>
+            word = "array is empty"
+            //console.log(word);
+            console.log("array is empty");
+        }
+
+        //console.log(word);
+        //console.log(word);
+
+
+        if(connections.length !== 0){
+            
+             for(let connection of connections){
+                if(connection._id === this.props.auth.userInfo.id){
+                    displayConnect = <li className="" ><a aria-current="page" onClick={this.disconnectWithUser}>Disconnect from user</a></li>
+                    console.log("this user contains you as a connection")
+                    word="is a connection";
+                    //console.log(word);
+                }
+            } 
+        }
         
-        
+        console.log(word);
+        //console.log(this.props.err);
+
+        if(this.props.err.hasError === true){
+            //console.log(this.props.err.err.response.data);
+            alert(this.props.err.err.response.data.error);
+        }
+
+
+
 
 
         if(this.props.authUser === this.props.selectedUser){
@@ -100,7 +158,8 @@ class profileNavigation extends Component {
 const mapStateToProps = (state) => {
     return {
         userProfileInfo: state.userProfileInfo,
-        auth: state.auth
+        auth: state.auth,
+        err: state.err
     }
 }
 

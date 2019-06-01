@@ -10,6 +10,8 @@ import UserActivity from './subComponents/userActivity';
 import UserLogs from './subComponents/userLogs';
 import ProgressBar from './subComponents/progressBar';
 import UserConnections from './subComponents/userConnections';
+import UserBox from './subComponents/userBox';
+//import ProgressBar from './subComponents/progressBar';
 
 import { getUserLogs } from '../actions';
 import { getUserProfile } from '../actions';
@@ -20,24 +22,20 @@ class userProfile extends Component {
 
     componentWillMount = () => {
 
-        const logInfo = {
+        /* const logInfo = {
             userID: this.props.match.params.id
         }
 
-        //this.props.getUserLogs(logInfo);
-        this.props.getUserProfile(this.props.match.params.id);
+        this.props.getUserProfile(this.props.match.params.id);  */
 
-        //this.props.history.push('/');
-        /*
-            So it seems like I can add authorization in here
-        */
+
+    }
+
+    componentWillUpdate = (nextProps) =>{
+        
     }
 
     render(){
-        /* const divStyle = {
-            color: 'blue',
-            background: 'url(' + this.props.selectedEvent.selectedEvent.eventImage + ')'
-        }; */
         
 
         return (
@@ -48,14 +46,15 @@ class userProfile extends Component {
                     <div className="container userProfileContainer">
                         <div className="columns">
                             <div className="column is-3">
-                                <div className="box is-two-fifths">
+                                 {/* <div className="box is-two-fifths">
                                     <p>
                                         Username: {this.props.userProfileInfo.userProfileInfo.userName}
                                     </p>
                                     <p>
                                         Name: {this.props.userProfileInfo.userProfileInfo.lastName}, {this.props.userProfileInfo.userProfileInfo.firstName}
                                     </p>
-                                </div>
+                                </div>  */}
+                                <UserBox />
                             </div>
 
                             <div className="column level">

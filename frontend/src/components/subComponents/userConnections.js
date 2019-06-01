@@ -24,6 +24,7 @@ class userConnections extends Component {
                         userID={user._id}
                         authID={this.props.auth.userInfo.id}
                         type="requests"
+                        message="Sent you a connection request"
                     />
         })
 
@@ -36,13 +37,14 @@ class userConnections extends Component {
                         userID={friend._id}
                         authID={this.props.auth.userInfo.id}
                         type="friends"
+                        message="Is a connection"
                     />
         })
 
         //only display connection requests if the current user is logged in
         if(this.props.auth.userInfo.id === this.props.userProfileInfo._id){
             displayUserConn = connectionRequests;
-            displayConnections = connectionList;
+            displayConnections = connectionList; //we want to display this regardless if it's the logged in viewer viewing his/her page or not
         }
         else {
             displayUserConn = <p>Show nothing</p>

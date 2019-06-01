@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 
 import UserActivity from './userActivity';
 import { getUserLogs } from '../../actions';
+import { getUserProfile } from '../../actions';
+
 import ProgressBar from './progressBar';
 
 
@@ -19,8 +21,19 @@ class userLogs extends Component {
         //console.log(this.props.match.params.id);
 
         this.props.getUserLogs(logInfo);
+        this.props.getUserProfile(this.props.match.params.id);
 
         
+    }
+
+    componentWillUpdate = (nextProps) =>{
+        if(nextProps.match.params.id !== this.props.match.params.id){
+            const logInfo = {
+                userID: nextProps.match.params.id
+            }
+            this.props.getUserLogs(logInfo);
+            this.props.getUserProfile(nextProps.match.params.id);
+        }
     }
 
     render(){
@@ -79,5 +92,6 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps, {
-    getUserLogs: getUserLogs
+    getUserLogs: getUserLogs,
+    getUserProfile: getUserProfile
 })(userLogs));

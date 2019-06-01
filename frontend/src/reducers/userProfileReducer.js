@@ -1,15 +1,25 @@
-import { GET_USER_PROFILE } from "../actions/types";
+import { GET_USER_PROFILE, LOAD_COMPONENT } from "../actions/types";
 
 const initialState = {
     loading: false,
-    userProfileInfo: {}
+    userProfileInfo: {},
+    error: null
 }
 
 export default (state= initialState, action) => {
-    if(action.type === GET_USER_PROFILE){
+    if(action.type === LOAD_COMPONENT){
         return {
             ...state,
-            userProfileInfo: action.payload
+            loading: true,
+            error: null
+        }
+    }
+    else if (action.type === GET_USER_PROFILE){
+        return {
+            ...state,
+            loading: false,
+            userProfileInfo: action.payload,
+            
         }
     }
     else {
@@ -18,3 +28,5 @@ export default (state= initialState, action) => {
         }
     }
 }
+
+//export default userProfileReducer;

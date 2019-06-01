@@ -799,24 +799,63 @@ app.get("/api/users", function(req, res){
 //Route to send connection requests to the user
 app.post("/api/user/:id/connect", function(req, res){
 
-    userID = req.params.id;
-    //req.body.authUser is the user that is currently logged in
+    userID = req.params.id; //this is the selectedUser
+    //req.body.authUser //This is the authUser
 
-    User.findById(userID, function(err, user){
-        user.connectionRequests.push(req.body.authUser);
 
-        user.save(function(err, data){
+    //Before the auth user even thinks about sending a request to the selectedUser, check that the selectedUser already didn't send you a request
+    //Both user's shouldn't have the ability to send each other requests
 
-            
-            if(err){
-                res.send(err);
-            }
-            else {
-                res.send(data); //returning the user back to us, not sure if this is needed but will send back just in case
-            }
 
-        })
+    User.findById(req.body.authUser, function(err, authUser){
+        const poop = true;
+
+        //if(user.connections.map(user=>user.toString()).includes(req.body.selectedUserID) !== true){
+
+            console.log("the auth user does not have the selectedUser in it's list of connectionRequests");
+
+            User.findById(userID, { "new":true }).populate("connectionRequests").populate("connections").exec(function(err, user){
+
+                //Logged in user can't send a connection request if:
+                /*
+                    the logged in user is in the selected user's list of connectionRequest
+                    the logged in user's list of connectionReq/connections does not contain the selectedUser's id
+                */
+                if(authUser.connectionRequests.map(user=>user.toString()).includes(userID) !== true 
+                    && authUser.connections.map(userconn=>userconn.toString()).includes(userID) !== true 
+                    && user.connectionRequests.map(userConReq=>userConReq.toString().includes(req.body.authUser) !== true)
+                    ){
+
+
+                    user.connectionRequests.push(req.body.authUser);
+
+                    user.save(function(err, data){
+
+                        
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            res.send(data); //returning the user back to us, not sure if this is needed but will send back just in case
+                        }
+
+                    })
+                }
+                else {
+                    console.log("woahhh, these users's are already either linked or have sent each other a connection request");
+                    res.status(400).json({error: "Request Error: The user is already either a connection or sent a connecton Request"});
+
+                }
+
+
+
+
+            })
+
+
     })
+
+    
 
 })
 
@@ -855,72 +894,80 @@ app.delete("/api/user/:id/connect", function(req, res){
 
 //This route finally works!!!!!
 app.post("/api/user/:id/connections", function(req, res){
-    //req.body.selectedUserID //this gives us the user that will be added to the connections array
-
-
-    //check to see if this should be removed
-    User.findById(req.params.id, function(err, user){
-        if(err){
-            res.send(user);
-        }
-        else {
-            //.map function is used to convert the array of objectId's into a string
-            if(user.connections.map(user=>user.toString()).includes(req.body.selectedUserID) !== true){
-                //console.log("user is NOT in the connections list");
-                //if the user is not shown in the list of connections, then add them to it
-
-
                 //we set "new": true, in order to return the updated new information from the user
                 User.findOneAndUpdate({_id: req.params.id}, {$pull: {connectionRequests: req.body.selectedUserID}}, { "new":true }, function(err, updateUser){
                     if(err){
                         console.log(err);
                     }
                     else {
+                        //if the logged in user does not have the selectedUser in it's connections array, then perform the following code below
+                        if(updateUser.connections.map(user=>user.toString()).includes(req.body.selectedUserID) !== true){
                         
-                        updateUser.connections.push(req.body.selectedUserID);
+                            updateUser.connections.push(req.body.selectedUserID);
 
-                        updateUser.save(function(err, newUser){
-                            if(err){
-                                res.send(err);
-                            }
-                            else {
-                                const userLog = {
-                                    user: req.params.id,
-                                    connectedUser: req.body.selectedUserID,
-                                    type: "Connection",
-                                    log: "Connected with the user: " + req.body.selectedUserName,
-                                    timeStamp: new Date(),
-                                    image: "https://bulma.io/images/placeholders/128x128.png" //This is just a default image for profile pictures
+                            updateUser.save(function(err, newUser){
+                                if(err){
+                                    res.send(err);
                                 }
-
-
-                                Logs.create(userLog, function(err, log) {
-                                    if(err){
-                                        res.send(err);
+                                else {
+                                    //issue, we also need to make a log for the selected user as well and not just for the logged in user
+                                    const userLog = {
+                                        user: req.params.id,
+                                        connectedUser: req.body.selectedUserID,
+                                        type: "Connection",
+                                        log: "Connected with the user: " + req.body.selectedUserName,
+                                        timeStamp: new Date(),
+                                        image: "https://bulma.io/images/placeholders/128x128.png" //This is just a default image for profile pictures
                                     }
-                                    else {
-                                        //log is created here
-                                        res.send(newUser);
-                                        console.log(newUser);
-                                    }
+
+                                    newUser.populate('connections').populate('connectionRequests', function(err, populatedUser){
+
+                                        if(err){
+                                            res.send(err);
+                                        }
+                                        else{
+                                            Logs.create(userLog, function(err, log) {
+                                                if(err){
+                                                    res.send(err);
+                                                }
+                                                else {         
+                                                    User.findById(req.body.selectedUserID, function(err, selectedUser){
+                                                        if(err){
+                                                            res.send(err);
+                                                        }
+                                                        else {
+
+                                                            //This will push the logged in user's id into the selected user list of connections as well
+                                                            if(selectedUser.connections.map(user=>user.toString()).includes(newUser._id) !== true){
+                                                                selectedUser.connections.push(newUser._id);
+                                                                selectedUser.save(function(err, selectedData){
+                                                                    if(err){
+                                                                        res.send(err);
+                                                                    }
+                                                                    else {
+                                                                        //do nothing here
+                                                                        res.send(populatedUser);
+                                                                        console.log(populatedUser);
+                                                                    }
+                                                                })
+                                                            }
+                                                            else{
+                                                                res.status(400).send("The selected user is already a connection");
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
                                 })
-
-
-                            }
-                        })
-
-
+                                }
+                            })
+                        }
+                        else {
+                            res.status(400).json({error: "The selected user is already a connection"});
+                        }
                     }
                 })
-            }
-            else {
-                //console.log("user is IN the connections lists");
-
-                res.status(400).json({error: "The user is already a connection"});
-
-            }
-        }
-    })
 })
 
 
