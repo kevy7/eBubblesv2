@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { removeUserConnection } from '../../actions';
 import { addConnection } from '../../actions';
@@ -43,6 +44,8 @@ class connectionCard extends Component {
     render(){
 
         let displayButtons;
+        let url;
+        url = "/user/" + this.props.userID;
 
         if(this.props.type === "requests"){
             //Not sure if this is the most efficient way of doing it but it works!!!
@@ -67,17 +70,26 @@ class connectionCard extends Component {
                         <div className="columns">
                             <div className="column is-one-fifth">
                                 <figure className="image is-128x128">
-                                    
+                                    <Link to={url}>
                                     <img className="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
-                                    
+                                    </Link>
                                 </figure>
                             </div>
                             <div className="column">
+                                <br />
+                                <Link to={url}>
                                 <p className="title is-4">{this.props.firstName} {this.props.lastName}</p>
+                                </Link>
+                                
                                 <p className="subtitle is-6">{this.props.userName}</p>
-                                <p>
-                                    Sent you a connection request
+                                
+                                <p className="subtitle is-6">
+                                    {this.props.message}
                                 </p>
+                            </div>
+
+                            <div className="column">
+                                {displayButtons}
                             </div>
                         </div>
 
@@ -88,7 +100,7 @@ class connectionCard extends Component {
                         <button className="button is-info" onClick={this.acceptButton} >Accept</button>
                         </div>
                     </div> */}
-                    {displayButtons}
+                    {/*displayButtons*/}
 
 
 

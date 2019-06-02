@@ -936,7 +936,6 @@ app.post("/api/user/:id/connections", function(req, res){
                                                             res.send(err);
                                                         }
                                                         else {
-
                                                             //This will push the logged in user's id into the selected user list of connections as well
                                                             if(selectedUser.connections.map(user=>user.toString()).includes(newUser._id) !== true){
                                                                 selectedUser.connections.push(newUser._id);

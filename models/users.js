@@ -56,7 +56,10 @@ var userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
+    userProfileImage: {
+        type: String
+    }
 });
 
 //userSchema.plugin(passportLocalMongoose); //We're basically plugging in methods from passportLocalMongoose into our userSchema

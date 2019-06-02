@@ -12,6 +12,7 @@ import ProgressBar from './subComponents/progressBar';
 import UserConnections from './subComponents/userConnections';
 import UserBox from './subComponents/userBox';
 //import ProgressBar from './subComponents/progressBar';
+import DisplayMessages from './subComponents/displayMessages';
 
 import { getUserLogs } from '../actions';
 import { getUserProfile } from '../actions';
@@ -32,7 +33,10 @@ class userProfile extends Component {
     }
 
     componentWillUpdate = (nextProps) =>{
-        
+        //console.log(nextProps);
+        if(nextProps.match.params.id !== this.props.match.params.id){
+            this.props.getUserProfile(nextProps.match.params.id);
+        }
     }
 
     render(){
@@ -40,7 +44,6 @@ class userProfile extends Component {
 
         return (
             <div className="userProfile">
-
                 <ProfileBackground bgImage="https://images.unsplash.com/photo-1536365480814-1072b4655d02?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" />
                 <div className="section">
                     <div className="container userProfileContainer">
@@ -68,10 +71,10 @@ class userProfile extends Component {
                                 
                                 <Route exact path="/user/:id" component={UserLogs} />
                                 <Route exact path="/user/:id/connections" component={UserConnections} />
+                                <Route exact path="/user/:id/messages" component={DisplayMessages} />
+
 
                             </div>
-
-                        
                         </div>
                     </div>
                 </div>
