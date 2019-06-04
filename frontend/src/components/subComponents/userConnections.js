@@ -58,7 +58,7 @@ class userConnections extends Component {
             displayUserConn = connectionRequests;
         }
         else {
-            displayUserConn = <p>Show nothing</p>
+            displayUserConn = <span></span>
             //displayConnections = <p>Show Nothing here as well</p>
         }
 

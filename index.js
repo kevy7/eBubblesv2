@@ -66,6 +66,8 @@ var User = require("./models/users");
 var Events = require("./models/events");
 var Comments = require("./models/comments");
 var Logs = require("./models/logs");
+var Message = require("./models/message");
+var Conversation = require("./models/conversation");
 
 
 /*
@@ -967,6 +969,139 @@ app.post("/api/user/:id/connections", function(req, res){
                         }
                     }
                 })
+})
+
+//create a conversation with a user
+//if no conversation exists between users, then create a conversation
+app.post("/api/user/:id/conversation", function(req, res){
+    const authUser = req.params.id;
+    const selectedUser = req.body.selectedUser;
+
+    /*
+    //this is the schema for conversations
+
+    users: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
+    timeStamp: Date,
+    messages: [
+        {
+            type: mongoose.Schema.Types.ObjectId, //list of messages within this conversation
+            ref: 'Message'
+        }
+    ]
+    */
+
+    const convoData = {
+        timeStamp: new Date()
+    }
+
+    //this code works
+    //this code will create a conversation for the users listed
+
+    Conversation.create(convoData, function(err, conversation){
+        if(err){
+            res.send(err);
+        }
+        else {
+            conversation.users.push(authUser);
+            conversation.users.push(selectedUser);
+
+            conversation.save(function(err, newConvo){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    console.log(newConvo);
+                    res.send(newConvo);
+                }
+            })
+        }
+    })
+
+
+
+})
+
+
+
+//GET request to receive all conversations of a user
+app.get("/api/user/:id/messages", function(req, res){
+
+    //get a message based on it's users
+    Conversation.find({users: req.params.id}, function(err, conversation){
+        if(err){
+            res.send(err);
+        }
+        else {
+            res.send(conversation);
+            //display list of messages within this conversation
+        }
+    })
+
+})
+
+//Get one conversation and all of it's messages
+app.get("/api/user/:id/messages/:messageID", function(req, res){
+
+    Conversation.find({_id: req.params.messageID}, function(err, conversation){
+        if(err){
+            res.send(err);
+        }
+        else {
+            res.send(conversation);
+            //When retreiving a message, find a way to retreive them in order by timestamp
+        }
+    })
+
+})
+
+
+//Post a new message into a conversation
+app.post("/api/user/:id/messages/:messageID", function(req, res){
+    const authUser = req.params.id;
+
+    const messageData = {
+        message: req.body.message,
+        sender: req.params.id,
+        senderName: req.body.authName,
+        timeStamp: new Date()
+    }
+
+    Message.create(messageData, function(err, message){
+        if(err){
+            res.send(err);
+        }
+        else {
+            
+            //console.log(message._id);
+            //Conversation.findById
+
+            Conversation.findById({_id: req.params.messageID}, function(err, convo){
+                if(err){
+                    res.send(err);
+                }
+                else{
+                    //res.send(message._id);
+                    convo.messages.push(message._id);
+                    convo.save(function(err, data){
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            res.send(data);
+                        }
+                    }) 
+                }
+            })
+
+
+        }
+    })
+
 })
 
 
