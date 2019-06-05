@@ -79,7 +79,7 @@ class Navbar extends Component {
         
 
         return(
-            <div className="">
+            <div className="mainNav">
                 <nav className="navbar" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
                         <Link to="/" className="navbar-item">
@@ -115,9 +115,9 @@ class Navbar extends Component {
                                 <Link to={url} className="navbar-item">
                                     My Profile
                                 </Link>
-                                <a className="navbar-item">
+                                <Link to="/messages" className="navbar-item">
                                     Messages
-                                </a>
+                                </Link>
                                 <a className="navbar-item">
                                     About
                                 </a>

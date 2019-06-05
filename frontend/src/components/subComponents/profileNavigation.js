@@ -107,7 +107,7 @@ class profileNavigation extends Component {
                             <ul>
                                 <li className="" onClick={this.onSubmit} ref = {(el) => { this.logsLink = el; }}><Link to={this.props.match.url}>Logs</Link></li>
                                 <li ref = {(el) => { this.connectionsLink = el; }}><Link to={this.props.match.url + "/connections"} href="#">Connections</Link></li>
-                                <li ref = {(el) => { this.messageLink = el; }}><Link href="#" to={this.props.match.url + "/messages"}>Messages</Link></li>
+                                <li ref = {(el) => { this.messageLink = el; }}><Link href="#" to="/messages">Messages</Link></li>
                                 <li className="" ref = {(el) => { this.eventsLink = el; }}><a href="#" aria-current="page">My Events</a></li>
                             </ul>
                         </nav>
@@ -121,7 +121,7 @@ class profileNavigation extends Component {
                             <ul>
                                 <li className="" onClick={this.onSubmit} ref = {(el) => { this.logsLink = el; }}><Link to={this.props.match.url}>Logs</Link></li>
                                 <li ref = {(el) => { this.connectionsLink = el; }}><Link to={this.props.match.url + "/connections"} href="#">Connections</Link></li>
-                                <li ref = {(el) => { this.messageLink = el; }}><Link href="#" to={ this.props.match.url + "/messages"}>Message Me</Link></li>
+                                <li ref = {(el) => { this.messageLink = el; }}><Link href="#" to="/messages">Message Me</Link></li>
                                 <li className="" ref = {(el) => { this.eventsLink = el; }}><a href="#" aria-current="page">Events</a></li>
                                 {displayConnect}
                             </ul>

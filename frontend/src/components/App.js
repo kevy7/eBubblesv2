@@ -15,6 +15,7 @@ import CreateEvent from './createEvent';
 import EventEditPage from './EventEditPage';
 import UserProfile from './userProfile';
 import Users from './users';
+import DisplayMessages from './subComponents/displayMessages';
 
 
 //Look at this.props.children https://til.hashrocket.com/posts/c5725d4d01-react-wrapper-components-with-nested-children
@@ -26,7 +27,7 @@ class App extends React.Component {
     //<Route path='/about' component={About} />
     render(){
         return(
-            <div>
+            <div id="mainBody">
                 <Navbar />
                 <Switch>
                     <Route exact path="/" component={Home} />
@@ -38,6 +39,7 @@ class App extends React.Component {
                     <PrivateRoute exact path='/events/:id/edit' component={EventEditPage} />
                     <PrivateRoute path="/user/:id" component={UserProfile} />
                     <PrivateRoute path="/users" component={Users} />
+                    <PrivateRoute path="/messages" component={DisplayMessages}/>
                 </Switch>
             </div>
         );

@@ -976,25 +976,6 @@ app.post("/api/user/:id/connections", function(req, res){
 app.post("/api/user/:id/conversation", function(req, res){
     const authUser = req.params.id;
     const selectedUser = req.body.selectedUser;
-
-    /*
-    //this is the schema for conversations
-
-    users: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    ]
-    timeStamp: Date,
-    messages: [
-        {
-            type: mongoose.Schema.Types.ObjectId, //list of messages within this conversation
-            ref: 'Message'
-        }
-    ]
-    */
-
     const convoData = {
         timeStamp: new Date()
     }
@@ -1021,9 +1002,6 @@ app.post("/api/user/:id/conversation", function(req, res){
             })
         }
     })
-
-
-
 })
 
 
@@ -1097,12 +1075,11 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
                     }) 
                 }
             })
-
-
         }
     })
-
 })
+
+
 
 
 

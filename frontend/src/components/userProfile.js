@@ -71,7 +71,7 @@ class userProfile extends Component {
                                 
                                 <Route exact path="/user/:id" component={UserLogs} />
                                 <Route exact path="/user/:id/connections" component={UserConnections} />
-                                <Route exact path="/user/:id/messages" component={DisplayMessages} />
+                                {/*<Route exact path="/user/:id/messages" component={DisplayMessages} />*/}
 
 
                             </div>

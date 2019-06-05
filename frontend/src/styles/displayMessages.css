@@ -1,0 +1,41 @@
+.displayMessages {
+    margin-top: 5px;
+}
+
+body, html {
+  height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+#mainBody {
+    height: 100%;
+}
+
+.displayMessages {
+    height: 100%;
+}
+
+.dispMessageColumns {
+    height: 100%;
+}
+
+.messageColumn {
+    height: 100%;
+}
+
+.messageBox {
+    height: 100%;
+}
+
+.messageBox {
+    background-color: rgb(220,220,220);
+}
+
+.messageMenu {
+    display: flex;
+    flex-direction: row;
+      justify-content: space-around;
+}
