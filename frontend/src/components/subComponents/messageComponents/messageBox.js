@@ -4,6 +4,7 @@ import { withRouter, Route, Link } from 'react-router-dom';
 
 import MessageCard from './messageCard';
 import UserMessageCard from './userMessageCard';
+import InputMessage from './inputMessage';
 
 class messageBox extends Component {
     render(){
@@ -11,8 +12,22 @@ class messageBox extends Component {
             <div className="displayMessageBox">
                 
                 {/* Let's display messageCard's here */}
-                <MessageCard />
-                <UserMessageCard />
+                
+
+                <div className="messageContainer">
+                    {/* this will display a list of messages */}
+                    <p>MessageContainerHere</p>
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <UserMessageCard />
+                </div>
+
+                {/* <InputMessage /> */}
+
 
 
 

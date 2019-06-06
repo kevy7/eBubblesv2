@@ -17,11 +17,7 @@ class newMessage extends Component {
                     </div>
                 </div>
 
-                <div className="displayMessageBox">
-                    {/* Need to create a form for submiting a new conversation */}
-                    
-
-                </div>
+                <MessageBox />
 
                 {/* MessageBox is only used to display list of messages within a conversation
                     We need to find a way for users to create a conversation and then push their first message within a conversation
@@ -29,6 +25,8 @@ class newMessage extends Component {
 
                 />
                 */}
+
+                
 
 
             </div>
