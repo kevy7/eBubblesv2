@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import "../../styles/miniUserCard.css";
+import "../../../styles/miniUserCard.css";
 
 class miniUserCard extends Component {
 

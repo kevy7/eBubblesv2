@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Link } from 'react-router-dom';
 
-import MiniUserCard from "./miniUserCard";
-import NewMessage from "./newMessage";
+import NewMessage from "./messageComponents/newMessage";
 //Maybe create a component to display miniUserCards
-import DisplayMiniUserCard from "./displayMiniUserCard";
+import DisplayMiniUserCard from "./messageComponents/displayMiniUserCard";
 
 
 
