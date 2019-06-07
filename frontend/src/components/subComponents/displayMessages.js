@@ -16,7 +16,7 @@ class displayMessages extends Component {
             <div className="displayMessages">
                 <div className="columns is-gapless dispMessageColumns">
                     <div className="column is-3 messageColumn">
-                        <div className="box messageBox">
+                        <div className="box messageBox userBox">
                             
                             <div className="messageMenu">
                                 <p>List of conversations here</p>
@@ -24,16 +24,11 @@ class displayMessages extends Component {
                             </div>
                             <hr />
                             <DisplayMiniUserCard />
-                            
-
-
-                            
-
                         </div>
                     </div>
                     <div className="column messageColumn">
                         <div className="box messageBox">
-                            <p>List of messages within that conversation here</p>
+                            
                             <Route exact path="/messages/new" component={NewMessage} />
                             <Route exact path="/messages/user/:id" component={NewMessage} /> {/* Change the url for this later */}
                         

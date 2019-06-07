@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import MessageBox from './messageBox';
+import InputMessage from './inputMessage';
 
 import "../../../styles/messageBox.css";
 
@@ -10,7 +11,8 @@ class newMessage extends Component {
     render(){
         return (
             <div className="newMessage">
-                <div className="field">
+                <div className="inputUser field">
+                    {/* learn how to create a select user */}
                     <label className="label">Name</label>
                     <div className="control">
                         <input className="input" type="text" placeholder="Input name here" />
@@ -26,7 +28,7 @@ class newMessage extends Component {
                 />
                 */}
 
-                
+                <InputMessage />
 
 
             </div>

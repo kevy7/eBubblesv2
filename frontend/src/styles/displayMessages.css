@@ -39,3 +39,11 @@ body, html {
     flex-direction: row;
       justify-content: space-around;
 }
+
+
+/*
+The code below is used to style the user box
+*/
+.userBox {
+    overflow: auto;
+}

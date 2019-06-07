@@ -1,5 +1,5 @@
 .newMessage {
-    height: 85%;
+    height: 100%;
 }
 
 .displayMessageBox {
@@ -20,3 +20,16 @@
     padding: 5px 5px 5px 5px;
 
 } */
+
+.inputUser {
+    height: 10%;
+}
+
+.displayMessageBox {
+    height: 70%;
+}
+
+.inputMessage { 
+    height: 20%;
+}
+

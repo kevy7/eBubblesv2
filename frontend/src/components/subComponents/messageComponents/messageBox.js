@@ -16,20 +16,11 @@ class messageBox extends Component {
 
                 <div className="messageContainer">
                     {/* this will display a list of messages */}
-                    <p>MessageContainerHere</p>
-                    <MessageCard />
-                    <MessageCard />
-                    <MessageCard />
-                    <MessageCard />
-                    <MessageCard />
-                    <MessageCard />
-                    <UserMessageCard />
+                    
+                    
                 </div>
 
                 {/* <InputMessage /> */}
-
-
-
 
             </div>
         )
