@@ -983,7 +983,7 @@ app.post("/api/user/:id/conversation", function(req, res){
     //this code works
     //this code will create a conversation for the users listed
 
-    Conversation.create(convoData.populate("users").exec(function(err, conversation){
+    Conversation.create(convoData).populate("users").exec(function(err, conversation){
         if(err){
             res.send(err);
         }
@@ -1003,8 +1003,6 @@ app.post("/api/user/:id/conversation", function(req, res){
         }
     })
 })
-
-
 
 //GET request to receive all conversations of a user
 app.get("/api/user/:id/messages", function(req, res){
