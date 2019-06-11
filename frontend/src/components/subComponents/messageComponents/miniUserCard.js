@@ -8,9 +8,11 @@ class miniUserCard extends Component {
 
     render(){
         const url = "/user/" + this.props.userID;
+        const userMessageUrl = "/messages/user/" + this.props.userID;
         
         return (
             <div className="miniUserCard">
+                <Link to={userMessageUrl}>
                 <div className="holder">
                     <div className="">
                         <figure className="image is-64x64">
@@ -27,6 +29,7 @@ class miniUserCard extends Component {
                     </div>
                 </div>
                 <hr />
+                </Link>
                 
             </div>
         )

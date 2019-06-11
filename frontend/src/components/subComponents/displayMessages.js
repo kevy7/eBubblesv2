@@ -5,6 +5,7 @@ import { withRouter, Route, Link } from 'react-router-dom';
 import NewMessage from "./messageComponents/newMessage";
 //Maybe create a component to display miniUserCards
 import DisplayMiniUserCard from "./messageComponents/displayMiniUserCard";
+import UserMessagePage from "./messageComponents/userMessagePage";
 
 
 
@@ -30,8 +31,9 @@ class displayMessages extends Component {
                         <div className="box messageBox">
                             
                             <Route exact path="/messages/new" component={NewMessage} />
-                            <Route exact path="/messages/user/:id" component={NewMessage} /> {/* Change the url for this later */}
-                        
+                            <Route exact path="/messages/user/:id" component={UserMessagePage} />
+                            
+
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,9 @@ class messageBox extends Component {
 
                 <div className="messageContainer">
                     {/* this will display a list of messages */}
+                    {/* Only display something if the user actually have messages to display */}
                     
+
                     
                 </div>
 
@@ -24,6 +26,12 @@ class messageBox extends Component {
 
             </div>
         )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        //messages: state.messages
     }
 }
 

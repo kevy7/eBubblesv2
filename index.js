@@ -983,7 +983,7 @@ app.post("/api/user/:id/conversation", function(req, res){
     //this code works
     //this code will create a conversation for the users listed
 
-    Conversation.create(convoData, function(err, conversation){
+    Conversation.create(convoData.populate("users").exec(function(err, conversation){
         if(err){
             res.send(err);
         }
@@ -1025,7 +1025,9 @@ app.get("/api/user/:id/messages", function(req, res){
 //Get one conversation and all of it's messages
 app.get("/api/user/:id/messages/:messageID", function(req, res){
 
-    Conversation.find({_id: req.params.messageID}, function(err, conversation){
+
+
+    Conversation.find({_id: req.params.messageID}).populate("messages").exec(function(err, conversation){
         if(err){
             res.send(err);
         }
@@ -1034,6 +1036,9 @@ app.get("/api/user/:id/messages/:messageID", function(req, res){
             //When retreiving a message, find a way to retreive them in order by timestamp
         }
     })
+
+
+    //Create a way to retrieve all messages of
 
 })
 
