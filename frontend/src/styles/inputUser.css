@@ -1,0 +1,37 @@
+.inputContainer {
+    border-bottom: 1px solid;
+    border-color: rgb(237, 234, 234);
+    height: 100%;
+    width: 100%;
+}
+
+/*
+This is used to remove the border focus from the input text when user selects it
+This essentially prevents the border from being displayed
+*/
+input:focus{
+    outline: none;
+}
+
+.inputUserField {
+    border: none;
+    height: 100%;
+    font-size: 18px;
+}
+
+.to {
+    font-size: 18px;
+}
+
+.contactChip {
+    width: 150px;
+    display: inline-block;
+    padding-left: 2px;
+}
+
+
+#contactChipFigure {
+    display: inline-block;
+    margin-right: 0px;
+}
+
