@@ -17,6 +17,7 @@ input:focus{
     border: none;
     height: 100%;
     font-size: 18px;
+    padding-left: 10px;
 }
 
 .to {
@@ -27,6 +28,11 @@ input:focus{
     width: 150px;
     display: inline-block;
     padding-left: 2px;
+    border: 1px solid;
+    border-color: rgb(237, 234, 234);
+    border-radius: 25rem;
+    padding-lefT: 15px;
+    background-color: rgb(237, 234, 234);
 }
 
 
@@ -35,3 +41,6 @@ input:focus{
     margin-right: 0px;
 }
 
+.closeIcon {
+    margin-left: 3px;
+}

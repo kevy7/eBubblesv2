@@ -30,8 +30,7 @@ class inputUser extends Component {
                             
                         </figure> */}
                         usernamehere
-                        
-                        {/* add some kind of close btn here */}
+                        <i class="fas fa-times closeIcon"></i>
 
                     </div>
 
