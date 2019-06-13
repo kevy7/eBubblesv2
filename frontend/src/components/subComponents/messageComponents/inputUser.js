@@ -22,13 +22,8 @@ class inputUser extends Component {
                         To:
                     </span>
                     {/* place card selectors in here */}
+                    {/* This should probably be it's own component */}
                     <div className="contactChip">
-                        {/* <figure className="image is-32x32" id="ContactChipFigure">
-                            
-                            <img className="image is 32x32 is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
-                            
-                            
-                        </figure> */}
                         usernamehere
                         <i class="fas fa-times closeIcon"></i>
 
