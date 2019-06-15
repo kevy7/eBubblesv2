@@ -748,7 +748,7 @@ app.get("/api/user/:id/logs", function(req, res){
     })
 });
 
-
+//get user information
 //Making a get request to GET profile information from a user
 app.get("/api/user/:id", function(req, res){
 
@@ -1081,6 +1081,10 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
         }
     })
 })
+
+
+
+//Creating route to retrieve list of connections from a user
 
 
 
