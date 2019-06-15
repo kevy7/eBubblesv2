@@ -7,8 +7,29 @@ import ContactChip from './contactChip';
 
 class inputUser extends Component {
 
+    state = {
+        inputUser: ""
+    }
+
+    handleInputChanges = (e) =>{
+        this.setState({[e.target.name]: e.target.value});
+    }
+
 
     render(){
+
+        let displayUser = [];
+        let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
+
+        
+
+
+        //To access list of connections
+        //Below will return to us a list of user connections that the selected user has
+        //this.props.userProfileInfo.userProfileInfo.connections 
+
+
+
 
 
         return (
@@ -27,19 +48,25 @@ class inputUser extends Component {
                     {/* This should probably be it's own component */}
                     <ContactChip />
 
-                    <input className="inputUserField" type="text" /> {/* As something get's type, search for a user */}
+                    <input className="inputUserField" value={this.state.inputUser} name="inputUser" type="text" onChange={this.handleInputChanges} /> {/* As something get's type, search for a user */}
 
                     {/* use is hidden to hide the component below */}
                     <div className="box displayUserBox">
                         <p>Display list of users when typing in the input textbox</p>
-                    </div>
-                    
+                    </div>  
                 </div>
-                
-
             </div>
         )
     }
 }
 
-export default inputUser;
+//<input className="input" value={this.state.userName} name="userName" type="text" placeholder="User Name Here" onChange={this.handleInputChanges}/>
+
+
+mapStateToProps = (state) => {
+    return {
+        userProfileInfo: state.userProfileInfo
+    }
+}
+
+export default withRouter(connect()(inputUser));
