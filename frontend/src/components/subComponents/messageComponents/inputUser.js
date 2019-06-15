@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 
 import '../../../styles/inputUser.css';
+import ContactChip from './contactChip';
 
 class inputUser extends Component {
 
@@ -21,15 +22,18 @@ class inputUser extends Component {
                     <span className="to">
                         To:
                     </span>
+
                     {/* place card selectors in here */}
                     {/* This should probably be it's own component */}
-                    <div className="contactChip">
-                        usernamehere
-                        <i class="fas fa-times closeIcon"></i>
-
-                    </div>
+                    <ContactChip />
 
                     <input className="inputUserField" type="text" /> {/* As something get's type, search for a user */}
+
+                    {/* use is hidden to hide the component below */}
+                    <div className="box displayUserBox">
+                        <p>Display list of users when typing in the input textbox</p>
+                    </div>
+                    
                 </div>
                 
 
