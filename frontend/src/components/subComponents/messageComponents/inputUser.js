@@ -20,6 +20,9 @@ class inputUser extends Component {
 
         let displayUser = [];
         let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
+        console.log(this.props.userProfileInfo.userProfileInfo.connections);
+
+        
 
         
 
@@ -63,10 +66,10 @@ class inputUser extends Component {
 //<input className="input" value={this.state.userName} name="userName" type="text" placeholder="User Name Here" onChange={this.handleInputChanges}/>
 
 
-mapStateToProps = (state) => {
+ const mapStateToProps = (state) => {
     return {
         userProfileInfo: state.userProfileInfo
     }
 }
 
-export default withRouter(connect()(inputUser));
+export default withRouter(connect(mapStateToProps)(inputUser));
