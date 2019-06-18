@@ -35,7 +35,7 @@ class inputUser extends Component {
             if(userName.includes(this.state.inputUser.toLowerCase()) == true){
                 //The user's input string matches this user's username, push this into the array
 
-                //if(displayUser.includes(user.userName))
+                displayUser.push(user);
                 
             }
             else {
@@ -46,6 +46,10 @@ class inputUser extends Component {
             //console.log(userName);
 
         });
+
+        //use the inputuser action here and pass in the displayUser
+
+        console.log(displayUser);
 
     }
 
