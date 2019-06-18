@@ -11,8 +11,9 @@ class inputUser extends Component {
         inputUser: ""
     }
 
-    handleInputChanges = (e) =>{
-        this.setState({[e.target.name]: e.target.value});
+    handleInputChanges = async (e) =>{
+        await this.setState({[e.target.name]: e.target.value});
+        //console.log(this.state.inputUser);
     }
 
 
@@ -20,9 +21,33 @@ class inputUser extends Component {
 
         let displayUser = [];
         let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
-        console.log(this.props.userProfileInfo.userProfileInfo.connections);
+        //console.log(this.props.userProfileInfo.userProfileInfo.connections);
 
-        
+        /* const searchUser = () => {
+
+        } */
+
+        const searchUser = "fake";
+
+        //This may not be needed anymore
+
+        connections.forEach(user => {
+            //when the searchUser matches the name of the current user, then push this user into the displayUser array
+            //.toLowerCase() to turn a string into a lower case character so that you can search for it
+
+            let userName = user.userName.toLowerCase();
+
+            if(userName.includes(searchUser.toLowerCase()) == true){
+                //The user's input string matches this user's username, push this into the array
+            }
+            else {
+                //The user's input string does not match of the these userNames, don't push anything into the array
+            }
+
+            //console.log(userName);
+
+        });
+
 
         
 

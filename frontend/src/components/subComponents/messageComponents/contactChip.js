@@ -9,7 +9,7 @@ class contactChip extends Component {
             /* css styling for this component is in inputUser.css */
             <div className="contactChip">
                 usernamehere
-                <i class="fas fa-times closeIcon"></i>  
+                <i className="fas fa-times closeIcon"></i>  
             </div>
         )
     }
