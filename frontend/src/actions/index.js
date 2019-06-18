@@ -435,7 +435,7 @@ export const addConnection = (userData) => dispatch => {
 
 //Create an action, this will not be an ajax call made to the backend
 export const inputUserAction = (userData) => dispatch => {
-
+    //Place an array in here
     //Create a loading screen
     dispatch({
         type: LOAD_COMPONENT
@@ -444,7 +444,7 @@ export const inputUserAction = (userData) => dispatch => {
     //no url is needed
     dispatch({
         type: INPUT_USER,
-        payload: res.data
+        payload: userData
     })
 
 }

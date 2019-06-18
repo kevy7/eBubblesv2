@@ -19,6 +19,13 @@ class inputUser extends Component {
         let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
         //console.log(this.state.inputUser);
 
+        /*
+            Read this documentation about embedded arrays
+
+            https://stackoverflow.com/questions/11159912/mongodb-query-and-retrieve-objects-inside-embedded-array
+
+        */
+
         connections.forEach(user => {
             //when the searchUser matches the name of the current user, then push this user into the displayUser array
             //.toLowerCase() to turn a string into a lower case character so that you can search for it
@@ -27,6 +34,8 @@ class inputUser extends Component {
 
             if(userName.includes(this.state.inputUser.toLowerCase()) == true){
                 //The user's input string matches this user's username, push this into the array
+
+                //if(displayUser.includes(user.userName))
                 
             }
             else {
