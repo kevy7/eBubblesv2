@@ -8,28 +8,16 @@ import ContactChip from './contactChip';
 class inputUser extends Component {
 
     state = {
-        inputUser: ""
+        inputUser: "",
+        displayUser: []
     }
 
     handleInputChanges = async (e) =>{
         await this.setState({[e.target.name]: e.target.value});
-        //console.log(this.state.inputUser);
-    }
-
-
-    render(){
 
         let displayUser = [];
         let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
-        //console.log(this.props.userProfileInfo.userProfileInfo.connections);
-
-        /* const searchUser = () => {
-
-        } */
-
-        const searchUser = "fake";
-
-        //This may not be needed anymore
+        //console.log(this.state.inputUser);
 
         connections.forEach(user => {
             //when the searchUser matches the name of the current user, then push this user into the displayUser array
@@ -37,29 +25,25 @@ class inputUser extends Component {
 
             let userName = user.userName.toLowerCase();
 
-            if(userName.includes(searchUser.toLowerCase()) == true){
+            if(userName.includes(this.state.inputUser.toLowerCase()) == true){
                 //The user's input string matches this user's username, push this into the array
+                
             }
             else {
                 //The user's input string does not match of the these userNames, don't push anything into the array
+                
             }
 
             //console.log(userName);
 
         });
 
-
-        
-
-
-        //To access list of connections
-        //Below will return to us a list of user connections that the selected user has
-        //this.props.userProfileInfo.userProfileInfo.connections 
+    }
 
 
 
 
-
+    render(){
         return (
             <div className="inputUser field">
                 {/* <label className="label">Name</label>

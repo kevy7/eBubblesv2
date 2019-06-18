@@ -1083,6 +1083,16 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
 })
 
 
+//db.inventory.find( { tags: ["red", "blank"] } )
+//Example of how to search for collections in an array based on a match with a collections specified value within an array
+
+/* app.get("/api/user/:id/connections", function(req, res){
+    
+})
+ */
+
+
+
 
 //Creating route to retrieve list of connections from a user
 
