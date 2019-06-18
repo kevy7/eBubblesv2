@@ -12,6 +12,7 @@ import { LOAD_COMPONENT } from './types';
 import { GET_USER_LOGS } from './types';
 import { GET_USER_PROFILE } from './types';
 import { GET_USERS } from "./types";
+import { INPUT_USER } from "./types";
 
 //const nothing = null;
 
@@ -428,6 +429,22 @@ export const addConnection = (userData) => dispatch => {
     })
     .catch(err => {
         dispatch(setCurrentError(err));
+    })
+}
+
+
+//Create an action, this will not be an ajax call made to the backend
+export const inputUserAction = (userData) => dispatch => {
+
+    //Create a loading screen
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
+    //no url is needed
+    dispatch({
+        type: INPUT_USER,
+        payload: res.data
     })
 
 }
