@@ -1,0 +1,11 @@
+.userCardBox {
+    /*height: 50px;*/
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.userCardName {
+    line-height: 4;
+    margin-left: 10px;
+}

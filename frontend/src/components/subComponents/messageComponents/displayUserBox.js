@@ -9,12 +9,29 @@ import UserCard from './userCardUserBox';
 //This is considered a container
 class displayUserBox extends Component {
     render(){
+        
         return (
             <div className="box displayUserBox">
-                <UserCard />
+                {
+                    //console.log(searchedUsers);
+                    this.props.searchedUsers.map(function(user){
+                        return (
+                            <UserCard
+                                userName={user.userName}
+                                userID={user._id}
+                            />
+                        )
+                    })
+                }
             </div>
         )
     }
 }
 
-export default displayUserBox;
+const mapStateToProps = (state) => {
+    return {
+        searchedUsers: state.inputUserReducer.searchedUsers
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(displayUserBox));
