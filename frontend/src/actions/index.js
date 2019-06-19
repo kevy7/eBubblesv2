@@ -12,7 +12,7 @@ import { LOAD_COMPONENT } from './types';
 import { GET_USER_LOGS } from './types';
 import { GET_USER_PROFILE } from './types';
 import { GET_USERS } from "./types";
-import { INPUT_USER } from "./types";
+import { SEARCH_USERS } from "./types";
 
 //const nothing = null;
 
@@ -441,9 +441,11 @@ export const inputUserAction = (userData) => dispatch => {
         type: LOAD_COMPONENT
     })
 
+    //console.log(userData);
+
     //no url is needed
     dispatch({
-        type: INPUT_USER,
+        type: SEARCH_USERS,
         payload: userData
     })
 

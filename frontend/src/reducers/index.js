@@ -6,6 +6,7 @@ import selectEventReducer from './selectEventReducer';
 import userLogsReducer from './userLogsReducer';
 import userProfileReducer from './userProfileReducer';
 import getUsersReducer from './getUsersReducer';
+import inputUserReducer from './inputUserReducer';
 
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
     selectedEvent: selectEventReducer,
     userLogs: userLogsReducer,
     userProfileInfo: userProfileReducer,
-    users: getUsersReducer
+    users: getUsersReducer,
+    inputUserReducer: inputUserReducer
 });

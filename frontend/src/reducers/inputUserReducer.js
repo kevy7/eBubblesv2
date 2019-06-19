@@ -1,24 +1,26 @@
-import { INPUT_USER, LOAD_COMPONENT } from '../actions/types';
+import { SEARCH_USERS, LOAD_COMPONENT } from '../actions/types';
 
 const initialState = {
     loading: false,
-    inputUsers: []
+    searchedUsers: []
 }
 
 const inputUserReducer = (state=initialState, action) => {
     //action.payload //will give us an array of users
 
-    if(action.payload === LOAD_COMPONENT){
+    //console.log(action.paload);
+
+    if(action.type === LOAD_COMPONENT){
         return {
             ...state,
             loading: true
         }
     }
-    else if(action.payload === INPUT_USER){
+    else if(action.type === SEARCH_USERS){
         return {
             ...state,
             loading: false,
-            inputUsers: action.payload
+            searchedUsers: action.payload
         }
     }
     else {

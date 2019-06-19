@@ -8,4 +8,4 @@ export const REMOVE_EVENT = "REMOVE_EVENT";
 export const GET_USER_LOGS = "GET_USER_LOGS";
 export const GET_USER_PROFILE = "GET_USER_PROFILE";
 export const GET_USERS = "GET_USERS";
-export const INPUT_USER = "INPUT_USER";
+export const SEARCH_USERS = "SEARCH_USERS";

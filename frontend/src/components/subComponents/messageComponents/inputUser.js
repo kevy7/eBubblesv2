@@ -5,6 +5,9 @@ import { withRouter, Route } from 'react-router-dom';
 import '../../../styles/inputUser.css';
 import ContactChip from './contactChip';
 
+//import actions in here
+import { inputUserAction } from "../../../actions";
+
 class inputUser extends Component {
 
     state = {
@@ -17,19 +20,10 @@ class inputUser extends Component {
 
         let displayUser = [];
         let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
-        //console.log(this.state.inputUser);
-
-        /*
-            Read this documentation about embedded arrays
-
-            https://stackoverflow.com/questions/11159912/mongodb-query-and-retrieve-objects-inside-embedded-array
-
-        */
 
         connections.forEach(user => {
             //when the searchUser matches the name of the current user, then push this user into the displayUser array
             //.toLowerCase() to turn a string into a lower case character so that you can search for it
-
             let userName = user.userName.toLowerCase();
 
             if(userName.includes(this.state.inputUser.toLowerCase()) == true){
@@ -42,14 +36,11 @@ class inputUser extends Component {
                 //The user's input string does not match of the these userNames, don't push anything into the array
                 
             }
-
-            //console.log(userName);
-
         });
 
-        //use the inputuser action here and pass in the displayUser
+        //console.log(displayUser);
 
-        console.log(displayUser);
+        this.props.inputUserAction(displayUser);
 
     }
 
@@ -94,4 +85,6 @@ class inputUser extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(inputUser));
+export default withRouter(connect(mapStateToProps, {
+    inputUserAction: inputUserAction
+})(inputUser));
