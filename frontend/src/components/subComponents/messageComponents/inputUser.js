@@ -4,6 +4,7 @@ import { withRouter, Route } from 'react-router-dom';
 
 import '../../../styles/inputUser.css';
 import ContactChip from './contactChip';
+import DisplayUserBox from './displayUserBox';
 
 //import actions in here
 import { inputUserAction } from "../../../actions";
@@ -38,8 +39,6 @@ class inputUser extends Component {
             }
         });
 
-        //console.log(displayUser);
-
         this.props.inputUserAction(displayUser);
 
     }
@@ -67,9 +66,15 @@ class inputUser extends Component {
                     <input className="inputUserField" value={this.state.inputUser} name="inputUser" type="text" onChange={this.handleInputChanges} /> {/* As something get's type, search for a user */}
 
                     {/* use is hidden to hide the component below */}
-                    <div className="box displayUserBox">
+                    {/* <div className="box displayUserBox">
                         <p>Display list of users when typing in the input textbox</p>
+
                     </div>  
+                    */}
+
+                    <DisplayUserBox />
+
+
                 </div>
             </div>
         )
