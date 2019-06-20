@@ -43,16 +43,13 @@ class inputUser extends Component {
 
         const displayUserBoxComponent = document.querySelector(".displayUserBox");
 
-        if(this.state.inputUser !== ""){
+        if(this.state.inputUser !== "" && displayUser.length !== 0){
             displayUserBoxComponent.classList.remove("is-hidden");
         }
-        else if (this.state.inputUser === "" || displayUser.length == 0){
+        else if (this.state.inputUser === "" || displayUser.length === 0){
             displayUserBoxComponent.classList.add("is-hidden");
             //console.log(this.state.inputUser)
         }
-        
-        //console.log(displayUser);
-        //console.log(displayUser.length)
         
 
     }
