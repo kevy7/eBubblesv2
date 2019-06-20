@@ -17,9 +17,10 @@ class inputUser extends Component {
     }
 
     handleInputChanges = async (e) =>{
+
         await this.setState({[e.target.name]: e.target.value});
 
-        let displayUser = [];
+        let displayUser = []; //it looks like this array will keep expanding
         let connections = this.props.userProfileInfo.userProfileInfo.connections || [];
 
         connections.forEach(user => {
@@ -33,13 +34,26 @@ class inputUser extends Component {
                 displayUser.push(user);
                 
             }
-            else {
-                //The user's input string does not match of the these userNames, don't push anything into the array
-                
-            }
         });
 
-        this.props.inputUserAction(displayUser);
+        this.props.inputUserAction(displayUser); //Call action to place searched user's in our state
+
+        //as text is inputed into this input textbox check to see if displayUserBox component is hidden
+        //if it is hidden then display it but only do so if it has the class is-hidden
+
+        const displayUserBoxComponent = document.querySelector(".displayUserBox");
+
+        if(this.state.inputUser !== ""){
+            displayUserBoxComponent.classList.remove("is-hidden");
+        }
+        else if (this.state.inputUser === "" || displayUser.length == 0){
+            displayUserBoxComponent.classList.add("is-hidden");
+            //console.log(this.state.inputUser)
+        }
+        
+        //console.log(displayUser);
+        //console.log(displayUser.length)
+        
 
     }
 
@@ -49,10 +63,6 @@ class inputUser extends Component {
     render(){
         return (
             <div className="inputUser field">
-                {/* <label className="label">Name</label>
-                <div className="control">
-                    <input className="input" type="text" placeholder="Input name here" />
-                </div> */}
 
                 <div className="inputContainer">
                     <span className="to">
@@ -63,13 +73,24 @@ class inputUser extends Component {
                     {/* This should probably be it's own component */}
                     <ContactChip />
 
-                    <input className="inputUserField" value={this.state.inputUser} name="inputUser" type="text" onChange={this.handleInputChanges} /> {/* As something get's type, search for a user */}
+                    <input 
+                        className="inputUserField" 
+                        value={this.state.inputUser} 
+                        name="inputUser" 
+                        type="text" 
+                        onChange={this.handleInputChanges} 
 
-                    {/* use is hidden to hide the component below */}
-                    {/* <div className="box displayUserBox">
-                        <p>Display list of users when typing in the input textbox</p>
+                    /> {/* As something get's type, search for a user */}
 
-                    </div>  
+                    {/* 
+                        Whenever inputUserField is active, set DisplayUserBox to active
+
+                        what to do: identify how to manipulate your React Components
+
+                        what I'm trying to accomplish
+
+                        Set displayuserbox as active when the input above is set as active as well
+                        When input is not active, then set displayuserbox as hidden and do not show it to the user
                     */}
 
                     <DisplayUserBox />

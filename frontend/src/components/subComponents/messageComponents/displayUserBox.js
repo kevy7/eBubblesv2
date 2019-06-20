@@ -11,7 +11,7 @@ class displayUserBox extends Component {
     render(){
         
         return (
-            <div className="box displayUserBox">
+            <div className="box displayUserBox is-hidden">
                 {
                     //console.log(searchedUsers);
                     this.props.searchedUsers.map(function(user){
@@ -19,6 +19,7 @@ class displayUserBox extends Component {
                             <UserCard
                                 userName={user.userName}
                                 userID={user._id}
+                                key={user._id}
                             />
                         )
                     })
