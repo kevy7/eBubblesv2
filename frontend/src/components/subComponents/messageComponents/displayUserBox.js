@@ -8,6 +8,11 @@ import UserCard from './userCardUserBox';
 
 //This is considered a container
 class displayUserBox extends Component {
+
+    state = {
+        selectedUsers: []
+    }
+
     render(){
         
         return (
@@ -16,10 +21,13 @@ class displayUserBox extends Component {
                     //console.log(searchedUsers);
                     this.props.searchedUsers.map(function(user){
                         return (
+
                             <UserCard
                                 userName={user.userName}
                                 userID={user._id}
                                 key={user._id}
+                                
+                                
                             />
                         )
                     })

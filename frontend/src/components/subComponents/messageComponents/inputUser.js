@@ -12,8 +12,7 @@ import { inputUserAction } from "../../../actions";
 class inputUser extends Component {
 
     state = {
-        inputUser: "",
-        displayUser: []
+        inputUser: ""
     }
 
     handleInputChanges = async (e) =>{
@@ -50,8 +49,6 @@ class inputUser extends Component {
             displayUserBoxComponent.classList.add("is-hidden");
             //console.log(this.state.inputUser)
         }
-        
-
     }
 
 
@@ -69,6 +66,8 @@ class inputUser extends Component {
                     {/* place card selectors in here */}
                     {/* This should probably be it's own component */}
                     <ContactChip />
+                    
+                
 
                     <input 
                         className="inputUserField" 
@@ -78,17 +77,6 @@ class inputUser extends Component {
                         onChange={this.handleInputChanges} 
 
                     /> {/* As something get's type, search for a user */}
-
-                    {/* 
-                        Whenever inputUserField is active, set DisplayUserBox to active
-
-                        what to do: identify how to manipulate your React Components
-
-                        what I'm trying to accomplish
-
-                        Set displayuserbox as active when the input above is set as active as well
-                        When input is not active, then set displayuserbox as hidden and do not show it to the user
-                    */}
 
                     <DisplayUserBox />
 
