@@ -13,6 +13,7 @@ class displayUserBox extends Component {
         selectedUsers: []
     }
 
+    //This box get's displayed whenever the user searches for his connections and trying to see who to message
     render(){
         
         return (

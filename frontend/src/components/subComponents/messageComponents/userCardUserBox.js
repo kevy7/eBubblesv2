@@ -11,6 +11,17 @@ class userCardUserBox extends Component {
         
 
         //an action needs to be called here to push this.props.userID into your state
+        //We need this as our initialstate
+
+        /*
+            selectedUsers: []
+
+            action needs to be called to push/remove a user into the array above (our state)
+            but how will the selectedUsers state above reset if we were to refresh our page?
+                -I guess a way to resolve this is to create a removeall action, when ever someone redirects to the message page
+                    make sure all users in the selectedUsers array are removed
+
+        */
     }
 
     render(){
