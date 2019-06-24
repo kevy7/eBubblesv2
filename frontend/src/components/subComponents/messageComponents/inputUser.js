@@ -68,8 +68,6 @@ class inputUser extends Component {
                     {/* This should probably be it's own component */}
                     <ContactChip />
                     
-                
-
                     <input 
                         className="inputUserField" 
                         value={this.state.inputUser} 

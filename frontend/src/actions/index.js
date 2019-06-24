@@ -13,6 +13,7 @@ import { GET_USER_LOGS } from './types';
 import { GET_USER_PROFILE } from './types';
 import { GET_USERS } from "./types";
 import { SEARCH_USERS } from "./types";
+import { SELECT_USERS } from "./types";
 
 //const nothing = null;
 
@@ -448,8 +449,23 @@ export const inputUserAction = (userData) => dispatch => {
         type: SEARCH_USERS,
         payload: userData
     })
-
 }
+
+
 
 //Create an action that will placed selected user's into an array
 //These users in the array are selected to be messaged from the logged in user
+
+//This action is for selecting users that you want to message
+export const selectUsers = (user) => dispatch => {
+
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
+    dispatch({
+        type: SELECT_USERS,
+        payload: user
+    })
+
+}
