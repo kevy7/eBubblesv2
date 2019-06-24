@@ -455,7 +455,6 @@ export const inputUserAction = (userData) => dispatch => {
 
 //Create an action that will placed selected user's into an array
 //These users in the array are selected to be messaged from the logged in user
-
 //This action is for selecting users that you want to message
 export const selectUsers = (user) => dispatch => {
 
