@@ -7,6 +7,7 @@ import userLogsReducer from './userLogsReducer';
 import userProfileReducer from './userProfileReducer';
 import getUsersReducer from './getUsersReducer';
 import inputUserReducer from './inputUserReducer';
+import selectUsersReducers from "./selectUsersReducers";
 
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
     userLogs: userLogsReducer,
     userProfileInfo: userProfileReducer,
     users: getUsersReducer,
-    inputUserReducer: inputUserReducer
+    inputUserReducer: inputUserReducer,
+    selectUsersReducers: selectUsersReducers
 });
