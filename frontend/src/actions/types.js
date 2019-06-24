@@ -10,3 +10,5 @@ export const GET_USER_PROFILE = "GET_USER_PROFILE";
 export const GET_USERS = "GET_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const SELECT_USERS = "SELECT_USERS";
+export const REMOVE_USER = "REMOVE_USER";
+export const REMOVE_ALL_USERS = "REMOVE_ALL_USERS";

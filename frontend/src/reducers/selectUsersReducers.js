@@ -1,4 +1,4 @@
-import { LOAD_COMPONENT, SELECT_USERS } from '../actions/types';
+import { LOAD_COMPONENT, SELECT_USERS, REMOVE_USER } from '../actions/types';
 
 const initialState = {
     loading: false,

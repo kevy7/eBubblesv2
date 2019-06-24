@@ -14,6 +14,8 @@ import { GET_USER_PROFILE } from './types';
 import { GET_USERS } from "./types";
 import { SEARCH_USERS } from "./types";
 import { SELECT_USERS } from "./types";
+import { REMOVE_USER } from "./types";
+import { REMOVE_ALL_USERS } from "./types";
 
 //const nothing = null;
 
