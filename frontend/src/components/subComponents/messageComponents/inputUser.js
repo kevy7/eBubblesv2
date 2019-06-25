@@ -5,6 +5,7 @@ import { withRouter, Route } from 'react-router-dom';
 import '../../../styles/inputUser.css';
 import ContactChip from './contactChip';
 import DisplayUserBox from './displayUserBox';
+import contactChipContainer from "./contactChipContainer";
 
 //import actions in here
 //Testing to see if push from new computer will work
