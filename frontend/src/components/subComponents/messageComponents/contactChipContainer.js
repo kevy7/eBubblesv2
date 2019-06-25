@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 
+
+
 import ContactChip from "./contactChip";
 
 class contactChipContainer extends Component {
@@ -12,7 +14,13 @@ class contactChipContainer extends Component {
         return (
             <div className="contactChipContainer">
 
-
+                {/* <ContactChip />
+                <ContactChip />
+                <ContactChip /> */}
+                {this.props.selectUsersReducers.selectedUsers.map(user => {
+                    return <ContactChip />
+                })}
+                
 
             </div>
         )

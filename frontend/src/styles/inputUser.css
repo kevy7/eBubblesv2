@@ -3,6 +3,8 @@
     border-color: rgb(237, 234, 234);
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 /*

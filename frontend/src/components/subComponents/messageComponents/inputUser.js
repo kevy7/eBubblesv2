@@ -5,11 +5,12 @@ import { withRouter, Route } from 'react-router-dom';
 import '../../../styles/inputUser.css';
 import ContactChip from './contactChip';
 import DisplayUserBox from './displayUserBox';
-import contactChipContainer from "./contactChipContainer";
+import ContactChipContainer from "./contactChipContainer";
 
 //import actions in here
 //Testing to see if push from new computer will work
 import { inputUserAction } from "../../../actions";
+import displayUserBox from './displayUserBox';
 
 class inputUser extends Component {
 
@@ -67,7 +68,9 @@ class inputUser extends Component {
 
                     {/* place card selectors in here */}
                     {/* This should probably be it's own component */}
-                    <ContactChip />
+                    {/* <ContactChip /> */}
+                    
+                    <ContactChipContainer />
                     
                     <input 
                         className="inputUserField" 
@@ -78,10 +81,10 @@ class inputUser extends Component {
 
                     /> {/* As something get's type, search for a user */}
 
-                    <DisplayUserBox />
-
 
                 </div>
+
+                <DisplayUserBox />
             </div>
         )
     }
