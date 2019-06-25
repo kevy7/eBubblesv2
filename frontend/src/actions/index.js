@@ -460,7 +460,7 @@ export const inputUserAction = (userData) => dispatch => {
 //This action is for selecting users that you want to message
 export const selectUsers = (user) => dispatch => {
 
-    console.log("selectUsers action was initiated");
+    //console.log("selectUsers action was initiated");
 
     dispatch({
         type: LOAD_COMPONENT
@@ -472,3 +472,18 @@ export const selectUsers = (user) => dispatch => {
     })
 
 }
+
+//remove the selectedUser that you don't want to send a message to
+export const removeSelectedUser = (user) => dispatch => {
+
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
+    dispatch({
+        type: REMOVE_USER,
+        payload: user
+    })
+
+}
+

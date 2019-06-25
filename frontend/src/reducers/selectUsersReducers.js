@@ -49,6 +49,28 @@ const selectUsersReducer = (state=initialState, action) => {
         }
 
     }
+    else if (action.type === REMOVE_USER){
+
+        if(state.selectedUsers.includes(action.payload) === true){
+            //  items: state.items.filter(item => item !== action.payload)
+            /*
+                How to use the indexOf function, indexOf will return a new array that meets the condition that you set out
+            */
+
+            return {
+                ...state,
+                loading: false,
+                selectedUsers: state.selectedUsers.filter(user => user !== action.payload)
+            }
+
+        }
+        return {
+            ...state,
+            loading: false,
+            selectedUsers: [...state.selectedUsers]
+        }
+
+    }
     else {
         return {
             ...state
