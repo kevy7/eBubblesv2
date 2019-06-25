@@ -26,6 +26,7 @@ class displayMiniUserCard extends Component {
             return <MiniUserCard 
                         userName={user.userName}
                         userID={user._id}
+                        key={user._id}
                     />
         })
         

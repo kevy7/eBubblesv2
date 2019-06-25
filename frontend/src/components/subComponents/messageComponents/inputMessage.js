@@ -22,7 +22,7 @@ class inputMessage extends Component {
                         <textarea className="textarea" placeholder="You're too awesome...." row="1"></textarea>
                     </div>
                     <div className="column enterCommentBtn">
-                        <a class="button is-info">Send</a>
+                        <a className="button is-info">Send</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import "../../../styles/userCardUserBox.css";
+
+//import actions in here
+import { selectUsers } from "../../../actions";
 
 //convert this from a functional component to a class-based component
 class userCardUserBox extends Component {
@@ -22,6 +27,10 @@ class userCardUserBox extends Component {
                     make sure all users in the selectedUsers array are removed
 
         */
+
+        //this.props.userID will give us the id of the selected user for this component
+
+        this.props.selectUsers(this.props.userID);
     }
 
     render(){
@@ -46,4 +55,12 @@ class userCardUserBox extends Component {
     }
 };
 
-export default userCardUserBox;
+const mapStateToProps = (state) => {
+    return {
+        selectUsersReducers: state.selectUsersReducers
+    }
+}
+
+export default withRouter(connect(mapStateToProps, {
+    selectUsers: selectUsers
+})(userCardUserBox));

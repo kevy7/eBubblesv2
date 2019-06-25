@@ -18,7 +18,7 @@ export default combineReducers({
     selectedEvent: selectEventReducer,
     userLogs: userLogsReducer,
     userProfileInfo: userProfileReducer,
-    users: getUsersReducer,
+    users: getUsersReducer, //What the heck was this created for? Is this still needed?
     inputUserReducer: inputUserReducer,
     selectUsersReducers: selectUsersReducers
 });
