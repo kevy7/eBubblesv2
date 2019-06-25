@@ -1,4 +1,4 @@
-import { LOAD_COMPONENT, SELECT_USERS, REMOVE_USER } from '../actions/types';
+import { LOAD_COMPONENT, SELECT_USERS, REMOVE_USER, REMOVE_ALL_USERS } from '../actions/types';
 
 const initialState = {
     loading: false,
@@ -70,6 +70,13 @@ const selectUsersReducer = (state=initialState, action) => {
             selectedUsers: [...state.selectedUsers]
         }
 
+    }
+    else if (action.type === REMOVE_ALL_USERS){
+        return {
+            ...state,
+            loading: false,
+            selectedUsers: [] //selectedUsers will return empty
+        }
     }
     else {
         return {
