@@ -10,7 +10,13 @@ class contactChip extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        this.props.removeSelectedUser("5cc8aef8e9008e0017118b9d");
+
+        const userInfo = {
+            userID: "5cc8aef8e9008e0017118b9d",
+            userName: "fakeUser"
+        }
+
+        this.props.removeSelectedUser(userInfo);
         
     }
 
