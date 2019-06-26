@@ -21,6 +21,7 @@ class contactChipContainer extends Component {
                     return <ContactChip 
                         userName={user.userName}
                         key={user.userID}
+                        userID={user.userID}
                     />
                 })}
                 

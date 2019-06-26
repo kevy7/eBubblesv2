@@ -12,8 +12,8 @@ class contactChip extends Component {
 
 
         const userInfo = {
-            userID: "5cc8aef8e9008e0017118b9d",
-            userName: "fakeUser"
+            userID: this.props.userID,
+            userName: this.props.userName
         }
 
         this.props.removeSelectedUser(userInfo);
