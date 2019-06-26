@@ -18,7 +18,10 @@ class contactChipContainer extends Component {
                 <ContactChip />
                 <ContactChip /> */}
                 {this.props.selectUsersReducers.selectedUsers.map(user => {
-                    return <ContactChip />
+                    return <ContactChip 
+                        userName={user.userName}
+                        key={user.userID}
+                    />
                 })}
                 
 

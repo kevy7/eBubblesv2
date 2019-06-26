@@ -2,7 +2,7 @@ import { LOAD_COMPONENT, SELECT_USERS, REMOVE_USER, REMOVE_ALL_USERS } from '../
 
 const initialState = {
     loading: false,
-    selectedUsers: []
+    selectedUsers: [] //This needs to be an array of objects
 }
 
 /*
@@ -17,6 +17,19 @@ case ADD_ITEM :
 
 */
 
+//Okay, this function works and is able to test if an object will contain your action.payload.userID value
+const checkArrayObject = (userArray, action2) => {
+    let result = false;
+    userArray.forEach(user => {
+        if(user.userID === action2.payload.userID ){
+            result = true;
+        }
+    });
+
+    return result;
+}
+
+
 const selectUsersReducer = (state=initialState, action) => {
 
     if(action.type === LOAD_COMPONENT){
@@ -27,19 +40,34 @@ const selectUsersReducer = (state=initialState, action) => {
     }
     else if (action.type === SELECT_USERS){
 
-        //only, push into the array if the userID does not exists within the array
-        //console.log(state.selectedUsers);
 
-        //With this if statement, user cannot be selected twice
-        if(state.selectedUsers.includes(action.payload) === true ){
+        //console.log(action.payload.userID);
+        //Create an if statement to check if the object contains the value of action.payload.
+
+        //checks if the object contains the userID thats passed down from action.payload
+        /*
+            Ex: [
+                {
+                    userName: "name1",
+                    userID: 1
+                },
+                {
+                    userName: "name2"
+                    userID: 2
+                }
+            ]
+        */
+        //Create a function to test if your object contains the user id
+
+        const results = checkArrayObject(state.selectedUsers, action);
+
+        if(results === true){
             return {
                 ...state,
                 loading: false,
                 selectedUsers: [...state.selectedUsers]
             }
         }
-
-        //if the above statement is false, then execute the code below
 
         return {
             ...state,

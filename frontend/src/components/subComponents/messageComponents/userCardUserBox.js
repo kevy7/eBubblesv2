@@ -30,7 +30,13 @@ class userCardUserBox extends Component {
 
         //this.props.userID will give us the id of the selected user for this component
 
-        this.props.selectUsers(this.props.userID);
+        const userInfo =  {
+            //Push in this object instead
+            userID: this.props.userID,
+            userName: this.props.userName
+        }
+
+        this.props.selectUsers(userInfo);
     }
 
     render(){
