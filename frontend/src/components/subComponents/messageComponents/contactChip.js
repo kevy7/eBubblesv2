@@ -25,7 +25,7 @@ class contactChip extends Component {
             /* css styling for this component is in inputUser.css */
             <div className="contactChip" onClick={this.onSubmit}>
                 {this.props.userName}
-                <i className="fas fa-times closeIcon"></i>  
+                {/* <i className="fas fa-times closeIcon"></i>  */}
             </div>
         )
     }

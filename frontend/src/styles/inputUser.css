@@ -5,6 +5,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 /*
@@ -27,7 +28,7 @@ input:focus{
 }
 
 .contactChip {
-    width: 150px;
+    /*width: 150px;*/
     display: inline-block;
     padding-left: 2px;
     border: 1px solid;
@@ -35,6 +36,7 @@ input:focus{
     border-radius: 25rem;
     padding-lefT: 15px;
     background-color: rgb(237, 234, 234);
+    padding-right: 15px;
 }
 
 

@@ -24,8 +24,6 @@ class contactChipContainer extends Component {
                         userID={user.userID}
                     />
                 })}
-                
-
             </div>
         )
     }
