@@ -495,23 +495,28 @@ export const removeSelectedUser = (user) => dispatch => {
 
 //Create an action to GET_CONVERSATIONS
 
-export const getConversations = (convoData) => {
+export const getConversations = (convoData) => dispatch => {
     //create a dispatch to GET_CONVERSATIONS
-    
+
 }
 
 
 //Create an action to POST a conversation into a database
-export const createConversation = (convoData) => {
+export const createConversation = (convoData) => dispatch => {
 
     //We don't need to dispatch anything when posting data into our database
     /* dispatch({
         type: CREATE_CONVERSATION,
         payload: convoData
     }) */
+
+    const url = "";
+
+
+
 }
 
-export const postMessage = (messageData) => {
+export const postMessage = (messageData) => dispatch => {
     dispatch({
         type: POST_MESSAGE,
         payload: messageData

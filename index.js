@@ -978,6 +978,7 @@ app.post("/api/user/:id/conversation", function(req, res){
     const selectedUser = req.body.selectedUser; */
 
     const users = req.body.users;
+    const message = req.body.message;
 
     const convoData = {
         timeStamp: new Date()
@@ -998,14 +999,19 @@ app.post("/api/user/:id/conversation", function(req, res){
                 //for each user, push them into the newly created conversation
                 conversation.users.push(user); //Each user will be passed in to the conversation collection
             })
+            
+            //Push the very first message to this conversation here
+            
+            
 
             conversation.save(function(err, newConvo){
                 if(err){
                     res.send(err);
                 }
                 else {
-                    console.log(newConvo);
+                    //console.log(newConvo);
                     res.send(newConvo);
+
                 }
             })
         }

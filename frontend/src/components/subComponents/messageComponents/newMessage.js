@@ -4,6 +4,7 @@ import { withRouter, Route } from 'react-router-dom';
 
 import MessageBox from './messageBox';
 import InputMessage from './inputMessage';
+import InputFirstMessage from "./inputFirstMessage";
 import InputUser from './inputUser';
 
 import "../../../styles/messageBox.css";
@@ -34,7 +35,8 @@ class newMessage extends Component {
                 />
                 */}
 
-                <InputMessage />
+                {/* <InputMessage /> */}
+                <InputFirstMessage />
 
 
             </div>

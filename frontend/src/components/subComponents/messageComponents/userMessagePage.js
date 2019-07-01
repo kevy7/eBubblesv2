@@ -16,6 +16,10 @@ class userMessagePage extends Component {
                 <MessageBox />
                 <InputMessage />
 
+                {/* instead of having the same InputMessage component from the new message page
+                    we should create another InputMessage component but for conversations that already exist
+                */}
+
             </div>
         )
     }
