@@ -987,7 +987,7 @@ app.post("/api/user/:id/conversation", function(req, res){
     //this code works
     //this code will create a conversation for the users listed
 
-    Conversation.create(convoData).populate("users").exec(function(err, conversation){
+    Conversation.create(convoData).populate("users").populate("messages").exec(function(err, conversation){
         if(err){
             res.send(err);
         }
@@ -1001,7 +1001,7 @@ app.post("/api/user/:id/conversation", function(req, res){
             })
             
             //Push the very first message to this conversation here
-            
+
             
 
             conversation.save(function(err, newConvo){
@@ -1010,7 +1010,7 @@ app.post("/api/user/:id/conversation", function(req, res){
                 }
                 else {
                     //console.log(newConvo);
-                    res.send(newConvo);
+                    res.send(newConvo); //Send the conversation back to the user
 
                 }
             })

@@ -20,6 +20,7 @@ import { CREATE_CONVERSATION } from "./types";
 import { POST_MESSAGE } from "./types";
 import { EDIT_MESSAGE } from "./types";
 import { GET_CONVERSATIONS } from "./types";
+import { GET_SELECTED_CONVERSATION } from "./types";
 
 
 
@@ -493,10 +494,44 @@ export const removeSelectedUser = (user) => dispatch => {
 
 }
 
+
+
 //Create an action to GET_CONVERSATIONS
 
 export const getConversations = (convoData) => dispatch => {
     //create a dispatch to GET_CONVERSATIONS
+
+}
+
+
+export const getSelectedConversation = (convoData) => dispatch => {
+    ///api/user/:id/messages/:messageID
+    /*
+
+        convoData needs to contain
+        {
+            authUserID,
+            messageID,
+
+        }
+
+    */
+    const url = "/api/user/" + convoData.authUserID + "/messages/" + convoData.messageID;
+
+    axios.get(url, convoData)
+    .then(res => {
+        dispatch({
+            type: GET_SELECTED_CONVERSATION,
+            payload: res.data
+        })
+    })
+    .catch(err =>{
+        dispatch({
+            type: SET_CURRENT_ERROR,
+            payload: err
+        })
+    })
+
 
 }
 
@@ -510,7 +545,23 @@ export const createConversation = (convoData) => dispatch => {
         payload: convoData
     }) */
 
-    const url = "";
+    const url = "/api/user/" + convoData.authUserID + "/conversation";
+
+    // /api/user/:id/conversation
+
+    axios.post(url, convoData)
+    .then(res => {
+        dispatch({
+            type: GET_SELECTED_CONVERSATION,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: SET_CURRENT_ERROR,
+            payload: err
+        })
+    })
 
 
 

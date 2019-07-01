@@ -5,7 +5,7 @@ Component Responsible for inputting the very first message into a newly created 
 Difference between this component and the inputMessage component?
     -inputMessage component is used to post messages into an existing conversation
     -inputFirstMessage component will be used to post the first message into a newly created conversation that did not exist before
-    
+
 
 ***************/
 
@@ -33,14 +33,18 @@ class inputFirstMessage extends Component {
     sendMessage = async (e) => {
         e.preventDefault();
 
-        //Send message to users
+        //How to redirect users to a different route
+        //        this.props.history.push("path/to/push");
+        const url = "/messages/user/" + this.props.auth.userInfo.id;
 
-        //Create a conversation if no conversation currently exists for these users
-        //action that will 
+
+        //this.props.history.push(url);
+
+        //When this button is clicked, a conversation should be returned back to us
+        //Once we get the id of the conversation, we need to re-route the user to that conversation and display the current message shown
 
 
-        //If a conversation does exist for these users, then the send button shouldn't be creating another conversation
-
+        
 
 
     }
@@ -63,7 +67,7 @@ class inputFirstMessage extends Component {
 
                     </div>
                     <div className="column enterCommentBtn">
-                        <a className="button is-info">Send</a>
+                        <a className="button is-info" onClick={this.sendMessage} >Send</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +77,8 @@ class inputFirstMessage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectUsersReducers: state.selectUsersReducers
+        selectUsersReducers: state.selectUsersReducers,
+        auth: state.auth
     }
 }
 
