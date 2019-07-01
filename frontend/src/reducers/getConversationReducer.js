@@ -5,7 +5,7 @@ export const EDIT_MESSAGE = "EDIT_MESSAGE";
 export const GET_CONVERSATIONS = "GET_CONVERSATIONS";
 */
 
-import { GET_CONVERSATIONS, } from "../actions/types";
+import { GET_CONVERSATIONS, LOAD_COMPONENT} from "../actions/types";
 
 const initialState = {
     conversations: [],
@@ -13,7 +13,7 @@ const initialState = {
     error: null
 }
 
-export const getConversationsReducer = (state=initialState, action) => {
+const getConversationsReducer = (state=initialState, action) => {
     if(action.type === GET_CONVERSATIONS){
         return {
             ...state,
@@ -25,7 +25,7 @@ export const getConversationsReducer = (state=initialState, action) => {
     else if (action.type === ""){
 
     }
-    else if (action.type === loading){
+    else if (action.type === LOAD_COMPONENT){
         return {
             ...state,
             loading: true
@@ -37,3 +37,5 @@ export const getConversationsReducer = (state=initialState, action) => {
         }
     }
 }
+
+export default getConversationsReducer;

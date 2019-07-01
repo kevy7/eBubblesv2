@@ -8,6 +8,8 @@ import userProfileReducer from './userProfileReducer';
 import getUsersReducer from './getUsersReducer';
 import inputUserReducer from './inputUserReducer';
 import selectUsersReducers from "./selectUsersReducers";
+import getConversationReducer from "./getConversationReducer";
+import selectedConvoReducer from "./selectedConvoReducer";
 
 
 export default combineReducers({
@@ -20,5 +22,7 @@ export default combineReducers({
     userProfileInfo: userProfileReducer,
     users: getUsersReducer, //What the heck was this created for? Is this still needed?
     inputUserReducer: inputUserReducer,
-    selectUsersReducers: selectUsersReducers
+    selectUsersReducers: selectUsersReducers,
+    conversations: getConversationReducer,
+    selectedConversation: selectedConvoReducer
 });

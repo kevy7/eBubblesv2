@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Link } from 'react-router-dom';
 
 import "../../../styles/inputMessage.css";
+import { createConversation } from "../../../actions";
 
 
 
@@ -44,7 +45,12 @@ class inputFirstMessage extends Component {
         //Once we get the id of the conversation, we need to re-route the user to that conversation and display the current message shown
 
 
+
         
+        //Use this to create a conversation
+
+        //this.props.createConversation();
+
 
 
     }
@@ -78,10 +84,12 @@ class inputFirstMessage extends Component {
 const mapStateToProps = (state) => {
     return {
         selectUsersReducers: state.selectUsersReducers,
-        auth: state.auth
+        auth: state.auth,
+        conversations: state.conversations,
+        selectedConversation: state.selectedConversation
     }
 }
 
 export default withRouter(connect(mapStateToProps, {
-
+    createConversation: createConversation
 })(inputFirstMessage));

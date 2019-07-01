@@ -6,7 +6,7 @@ const initialState = {
     error: null
 }
 
-export const selectedConvoReducer = (state=initialState, action) => {
+const selectedConvoReducer = (state=initialState, action) => {
     if(action.type === GET_SELECTED_CONVERSATION){
         return {
             ...state,
@@ -28,3 +28,5 @@ export const selectedConvoReducer = (state=initialState, action) => {
         }
     }
 }
+
+export default selectedConvoReducer;

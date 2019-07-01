@@ -545,6 +545,16 @@ export const createConversation = (convoData) => dispatch => {
         payload: convoData
     }) */
 
+    /*
+        Expected data:
+        {
+            authUserID,
+            users,
+            message
+        }
+
+    */
+
     const url = "/api/user/" + convoData.authUserID + "/conversation";
 
     // /api/user/:id/conversation
