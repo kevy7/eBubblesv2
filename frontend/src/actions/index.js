@@ -16,6 +16,12 @@ import { SEARCH_USERS } from "./types";
 import { SELECT_USERS } from "./types";
 import { REMOVE_USER } from "./types";
 import { REMOVE_ALL_USERS } from "./types";
+import { CREATE_CONVERSATION } from "./types";
+import { POST_MESSAGE } from "./types";
+import { EDIT_MESSAGE } from "./types";
+import { GET_CONVERSATIONS } from "./types";
+
+
 
 //const nothing = null;
 
@@ -486,6 +492,34 @@ export const removeSelectedUser = (user) => dispatch => {
     })
 
 }
+
+//Create an action to GET_CONVERSATIONS
+
+export const getConversations = (convoData) => {
+    //create a dispatch to GET_CONVERSATIONS
+    
+}
+
+
+//Create an action to POST a conversation into a database
+export const createConversation = (convoData) => {
+
+    //We don't need to dispatch anything when posting data into our database
+    /* dispatch({
+        type: CREATE_CONVERSATION,
+        payload: convoData
+    }) */
+}
+
+export const postMessage = (messageData) => {
+    dispatch({
+        type: POST_MESSAGE,
+        payload: messageData
+    })
+}
+
+
+//Create an action to POST a message into a conversation
 
 
 

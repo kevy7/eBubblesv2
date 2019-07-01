@@ -974,8 +974,11 @@ app.post("/api/user/:id/connections", function(req, res){
 //create a conversation with a user
 //if no conversation exists between users, then create a conversation
 app.post("/api/user/:id/conversation", function(req, res){
-    const authUser = req.params.id;
-    const selectedUser = req.body.selectedUser;
+    /* const authUser = req.params.id;
+    const selectedUser = req.body.selectedUser; */
+
+    const users = req.body.users;
+
     const convoData = {
         timeStamp: new Date()
     }
@@ -988,8 +991,13 @@ app.post("/api/user/:id/conversation", function(req, res){
             res.send(err);
         }
         else {
-            conversation.users.push(authUser);
-            conversation.users.push(selectedUser);
+            /* conversation.users.push(authUser);
+            conversation.users.push(selectedUser); */
+
+            users.forEach(user => {
+                //for each user, push them into the newly created conversation
+                conversation.users.push(user); //Each user will be passed in to the conversation collection
+            })
 
             conversation.save(function(err, newConvo){
                 if(err){

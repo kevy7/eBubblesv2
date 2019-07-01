@@ -27,7 +27,6 @@ class contactChipContainer extends Component {
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => {
