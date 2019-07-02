@@ -1002,9 +1002,33 @@ app.post("/api/user/:id/conversation", function(req, res){
             
             //Push the very first message to this conversation here
             //We have to create the message first and then push it's id into the conversation
-
             
 
+            const messageData = {
+                message: req.body.message,
+                sender: req.body.authUserID,
+                senderName: req.body.authName,
+                timeStamp: new Date()
+            }
+
+            Message.create(messageData, function(err, message){
+                if(err){
+                    res.send(err);
+                }
+                else {
+                    //push message id to conversation in here
+                    conversation.messages.push(message._id);
+
+                    //Maybe save the conversation in here instead?
+                }
+            })
+
+
+
+
+
+            
+            //Think about moving this above
             conversation.save(function(err, newConvo){
                 if(err){
                     res.send(err);
@@ -1015,6 +1039,9 @@ app.post("/api/user/:id/conversation", function(req, res){
 
                 }
             })
+
+
+
         }
     })
 })

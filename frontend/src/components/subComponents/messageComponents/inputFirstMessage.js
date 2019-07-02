@@ -61,7 +61,8 @@ class inputFirstMessage extends Component {
            authUserID: this.props.auth.userInfo.id,
            users: usersArray,
            message: this.state.userMessage,
-           authUserID: this.props.auth.userInfo.id
+           authUserID: this.props.auth.userInfo.id,
+           authName: this.props.auth.userInfo.name
         }
 
         //this.props.createConversation(convoData);
