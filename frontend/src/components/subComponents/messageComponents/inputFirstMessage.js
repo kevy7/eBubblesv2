@@ -44,13 +44,28 @@ class inputFirstMessage extends Component {
         //When this button is clicked, a conversation should be returned back to us
         //Once we get the id of the conversation, we need to re-route the user to that conversation and display the current message shown
 
+        const usersArray = [];
+
+        const selectedUsers = this.props.selectUsersReducers.selectedUsers;
+
+        selectedUsers.forEach(user => {
+            usersArray.push(user.userID);
+            //push each selected users id into the usersArray
+        });
+
+        usersArray.push(this.props.auth.userInfo.id); //Push the logged in user to the array as well
 
 
-        
-        //Use this to create a conversation
 
-        //this.props.createConversation();
+        const convoData = {
+           authUserID: this.props.auth.userInfo.id,
+           users: usersArray,
+           message: this.state.userMessage,
+           authUserID: this.props.auth.userInfo.id
+        }
 
+        //this.props.createConversation(convoData);
+        //in the backend, we have to create the message first before we can push it into our database
 
 
     }

@@ -1001,6 +1001,7 @@ app.post("/api/user/:id/conversation", function(req, res){
             })
             
             //Push the very first message to this conversation here
+            //We have to create the message first and then push it's id into the conversation
 
             
 
