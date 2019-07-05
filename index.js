@@ -1019,12 +1019,20 @@ app.post("/api/user/:id/conversation", function(req, res){
                     //push message id to conversation in here
                     conversation.messages.push(message._id);
 
+                    /*
+                        newUser.populate('connections').populate('connectionRequests', function(err, populatedUser){
+
+                    */
+
                     conversation.save(function(err, newConvo){
                         if(err){
                             res.send(err);
                         }
                         else {
-                            res.send(newConvo);
+                            conversation.populate('users').populate('messages', function(err, populatedConversation){
+                                res.send(populatedConversation);
+                            })
+                            //res.send(newConvo);
                         }
                     })
 

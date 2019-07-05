@@ -36,7 +36,7 @@ class inputMessage extends Component {
 
         //If a conversation does exist for these users, then the send button shouldn't be creating another conversation
 
-
+        alert("you're clicking on a different button!!");
 
     }
 
@@ -58,7 +58,7 @@ class inputMessage extends Component {
 
                     </div>
                     <div className="column enterCommentBtn">
-                        <a className="button is-info">Send</a>
+                        <a className="button is-info" onClick={this.sendMessage}>Send</a>
                     </div>
                 </div>
             </div>

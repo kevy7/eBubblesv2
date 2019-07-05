@@ -16,8 +16,6 @@ import { withRouter, Route, Link } from 'react-router-dom';
 import "../../../styles/inputMessage.css";
 import { createConversation } from "../../../actions";
 
-
-
 class inputFirstMessage extends Component {
 
     state = {
@@ -33,6 +31,15 @@ class inputFirstMessage extends Component {
 
     sendMessage = async (e) => {
         e.preventDefault();
+
+
+        /*
+            Issue with this code:
+
+            We cannot create a new conversation if there is already a conversation created for these users
+            They should be pushing messages to an already created conversation if it exists
+
+        */
 
         const usersArray = [];
 
@@ -53,6 +60,17 @@ class inputFirstMessage extends Component {
            authName: this.props.auth.userInfo.name
         }
 
+
+        /*
+            What if I do this. Compare the usersArray with this.props.selectedConversation.users
+            if both of these array matches and have the same users and amounts, then do not initiate the
+            createConversation action, instead initiate a different action called pushMessage
+
+            issue: every time a user is selected for a new conversation, initiate an action that wil return a conversation that contains
+            those users in it's conversation.users array
+
+            Find a way in the backend to search for conversations, that exactly matches the list of users given
+        */
         await this.props.createConversation(convoData);
         
     }
