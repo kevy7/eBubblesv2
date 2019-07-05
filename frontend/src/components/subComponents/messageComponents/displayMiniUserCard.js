@@ -10,17 +10,20 @@ import { getUserProfile } from "../../../actions"
 class displayMiniUserCard extends Component {
     //this.auth.userInfo.id this will give us the logged in user's id
     componentWillMount = () => {
-        const authUserID = this.props.auth.userInfo.id;
-        //console.log(authUserID);
 
-        this.props.getUserProfile(authUserID);
+        /* const authUserID = this.props.auth.userInfo.id;
+
+        this.props.getUserProfile(authUserID); */
+        //The code above is getting replaced as well
+
+
     }
 
 
     render(){
 
         //console.log(this.props.userProfileInfo.connections);
-        const connections = this.props.userProfileInfo.connections || [];
+        /* const connections = this.props.userProfileInfo.connections || [];
 
         let users = connections.map((user) => {
             return <MiniUserCard 
@@ -28,7 +31,10 @@ class displayMiniUserCard extends Component {
                         userID={user._id}
                         key={user._id}
                     />
-        })
+        }) */
+
+        //Above code is essentially getting replaced
+
         
         return (
             <div className="displayMiniUserCard">
@@ -36,7 +42,7 @@ class displayMiniUserCard extends Component {
                 
 
                 {/* Create a loop to loop through each user */}
-                {users}
+                {/* users */}
             </div>
         )
     }
@@ -45,7 +51,8 @@ class displayMiniUserCard extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
-        userProfileInfo: state.userProfileInfo.userProfileInfo
+        userProfileInfo: state.userProfileInfo.userProfileInfo,
+        conversations: state.conversations
     }
 }
 

@@ -499,7 +499,36 @@ export const removeSelectedUser = (user) => dispatch => {
 //Create an action to GET_CONVERSATIONS
 
 export const getConversations = (convoData) => dispatch => {
+    /*
+        convoData = {
+            authUserID
+        }
+
+
+    */
+
     //create a dispatch to GET_CONVERSATIONS
+
+    //url for getting all conversations of a user
+    ///api/user/:id/messages
+
+    const url = "/api/user/" + convoData.authUserID + "/messages";
+
+    axios.get(url, convoData)
+    .then(res => {
+        dispatch({
+            type: GET_CONVERSATIONS,
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: SET_CURRENT_ERROR,
+            payload: err
+        })
+    })
+
+
 
 }
 
