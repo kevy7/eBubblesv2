@@ -4,6 +4,8 @@ import { withRouter, Route, Link } from 'react-router-dom';
 
 import MiniUserCard from "./miniUserCard";
 import { getUserProfile } from "../../../actions"
+import { getConversations } from "../../../actions";
+
 
 
 
@@ -11,11 +13,13 @@ class displayMiniUserCard extends Component {
     //this.auth.userInfo.id this will give us the logged in user's id
     componentWillMount = () => {
 
-        /* const authUserID = this.props.auth.userInfo.id;
+        let convoData = {
+            authUserID: this.props.auth.userInfo.id
+        }
 
-        this.props.getUserProfile(authUserID); */
-        //The code above is getting replaced as well
-
+        this.props.getUserProfile(this.props.auth.userInfo.id);
+        this.props.getConversations(convoData);
+        
 
     }
 
@@ -32,8 +36,22 @@ class displayMiniUserCard extends Component {
                         key={user._id}
                     />
         }) */
-
         //Above code is essentially getting replaced
+
+        let conversations = this.props.conversations.conversations || [];
+
+        /*
+            Think about how you're going to display each conversation
+
+        */
+
+        let mapConversations = conversations.map((convo) => {
+            return <MiniUserCard
+                        convoName="convoName"
+                        key={convo._id}
+                        convoID = {convo._id}
+                    />
+        })
 
         
         return (
@@ -43,6 +61,7 @@ class displayMiniUserCard extends Component {
 
                 {/* Create a loop to loop through each user */}
                 {/* users */}
+                {mapConversations}
             </div>
         )
     }
@@ -57,5 +76,6 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps, {
-    getUserProfile: getUserProfile
+    getUserProfile: getUserProfile,
+    getConversations: getConversations
 })(displayMiniUserCard));

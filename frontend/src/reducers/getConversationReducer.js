@@ -22,9 +22,6 @@ const getConversationsReducer = (state=initialState, action) => {
             error: null
         }
     }
-    else if (action.type === ""){
-
-    }
     else if (action.type === LOAD_COMPONENT){
         return {
             ...state,

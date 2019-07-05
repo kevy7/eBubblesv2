@@ -1062,7 +1062,7 @@ app.post("/api/user/:id/conversation", function(req, res){
 app.get("/api/user/:id/messages", function(req, res){
 
     //get a message based on it's users
-    Conversation.find({users: req.params.id}, function(err, conversation){
+    Conversation.find({users: req.params.id}).populate("messages").populate("users").exec(function(err, conversation){
         if(err){
             res.send(err);
         }

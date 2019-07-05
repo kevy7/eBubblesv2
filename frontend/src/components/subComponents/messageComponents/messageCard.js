@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Link } from 'react-router-dom';
 
+import "../../../styles/messageCard.css";
+
 //import MiniUserCard from "./miniUserCard";
-
-
 
 class messageCard extends Component {
     
@@ -14,13 +14,13 @@ class messageCard extends Component {
                 {/* This is meant to display a user's message */}
                 <article className="media">
                     <figure className="media-left">
-                        <p className="image is-64x64">
+                        <p className="is-64x64" id="userImageMessageCard"> {/* <--- removed "image is-64x64" from className */}
                         <img src="https://bulma.io/images/placeholders/128x128.png" />
                         </p>
                     </figure>
                     <div className="media-content box">
                         <div className="content">
-                            <p>
+                            <p className="userMessage">
                                 <strong>Name/UserName here</strong>
                                 <br />
                                 Message Here: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.

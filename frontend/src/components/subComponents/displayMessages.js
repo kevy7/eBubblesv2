@@ -6,6 +6,7 @@ import NewMessage from "./messageComponents/newMessage";
 //Maybe create a component to display miniUserCards
 import DisplayMiniUserCard from "./messageComponents/displayMiniUserCard";
 import UserMessagePage from "./messageComponents/userMessagePage";
+import { getConversations } from "../../actions";
 
 
 
@@ -33,7 +34,6 @@ class displayMessages extends Component {
                             <Route exact path="/messages/new" component={NewMessage} />
                             <Route path="/messages/user/:id" component={UserMessagePage} />
                             
-
                         </div>
                     </div>
                 </div>
@@ -42,4 +42,12 @@ class displayMessages extends Component {
     }
 }
 
-export default withRouter(displayMessages);
+const mapStateToProps = (state) => {
+    return {
+        conversations: state.conversations
+    }
+}
+
+export default withRouter(connect(mapStateToProps, {
+    getConversations: getConversations
+})(displayMessages));
