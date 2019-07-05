@@ -987,7 +987,7 @@ app.post("/api/user/:id/conversation", function(req, res){
     //this code works
     //this code will create a conversation for the users listed
 
-    Conversation.create(convoData).populate("users").populate("messages").exec(function(err, conversation){
+    Conversation.create(convoData, function(err, conversation){
         if(err){
             res.send(err);
         }
@@ -1019,26 +1019,30 @@ app.post("/api/user/:id/conversation", function(req, res){
                     //push message id to conversation in here
                     conversation.messages.push(message._id);
 
+                    conversation.save(function(err, newConvo){
+                        if(err){
+                            res.send(err);
+                        }
+                        else {
+                            res.send(newConvo);
+                        }
+                    })
+
                     //Maybe save the conversation in here instead?
+
                 }
             })
-
-
-
-
-
             
             //Think about moving this above
-            conversation.save(function(err, newConvo){
+            /* conversation.save(function(err, newConvo){
                 if(err){
                     res.send(err);
                 }
                 else {
-                    //console.log(newConvo);
-                    res.send(newConvo); //Send the conversation back to the user
+                    res.send(newConvo);
 
                 }
-            })
+            }) */
 
 
 

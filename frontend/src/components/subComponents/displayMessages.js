@@ -31,7 +31,7 @@ class displayMessages extends Component {
                         <div className="box messageBox">
                             
                             <Route exact path="/messages/new" component={NewMessage} />
-                            <Route exact path="/messages/user/:id" component={UserMessagePage} />
+                            <Route path="/messages/user/:id" component={UserMessagePage} />
                             
 
                         </div>

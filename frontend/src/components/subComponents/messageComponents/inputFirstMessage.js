@@ -34,16 +34,6 @@ class inputFirstMessage extends Component {
     sendMessage = async (e) => {
         e.preventDefault();
 
-        //How to redirect users to a different route
-        //        this.props.history.push("path/to/push");
-        const url = "/messages/user/" + this.props.auth.userInfo.id;
-
-
-        //this.props.history.push(url);
-
-        //When this button is clicked, a conversation should be returned back to us
-        //Once we get the id of the conversation, we need to re-route the user to that conversation and display the current message shown
-
         const usersArray = [];
 
         const selectedUsers = this.props.selectUsersReducers.selectedUsers;
@@ -55,8 +45,6 @@ class inputFirstMessage extends Component {
 
         usersArray.push(this.props.auth.userInfo.id); //Push the logged in user to the array as well
 
-
-
         const convoData = {
            authUserID: this.props.auth.userInfo.id,
            users: usersArray,
@@ -65,10 +53,22 @@ class inputFirstMessage extends Component {
            authName: this.props.auth.userInfo.name
         }
 
-        //this.props.createConversation(convoData);
-        //in the backend, we have to create the message first before we can push it into our database
+        await this.props.createConversation(convoData);
+        
+    }
 
+    //Use the react lifecycle method to redirect user to a new page right after a conversation is created
+    componentWillReceiveProps = (nextProps) => {
+        /* console.log(nextProps.selectedConversation);
+        console.log(this.props.selectedConversation); */
 
+        if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
+            //console.log(nextProps.selectedConversation.selectedConversation._id);
+
+            //Once the selectedConversation id is retrieved, we'll redirect the user to a new url
+            let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
+            this.props.history.push(url);
+        } 
     }
 
 
