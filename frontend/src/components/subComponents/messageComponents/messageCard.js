@@ -23,7 +23,7 @@ class messageCard extends Component {
                             <p className="userMessage">
                                 <strong>Name/UserName here</strong>
                                 <br />
-                                Message Here: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                {this.props.message}
                             </p>
                         </div>
                         

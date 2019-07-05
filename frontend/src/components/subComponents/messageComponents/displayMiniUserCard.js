@@ -26,18 +26,6 @@ class displayMiniUserCard extends Component {
 
     render(){
 
-        //console.log(this.props.userProfileInfo.connections);
-        /* const connections = this.props.userProfileInfo.connections || [];
-
-        let users = connections.map((user) => {
-            return <MiniUserCard 
-                        userName={user.userName}
-                        userID={user._id}
-                        key={user._id}
-                    />
-        }) */
-        //Above code is essentially getting replaced
-
         let conversations = this.props.conversations.conversations || [];
 
         /*

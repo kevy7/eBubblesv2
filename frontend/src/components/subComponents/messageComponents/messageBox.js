@@ -19,7 +19,7 @@ class messageBox extends Component {
                 messageID: nextProps.match.params.id
             }
             this.props.getSelectedConversation(convoData);
-        }
+        } 
 
     }
 
@@ -41,7 +41,8 @@ class messageBox extends Component {
 
         let displayMessages = newMessages.map(message => {
             return <MessageCard 
-            
+                        message={message.message}
+                        senderName="name1"
                     />
         })
 
