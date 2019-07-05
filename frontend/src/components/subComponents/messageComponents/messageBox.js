@@ -36,8 +36,17 @@ class messageBox extends Component {
     }
 
     render(){
-        let messages = ""
-        
+        let messages = this.props.selectedConversation.selectedConversation[0] || [];
+        let newMessages = messages.messages || [];
+
+        let displayMessages = newMessages.map(message => {
+            return <MessageCard 
+            
+                    />
+        })
+
+
+
         return (
             <div className="displayMessageBox">
                 
@@ -47,7 +56,8 @@ class messageBox extends Component {
                 <div className="messageContainer">
                     {/* this will display a list of messages */}
                     {/* Only display something if the user actually have messages to display */}
-                    <MessageCard />
+                    
+                    {displayMessages}
                     
 
                     
