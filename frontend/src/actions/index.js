@@ -21,6 +21,7 @@ import { POST_MESSAGE } from "./types";
 import { EDIT_MESSAGE } from "./types";
 import { GET_CONVERSATIONS } from "./types";
 import { GET_SELECTED_CONVERSATION } from "./types";
+import { CLEAR_SELECTED_CONVERSATION } from "./types";
 
 
 
@@ -563,6 +564,17 @@ export const getSelectedConversation = (convoData) => dispatch => {
 
 
 }
+
+export const clearSelectedConvo = () => dispatch => {
+    //This action is used to clear the selected conversation. This will be used if the user is in the path
+    // "/messages/new"
+    dispatch({
+        type: CLEAR_SELECTED_CONVERSATION
+    })
+
+}
+
+
 
 
 //Create an action to POST a conversation into a database

@@ -1,4 +1,4 @@
-import { GET_SELECTED_CONVERSATION, LOAD_COMPONENT } from "../actions/types";
+import { GET_SELECTED_CONVERSATION, LOAD_COMPONENT, CLEAR_SELECTED_CONVERSATION } from "../actions/types";
 
 const initialState = {
     selectedConversation: {},
@@ -19,6 +19,14 @@ const selectedConvoReducer = (state=initialState, action) => {
         return {
             ...state,
             loading: true,
+            error: null
+        }
+    }
+    else if (action.type === CLEAR_SELECTED_CONVERSATION){
+        return {
+            ...state,
+            selectedConversation: {},
+            loading: false,
             error: null
         }
     }

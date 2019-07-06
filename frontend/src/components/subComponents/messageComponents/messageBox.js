@@ -7,6 +7,7 @@ import UserMessageCard from './userMessageCard';
 import InputMessage from './inputMessage';
 
 import { getSelectedConversation } from "../../../actions";
+import { clearSelectedConvo } from "../../../actions";
 
 class messageBox extends Component {
 
@@ -31,7 +32,11 @@ class messageBox extends Component {
             messageID: this.props.match.params.id //This is just the conversation ID
         }
 
-        this.props.getSelectedConversation(convoData);
+        if(this.props.match.path !== "/messages/new"){
+            this.props.getSelectedConversation(convoData);
+        }
+        
+        //this.props.getSelectedConversation(convoData);
 
     }
 
@@ -43,6 +48,7 @@ class messageBox extends Component {
             return <MessageCard 
                         message={message.message}
                         senderName="name1"
+                        key={message._id}
                     />
         })
 

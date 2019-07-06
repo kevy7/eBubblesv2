@@ -15,6 +15,7 @@ import { withRouter, Route, Link } from 'react-router-dom';
 
 import "../../../styles/inputMessage.css";
 import { createConversation } from "../../../actions";
+import { getConversations } from "../../../actions";
 
 class inputFirstMessage extends Component {
 
@@ -60,7 +61,6 @@ class inputFirstMessage extends Component {
            authName: this.props.auth.userInfo.name
         }
 
-
         /*
             What if I do this. Compare the usersArray with this.props.selectedConversation.users
             if both of these array matches and have the same users and amounts, then do not initiate the
@@ -80,13 +80,43 @@ class inputFirstMessage extends Component {
         /* console.log(nextProps.selectedConversation);
         console.log(this.props.selectedConversation); */
 
-        if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
-            //console.log(nextProps.selectedConversation.selectedConversation._id);
+        
 
-            //Once the selectedConversation id is retrieved, we'll redirect the user to a new url
-            let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
+        if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
+            /* let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
             this.props.history.push(url);
+            console.log(this.props.selectedConversation.selectedConversation); */
+            
+
+            const getConvoData = {
+                authUserID: this.props.auth.userInfo.id
+            }
+
+            this.props.getConversations(getConvoData);
+
+            if(nextProps.match.url !== "/messages/new"){
+                console.log("path is not to new user");
+                console.log(nextProps);
+                //As long as the path is not this, then you can redirect the user to a different page
+
+                /* let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
+                this.props.history.push(url); */
+            }
+
+            console.log("the selected conersation doesn't match!!");
+
+
         } 
+        
+       /*  if(this.props.conversations.conversations !== nextProps.conversations.conversations){
+            console.log("it looks like the conversations changed!!");
+
+        } */
+
+        //console.log(this.props.conversations.conversations);
+        //console.log(nextProps.conversations.conversations);
+
+
     }
 
 
@@ -125,5 +155,6 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps, {
-    createConversation: createConversation
+    createConversation: createConversation,
+    getConversations: getConversations
 })(inputFirstMessage));
