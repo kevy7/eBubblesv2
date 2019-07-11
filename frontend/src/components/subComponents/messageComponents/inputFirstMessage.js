@@ -83,11 +83,7 @@ class inputFirstMessage extends Component {
         
 
         if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
-            /* let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
-            this.props.history.push(url);
-            console.log(this.props.selectedConversation.selectedConversation); */
             
-
             const getConvoData = {
                 authUserID: this.props.auth.userInfo.id
             }
@@ -97,25 +93,9 @@ class inputFirstMessage extends Component {
             if(nextProps.match.url !== "/messages/new"){
                 console.log("path is not to new user");
                 console.log(nextProps);
-                //As long as the path is not this, then you can redirect the user to a different page
-
-                /* let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
-                this.props.history.push(url); */
             }
 
-            console.log("the selected conersation doesn't match!!");
-
-
         } 
-        
-       /*  if(this.props.conversations.conversations !== nextProps.conversations.conversations){
-            console.log("it looks like the conversations changed!!");
-
-        } */
-
-        //console.log(this.props.conversations.conversations);
-        //console.log(nextProps.conversations.conversations);
-
 
     }
 

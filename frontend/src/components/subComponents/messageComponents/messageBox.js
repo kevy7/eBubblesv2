@@ -12,15 +12,19 @@ import { clearSelectedConvo } from "../../../actions";
 class messageBox extends Component {
 
     componentWillUpdate = (nextProps) => {
-        //console.log(nextProps);
-
         if(this.props.match.params.id !== nextProps.match.params.id){
             const convoData = {
                 authUserID: this.props.auth.userInfo.id,
                 messageID: nextProps.match.params.id
             }
             this.props.getSelectedConversation(convoData);
+            //this.props.clearSelectedConvo();
+            
         } 
+        else if(nextProps.match.path === "/messages/new"){
+            //this.props.clearSelectedConvo(); //This will clear our conversation state once the user goes to the route /messages/new
+            
+        }
 
     }
 
@@ -34,6 +38,9 @@ class messageBox extends Component {
 
         if(this.props.match.path !== "/messages/new"){
             this.props.getSelectedConversation(convoData);
+        }
+        else{
+            this.props.clearSelectedConvo();
         }
         
         //this.props.getSelectedConversation(convoData);
@@ -51,8 +58,6 @@ class messageBox extends Component {
                         key={message._id}
                     />
         })
-
-
 
         return (
             <div className="displayMessageBox">
@@ -86,5 +91,6 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps, {
-    getSelectedConversation: getSelectedConversation
+    getSelectedConversation: getSelectedConversation,
+    clearSelectedConvo: clearSelectedConvo
 })(messageBox));
