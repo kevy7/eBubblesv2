@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Link } from 'react-router-dom';
+import isEmpty from "is-empty";
 
 import MessageCard from './messageCard';
 import UserMessageCard from './userMessageCard';
@@ -11,7 +12,7 @@ import { clearSelectedConvo } from "../../../actions";
 
 class messageBox extends Component {
 
-    componentWillUpdate = (nextProps) => {
+    componentWillUpdate = async (nextProps) => {
         if(this.props.match.params.id !== nextProps.match.params.id){
             const convoData = {
                 authUserID: this.props.auth.userInfo.id,
@@ -20,15 +21,15 @@ class messageBox extends Component {
             this.props.getSelectedConversation(convoData);
             //this.props.clearSelectedConvo();
             
-        } 
-        else if(nextProps.match.path === "/messages/new"){
-            //this.props.clearSelectedConvo(); //This will clear our conversation state once the user goes to the route /messages/new
-            
+        }
+        else if (isEmpty(nextProps.selectedConversation.selectedConversation.length) !== true){
+            await console.log("this object does not return empty");
+            //Since the object is not empty, redirect the user to a new route
         }
 
     }
 
-    componentWillMount = () => {
+    componentWillMount = async () => {
         //this.props.getSelectedConversation
 
         const convoData = {
@@ -37,10 +38,11 @@ class messageBox extends Component {
         }
 
         if(this.props.match.path !== "/messages/new"){
-            this.props.getSelectedConversation(convoData);
+            await this.props.getSelectedConversation(convoData);
         }
         else{
-            this.props.clearSelectedConvo();
+            await this.props.clearSelectedConvo();
+            //console.log(await this.props.selectedConversation.selectedConversation);
         }
         
         //this.props.getSelectedConversation(convoData);

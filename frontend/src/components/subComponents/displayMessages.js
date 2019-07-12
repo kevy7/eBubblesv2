@@ -21,7 +21,7 @@ class displayMessages extends Component {
                         <div className="box messageBox userBox">
                             
                             <div className="messageMenu">
-                                <p>List of conversations here</p>
+                                <p>WORK IN PROGRESS</p>
                                 <Link to="/messages/new" className="button is-info">New Message</Link>
                             </div>
                             <hr />

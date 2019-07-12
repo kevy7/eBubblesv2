@@ -32,8 +32,6 @@ class inputFirstMessage extends Component {
 
     sendMessage = async (e) => {
         e.preventDefault();
-
-
         /*
             Issue with this code:
 
@@ -76,27 +74,40 @@ class inputFirstMessage extends Component {
     }
 
     //Use the react lifecycle method to redirect user to a new page right after a conversation is created
-    componentWillReceiveProps = (nextProps) => {
-        /* console.log(nextProps.selectedConversation);
-        console.log(this.props.selectedConversation); */
+    componentWillReceiveProps = async (nextProps) => {
 
-        
+        /* await console.log(nextProps.selectedConversation.selectedConversation);
+        await console.log(this.props.selectedConversation.selectedConversation); */
 
+        //When a new conversation is added to the database, the getConversations action will execute
         if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
-            
+            //console.log(nextProps.selectedConversation);
             const getConvoData = {
                 authUserID: this.props.auth.userInfo.id
             }
 
             this.props.getConversations(getConvoData);
 
-            if(nextProps.match.url !== "/messages/new"){
-                console.log("path is not to new user");
-                console.log(nextProps);
-            }
+            /*
+                I want to redirect the user to a user message page when a conversation is initially created
+                however, the issue is that it will try to redirect the user when you click on the new user message page
 
-        } 
 
+
+            */
+        }
+    }
+
+    componentWillUpdate = (nextProps) => {
+        /*
+            Work here!!!!!!
+        */
+        /* if(nextProps.match.path === "/messages/new"){
+            console.log("our routes match");
+        }
+        else if(nextProps.match.path !== "/messages/new"){
+            console.log("our routes do not match")
+        } */
     }
 
 
