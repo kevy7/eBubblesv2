@@ -996,7 +996,6 @@ app.post("/api/user/:id/conversation", function(req, res){
             //Push the very first message to this conversation here
             //We have to create the message first and then push it's id into the conversation
             
-
             const messageData = {
                 message: req.body.message,
                 sender: req.body.authUserID,
@@ -1020,7 +1019,6 @@ app.post("/api/user/:id/conversation", function(req, res){
                             conversation.populate('users').populate('messages', function(err, populatedConversation){
                                 res.send(populatedConversation);
                             })
-                            //res.send(newConvo);
                         }
                     })
                 }
@@ -1028,6 +1026,7 @@ app.post("/api/user/:id/conversation", function(req, res){
         }
     })
 })
+
 
 //GET request to receive all conversations of a user
 app.get("/api/user/:id/messages", function(req, res){

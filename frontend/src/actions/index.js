@@ -500,18 +500,6 @@ export const removeSelectedUser = (user) => dispatch => {
 //Create an action to GET_CONVERSATIONS
 
 export const getConversations = (convoData) => dispatch => {
-    /*
-        convoData = {
-            authUserID
-        }
-
-
-    */
-
-    //create a dispatch to GET_CONVERSATIONS
-
-    //url for getting all conversations of a user
-    ///api/user/:id/messages
 
     const url = "/api/user/" + convoData.authUserID + "/messages";
 
@@ -535,17 +523,7 @@ export const getConversations = (convoData) => dispatch => {
 
 
 export const getSelectedConversation = (convoData) => dispatch => {
-    ///api/user/:id/messages/:messageID
-    /*
 
-        convoData needs to contain
-        {
-            authUserID,
-            messageID,
-
-        }
-
-    */
     const url = "/api/user/" + convoData.authUserID + "/messages/" + convoData.messageID;
 
     axios.get(url, convoData)
