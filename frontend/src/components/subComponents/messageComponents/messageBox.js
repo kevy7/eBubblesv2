@@ -74,31 +74,13 @@ class messageBox extends Component {
                 />
             }
 
-            /* return <MessageCard 
-                        message={message.message}
-                        senderName={message.senderName}
-                        key={message._id}
-                    /> */
         })
 
         return (
             <div className="displayMessageBox">
-                
-                {/* Let's display messageCard's here */}
-                
-
                 <div className="messageContainer">
-                    {/* this will display a list of messages */}
-                    {/* Only display something if the user actually have messages to display */}
-                    
-                    {displayMessages}
-                    
-
-                    
+                    {displayMessages}  
                 </div>
-
-                {/* <InputMessage /> */}
-
             </div>
         )
     }
