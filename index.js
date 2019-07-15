@@ -974,8 +974,6 @@ app.post("/api/user/:id/connections", function(req, res){
 //create a conversation with a user
 //if no conversation exists between users, then create a conversation
 app.post("/api/user/:id/conversation", function(req, res){
-    /* const authUser = req.params.id;
-    const selectedUser = req.body.selectedUser; */
 
     const users = req.body.users;
     const message = req.body.message;
@@ -984,16 +982,11 @@ app.post("/api/user/:id/conversation", function(req, res){
         timeStamp: new Date()
     }
 
-    //this code works
-    //this code will create a conversation for the users listed
-
     Conversation.create(convoData, function(err, conversation){
         if(err){
             res.send(err);
         }
         else {
-            /* conversation.users.push(authUser);
-            conversation.users.push(selectedUser); */
 
             users.forEach(user => {
                 //for each user, push them into the newly created conversation
@@ -1019,11 +1012,6 @@ app.post("/api/user/:id/conversation", function(req, res){
                     //push message id to conversation in here
                     conversation.messages.push(message._id);
 
-                    /*
-                        newUser.populate('connections').populate('connectionRequests', function(err, populatedUser){
-
-                    */
-
                     conversation.save(function(err, newConvo){
                         if(err){
                             res.send(err);
@@ -1035,25 +1023,8 @@ app.post("/api/user/:id/conversation", function(req, res){
                             //res.send(newConvo);
                         }
                     })
-
-                    //Maybe save the conversation in here instead?
-
                 }
             })
-            
-            //Think about moving this above
-            /* conversation.save(function(err, newConvo){
-                if(err){
-                    res.send(err);
-                }
-                else {
-                    res.send(newConvo);
-
-                }
-            }) */
-
-
-
         }
     })
 })
