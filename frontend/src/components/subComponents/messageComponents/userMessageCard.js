@@ -19,7 +19,8 @@ class userMessageCard extends Component {
                             <p>
                                 <strong>{this.props.senderName}</strong>
                                 <br />
-                                {this.props.message}                            </p>
+                                {this.props.message}
+                            </p>
                         </div>
                         
                     </div>
