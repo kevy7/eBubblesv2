@@ -22,10 +22,10 @@ class messageBox extends Component {
             //this.props.clearSelectedConvo();
             
         }
-        else if (isEmpty(nextProps.selectedConversation.selectedConversation.length) !== true){
+        /* else if (isEmpty(nextProps.selectedConversation.selectedConversation.length) !== true){
             await console.log("this object does not return empty");
-            //Since the object is not empty, redirect the user to a new route
-        }
+            
+        } */
 
     }
 

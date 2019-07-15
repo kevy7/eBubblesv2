@@ -6,12 +6,12 @@ Difference between this component and the inputMessage component?
     -inputMessage component is used to post messages into an existing conversation
     -inputFirstMessage component will be used to post the first message into a newly created conversation that did not exist before
 
-
 ***************/
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Link } from 'react-router-dom';
+import isEmpty from "is-empty";
 
 import "../../../styles/inputMessage.css";
 import { createConversation } from "../../../actions";
@@ -76,40 +76,28 @@ class inputFirstMessage extends Component {
     //Use the react lifecycle method to redirect user to a new page right after a conversation is created
     componentWillReceiveProps = async (nextProps) => {
 
-        /* await console.log(nextProps.selectedConversation.selectedConversation);
-        await console.log(this.props.selectedConversation.selectedConversation); */
-
         //When a new conversation is added to the database, the getConversations action will execute
         if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
-            //console.log(nextProps.selectedConversation);
+
             const getConvoData = {
                 authUserID: this.props.auth.userInfo.id
             }
 
             this.props.getConversations(getConvoData);
 
-            /*
-                I want to redirect the user to a user message page when a conversation is initially created
-                however, the issue is that it will try to redirect the user when you click on the new user message page
+            //since these two are different, if nextProps.selectedConvo is not empty, then redirect the user to a different page
 
+            if(isEmpty(nextProps.selectedConversation.selectedConversation) === false){
+                //if the object above is not empty, then execute the following code here
 
+                let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
 
-            */
+                nextProps.history.push(url);
+
+            }
+            
         }
     }
-
-    componentWillUpdate = (nextProps) => {
-        /*
-            Work here!!!!!!
-        */
-        /* if(nextProps.match.path === "/messages/new"){
-            console.log("our routes match");
-        }
-        else if(nextProps.match.path !== "/messages/new"){
-            console.log("our routes do not match")
-        } */
-    }
-
 
     render(){
         return (
