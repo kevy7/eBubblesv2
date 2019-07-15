@@ -5,7 +5,7 @@ import isEmpty from "is-empty";
 
 import MessageCard from './messageCard';
 import UserMessageCard from './userMessageCard';
-import InputMessage from './inputMessage';
+//import InputMessage from './inputMessage';
 
 import { getSelectedConversation } from "../../../actions";
 import { clearSelectedConvo } from "../../../actions";
@@ -54,11 +54,31 @@ class messageBox extends Component {
         let newMessages = messages.messages || [];
 
         let displayMessages = newMessages.map(message => {
-            return <MessageCard 
+
+            //Create an if statement here
+            //if senderName === the auth username then return userMessageCard instead
+            //this.props.auth.userInfo.id
+
+            if(this.props.auth.userInfo.id === message.sender){
+                return <UserMessageCard 
+                    message={message.message}
+                    senderName={message.senderName}
+                    key={message._id}
+                />
+            }
+            else {
+                return <MessageCard
+                    message={message.message}
+                    senderName={message.senderName}
+                    key={message._id}
+                />
+            }
+
+            /* return <MessageCard 
                         message={message.message}
-                        senderName="name1"
+                        senderName={message.senderName}
                         key={message._id}
-                    />
+                    /> */
         })
 
         return (

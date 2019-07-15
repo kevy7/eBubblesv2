@@ -21,7 +21,7 @@ class messageCard extends Component {
                     <div className="media-content box">
                         <div className="content">
                             <p className="userMessage">
-                                <strong>Name/UserName here</strong>
+                                <strong>{this.props.senderName}</strong>
                                 <br />
                                 {this.props.message}
                             </p>
