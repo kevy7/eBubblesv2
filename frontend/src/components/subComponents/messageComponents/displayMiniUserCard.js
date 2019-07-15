@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Route, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import MiniUserCard from "./miniUserCard";
 import { getUserProfile } from "../../../actions"
 import { getConversations } from "../../../actions";
-
-
-
 
 class displayMiniUserCard extends Component {
     //this.auth.userInfo.id this will give us the logged in user's id
@@ -17,21 +14,14 @@ class displayMiniUserCard extends Component {
             authUserID: this.props.auth.userInfo.id
         }
 
-        this.props.getUserProfile(this.props.auth.userInfo.id);
+        this.props.getUserProfile(this.props.auth.userInfo.id); //This might not be needed anymore
         this.props.getConversations(convoData);
-        
-
     }
 
 
     render(){
 
         let conversations = this.props.conversations.conversations || [];
-
-        /*
-            Think about how you're going to display each conversation
-
-        */
 
         let mapConversations = conversations.map((convo) => {
             return <MiniUserCard
@@ -45,8 +35,6 @@ class displayMiniUserCard extends Component {
         return (
             <div className="displayMiniUserCard">
                 {/* display list of messages here */}
-                
-
                 {/* Create a loop to loop through each user */}
                 {/* users */}
                 {mapConversations}

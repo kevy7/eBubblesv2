@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import "../../../styles/miniUserCard.css";
 
 class miniUserCard extends Component {
-
     render(){
-        const url = "/user/" + this.props.userID;
+        //const url = "/user/" + this.props.userID;
         const userMessageUrl = "/messages/user/" + this.props.convoID;
         
         return (
@@ -30,7 +28,6 @@ class miniUserCard extends Component {
                 </div>
                 <hr />
                 </Link>
-                
             </div>
         )
     }
