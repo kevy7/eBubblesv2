@@ -18,12 +18,12 @@ class displayMiniUserCard extends Component {
         this.props.getConversations(convoData);
     }
 
-
     render(){
 
         let conversations = this.props.conversations.conversations || [];
 
         let mapConversations = conversations.map((convo) => {
+            
             return <MiniUserCard
                         convoName="convoName"
                         key={convo._id}
@@ -31,7 +31,6 @@ class displayMiniUserCard extends Component {
                     />
         })
 
-        
         return (
             <div className="displayMiniUserCard">
                 {/* display list of messages here */}

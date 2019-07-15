@@ -21,9 +21,9 @@ class miniUserCard extends Component {
                     </div>
                     <div className="holderUserName">
                         
-                        <p>{this.props.userName}</p>
+                        <p>{this.props.convoName}</p>
                         
-                        <small>Display recent message here</small>
+                        <small id="messageDisplay">Display recent message here</small>
                     </div>
                 </div>
                 <hr />
