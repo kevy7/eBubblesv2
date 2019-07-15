@@ -39,24 +39,29 @@ class inputFirstMessage extends Component {
             They should be pushing messages to an already created conversation if it exists
 
         */
-
         const usersArray = [];
+        const usersNamesArray = [];
 
         const selectedUsers = this.props.selectUsersReducers.selectedUsers;
 
         selectedUsers.forEach(user => {
             usersArray.push(user.userID);
+            usersNamesArray.push(user.userName);
             //push each selected users id into the usersArray
         });
 
         usersArray.push(this.props.auth.userInfo.id); //Push the logged in user to the array as well
 
+        //convert usersNamesArray into a string
+        const conversationName = usersNamesArray.join(", ");
+        
         const convoData = {
            authUserID: this.props.auth.userInfo.id,
            users: usersArray,
            message: this.state.userMessage,
            authUserID: this.props.auth.userInfo.id,
-           authName: this.props.auth.userInfo.name
+           authName: this.props.auth.userInfo.name,
+           conversationName: conversationName
         }
 
         /*

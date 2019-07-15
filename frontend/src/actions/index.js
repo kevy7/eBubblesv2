@@ -558,12 +558,6 @@ export const clearSelectedConvo = () => dispatch => {
 //Create an action to POST a conversation into a database
 export const createConversation = (convoData) => dispatch => {
 
-    //We don't need to dispatch anything when posting data into our database
-    /* dispatch({
-        type: CREATE_CONVERSATION,
-        payload: convoData
-    }) */
-
     /*
         Expected data:
         {

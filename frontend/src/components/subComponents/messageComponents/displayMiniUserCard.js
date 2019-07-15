@@ -25,7 +25,7 @@ class displayMiniUserCard extends Component {
         let mapConversations = conversations.map((convo) => {
             
             return <MiniUserCard
-                        convoName="convoName"
+                        convoName={convo.conversationName}
                         key={convo._id}
                         convoID = {convo._id}
                     />

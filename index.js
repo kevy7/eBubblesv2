@@ -977,9 +977,13 @@ app.post("/api/user/:id/conversation", function(req, res){
 
     const users = req.body.users;
     const message = req.body.message;
+    const conversationName = req.body.conversationName;
+
+    //filter our auth user
 
     const convoData = {
-        timeStamp: new Date()
+        timeStamp: new Date(),
+        conversationName: conversationName
     }
 
     Conversation.create(convoData, function(err, conversation){
