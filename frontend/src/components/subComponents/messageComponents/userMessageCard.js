@@ -17,8 +17,9 @@ class userMessageCard extends Component {
                     <div className="media-content box">
                         <div className="content">
                             <p>
-                                Message Here: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                            </p>
+                                <strong>{this.props.senderName}</strong>
+                                <br />
+                                {this.props.message}                            </p>
                         </div>
                         
                     </div>
