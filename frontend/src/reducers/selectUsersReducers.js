@@ -47,8 +47,9 @@ const selectUsersReducer = (state=initialState, action) => {
         */
         //Create a function to test if your object contains the user id
 
-        const results = checkArrayObject(state.selectedUsers, action);
+        const results = checkArrayObject(state.selectedUsers, action); //checks is current state contains this user in our object
 
+        //if the user is already in the state, then just return the original state and don't add the user into the state again
         if(results === true){
             return {
                 ...state,
@@ -57,6 +58,7 @@ const selectUsersReducer = (state=initialState, action) => {
             }
         }
 
+        //else add the new user into the state object
         return {
             ...state,
             loading: false,
