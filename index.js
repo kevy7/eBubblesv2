@@ -1005,9 +1005,31 @@ app.post("/api/user/:id/conversation", function(req, res){
 
 //GET request to receive all conversations of a user
 app.get("/api/user/:id/messages", function(req, res){
+    /*
+        Use this as reference
 
+        db.collection.find({ "$and": [ 
+            { "members": { "$all": [ "some id 1", "some id 2" ] } },
+            { "members": { "$size": 2 } }
+        ]})
+
+    */
+
+    //this is our default queryString
+    let queryString = {
+        "$and": [
+            {users: req.params.id}
+        ]
+    }
+
+    //creating for test purposes
+    let queryString2 = {
+        
+    }
+
+    //get all conversations of the currently logged in user
     //get a message based on it's users
-    Conversation.find({users: req.params.id}).populate("messages").populate("users").exec(function(err, conversation){
+    Conversation.find(queryString).populate("messages").populate("users").exec(function(err, conversation){
         if(err){
             res.send(err);
         }
