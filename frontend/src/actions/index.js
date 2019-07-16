@@ -451,7 +451,7 @@ export const inputUserAction = (userData) => dispatch => {
     dispatch({
         type: LOAD_COMPONENT
     })
-    
+
     dispatch({
         type: SEARCH_USERS,
         payload: userData
@@ -491,8 +491,6 @@ export const removeSelectedUser = (user) => dispatch => {
     })
 
 }
-
-
 
 //Create an action to GET_CONVERSATIONS
 

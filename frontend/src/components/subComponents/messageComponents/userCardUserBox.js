@@ -37,6 +37,14 @@ class userCardUserBox extends Component {
         }
 
         this.props.selectUsers(userInfo);
+
+
+
+        //an ajax call needs to be made to get a selectedconversation based on the users in
+        //this.props.selectedUsersReducer.selectedUsers
+        
+
+
     }
 
     render(){

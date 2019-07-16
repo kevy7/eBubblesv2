@@ -353,35 +353,6 @@ app.post('/api/events', function(req, res){
                     res.send(event);
                 }
             })
-
-
-
-            //res.send(event);
-
-            //I don't think I need this code anymore, I already have the reference to the user who created the event
-            //To view all events created by the user, I just need to create a query
-            /* User.findById(req.body.userID, function(err, user){
-                if(err){
-                    res.send(err);
-                }
-                else {
-                    user.events.push(event);
-
-                    user.save(function(err, data){
-                        if(err){
-                            res.send(err);
-                        }
-                        else {
-                            //Okay, this works. Inside users, their events will populate and events will populate with the user's id that created the event
-                            console.log(data);
-                            res.send(event);
-                        }
-                    });
-                    
-                }
-            })   */
-
-
         }
     }); 
        
@@ -1045,7 +1016,6 @@ app.get("/api/user/:id/messages", function(req, res){
             //display list of messages within this conversation
         }
     })
-
 })
 
 //Get one conversation and all of it's messages
