@@ -5,18 +5,6 @@ const initialState = {
     selectedUsers: [] //This needs to be an array of objects
 }
 
-/*
-How to push data into an array
-
-case ADD_ITEM :
-    return { 
-        ...state,
-        arr: [...state.arr, action.newItem]
-    }
-
-
-*/
-
 //Okay, this function works and is able to test if an object will contain your action.payload.userID value
 const checkArrayObject = (userArray, action2) => {
     let result = false;

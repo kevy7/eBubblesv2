@@ -13,10 +13,6 @@ class contactChipContainer extends Component {
     render(){
         return (
             <div className="contactChipContainer">
-
-                {/* <ContactChip />
-                <ContactChip />
-                <ContactChip /> */}
                 {this.props.selectUsersReducers.selectedUsers.map(user => {
                     return <ContactChip 
                         userName={user.userName}

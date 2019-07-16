@@ -451,10 +451,7 @@ export const inputUserAction = (userData) => dispatch => {
     dispatch({
         type: LOAD_COMPONENT
     })
-
-    //console.log(userData);
-
-    //no url is needed
+    
     dispatch({
         type: SEARCH_USERS,
         payload: userData

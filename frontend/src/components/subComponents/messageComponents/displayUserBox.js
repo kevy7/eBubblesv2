@@ -27,8 +27,6 @@ class displayUserBox extends Component {
                                 userName={user.userName}
                                 userID={user._id}
                                 key={user._id}
-                                
-                                
                             />
                         )
                     })

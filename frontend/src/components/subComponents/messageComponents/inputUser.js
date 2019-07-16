@@ -54,9 +54,6 @@ class inputUser extends Component {
         }
     }
 
-
-
-
     render(){
         return (
             <div className="inputUser field">
@@ -80,8 +77,6 @@ class inputUser extends Component {
                         onChange={this.handleInputChanges} 
 
                     /> {/* As something get's type, search for a user */}
-
-
                 </div>
 
                 <DisplayUserBox />
@@ -90,10 +85,7 @@ class inputUser extends Component {
     }
 }
 
-//<input className="input" value={this.state.userName} name="userName" type="text" placeholder="User Name Here" onChange={this.handleInputChanges}/>
-
-
- const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         userProfileInfo: state.userProfileInfo
     }
