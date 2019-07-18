@@ -1023,8 +1023,13 @@ app.get("/api/user/:id/messages", function(req, res){
     }
 
     //creating for test purposes
+    //solution to problem? see below
+    //pass the users array in req.body, check if req.body is not empty and if it isn't use queryString2 instead
     let queryString2 = {
-        
+        "and": [
+            {users: {"$all": [] } },
+            {users: {"$siz": 2}} //set size equal to array.length
+        ]
     }
 
     //get all conversations of the currently logged in user
@@ -1041,11 +1046,17 @@ app.get("/api/user/:id/messages", function(req, res){
 })
 
 //Get one conversation and all of it's messages
-app.get("/api/user/:id/messages/:messageID", function(req, res){
+ app.get("/api/user/:id/messages/:messageID", function(req, res){
 
+    console.log("hello world!!");
+    console.log(req.body.users);
+    console.log(req.body.authUserID);
 
+    let queryString = {
+        _id: req.params.messageID
+    }
 
-    Conversation.find({_id: req.params.messageID}).populate("messages").exec(function(err, conversation){
+    Conversation.find(queryString).populate("messages").exec(function(err, conversation){
         if(err){
             res.send(err);
         }

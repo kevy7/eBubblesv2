@@ -16,17 +16,12 @@ class messageBox extends Component {
         if(this.props.match.params.id !== nextProps.match.params.id){
             const convoData = {
                 authUserID: this.props.auth.userInfo.id,
-                messageID: nextProps.match.params.id
+                messageID: nextProps.match.params.id,
+                users: ""
             }
             this.props.getSelectedConversation(convoData);
-            //this.props.clearSelectedConvo();
-            
+            //this.props.clearSelectedConvo();  
         }
-        /* else if (isEmpty(nextProps.selectedConversation.selectedConversation.length) !== true){
-            await console.log("this object does not return empty");
-            
-        } */
-
     }
 
     componentWillMount = async () => {
@@ -34,7 +29,8 @@ class messageBox extends Component {
 
         const convoData = {
             authUserID: this.props.auth.userInfo.id,
-            messageID: this.props.match.params.id //This is just the conversation ID
+            messageID: this.props.match.params.id, //This is just the conversation ID
+            users: ""
         }
 
         if(this.props.match.path !== "/messages/new"){

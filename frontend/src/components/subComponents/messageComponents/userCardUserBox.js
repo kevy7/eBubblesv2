@@ -6,14 +6,13 @@ import "../../../styles/userCardUserBox.css";
 
 //import actions in here
 import { selectUsers } from "../../../actions";
+import { getConversations } from "../../../actions";
 
 //convert this from a functional component to a class-based component
 class userCardUserBox extends Component {
 
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
-
-        
 
         //an action needs to be called here to push this.props.userID into your state
         //We need this as our initialstate
@@ -36,15 +35,24 @@ class userCardUserBox extends Component {
             userName: this.props.userName
         }
 
-        this.props.selectUsers(userInfo);
-
-
+        await this.props.selectUsers(userInfo);
 
         //an ajax call needs to be made to get a selectedconversation based on the users in
         //this.props.selectedUsersReducer.selectedUsers
-        
 
+        let users = await this.props.selectUsersReducers.selectedUsers || [];
+        let userIDs = [];
 
+        await users.forEach(user => {
+            userIDs.push(user.userID);
+        })
+
+        const convoData = {
+            authUserID: this.props.auth.userInfo.id,
+            users: userIDs
+        }
+
+        this.props.getConversations(convoData);
     }
 
     render(){
@@ -71,10 +79,12 @@ class userCardUserBox extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectUsersReducers: state.selectUsersReducers
+        selectUsersReducers: state.selectUsersReducers,
+        auth: state.auth
     }
 }
 
 export default withRouter(connect(mapStateToProps, {
-    selectUsers: selectUsers
+    selectUsers: selectUsers,
+    getConversations: getConversations
 })(userCardUserBox));

@@ -496,9 +496,19 @@ export const removeSelectedUser = (user) => dispatch => {
 
 export const getConversations = (convoData) => dispatch => {
 
+    /*
+
+    const parameter = {
+        params: {
+            users: convoData.users
+        }
+    }
+
+    */
+
     const url = "/api/user/" + convoData.authUserID + "/messages";
 
-    axios.get(url, convoData)
+    axios.get(url)
     .then(res => {
         dispatch({
             type: GET_CONVERSATIONS,
@@ -511,15 +521,13 @@ export const getConversations = (convoData) => dispatch => {
             payload: err
         })
     })
-
-
-
 }
 
 
 export const getSelectedConversation = (convoData) => dispatch => {
 
     const url = "/api/user/" + convoData.authUserID + "/messages/" + convoData.messageID;
+    //console.log(convoData.users);
 
     axios.get(url, convoData)
     .then(res => {

@@ -20,7 +20,6 @@ class eventsNavigation extends Component {
 
         this.props.getEvents(this.state.searchBar);
 
-
         //However, if the route is "/users", then perform the ajax call below
     }
 
