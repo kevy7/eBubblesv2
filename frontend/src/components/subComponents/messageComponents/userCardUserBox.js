@@ -38,7 +38,8 @@ class userCardUserBox extends Component {
         await this.props.selectUsers(userInfo);
 
         //an ajax call needs to be made to get a selectedconversation based on the users in
-        //this.props.selectedUsersReducer.selectedUsers
+    
+
 
         let users = await this.props.selectUsersReducers.selectedUsers || [];
         let userIDs = [];
@@ -47,12 +48,35 @@ class userCardUserBox extends Component {
             userIDs.push(user.userID);
         })
 
+        userIDs.push(this.props.auth.userInfo.id);
+
         const convoData = {
             authUserID: this.props.auth.userInfo.id,
             users: userIDs
         }
 
-        this.props.getConversations(convoData);
+        await this.props.getConversations(convoData);
+
+        /*
+        let userIDs = [];
+
+        await users.forEach(user => {
+            userIDs.push(user.userID);
+        })
+
+        const convoData = {
+            authUserID: this.props.auth.userInfo.id,
+            users: "userIDs"
+        }
+
+        await this.props.getConversations(convoData); */
+
+
+    }
+
+    componentWillUpdate = (nextProps) => {
+        //console.log()
+        //console.log(nextProps.selectUsersReducers.selectedUsers);
     }
 
     render(){

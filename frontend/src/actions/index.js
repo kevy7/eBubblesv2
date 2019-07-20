@@ -496,24 +496,33 @@ export const removeSelectedUser = (user) => dispatch => {
 
 export const getConversations = (convoData) => dispatch => {
 
-    /*
-
     const parameter = {
         params: {
             users: convoData.users
         }
     }
 
-    */
-
     const url = "/api/user/" + convoData.authUserID + "/messages";
 
-    axios.get(url)
+    axios.get(url, parameter)
     .then(res => {
-        dispatch({
-            type: GET_CONVERSATIONS,
-            payload: res.data
-        })
+
+        if(parameter.params.users == undefined){
+            console.log("params is undefined");
+            //if users is undefined, then we should dispatch GET_CONVERSATIONS to get all conversations of a user instead
+            dispatch({
+                type: GET_CONVERSATIONS,
+                payload: res.data
+            })
+        }
+        else {
+            console.log("params is defined");
+            //Else, if users is defined and there is something in the array, dispatch a GET_SELECTED_CONVERSATION instead
+            /* dispatch({
+                type: GET_SELECTED_CONVERSATION,
+                payload: res.data 
+            }) */
+        }
     })
     .catch(err => {
         dispatch({

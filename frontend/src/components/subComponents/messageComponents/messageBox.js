@@ -20,7 +20,6 @@ class messageBox extends Component {
                 users: ""
             }
             this.props.getSelectedConversation(convoData);
-            //this.props.clearSelectedConvo();  
         }
     }
 
