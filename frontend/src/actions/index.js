@@ -22,6 +22,7 @@ import { EDIT_MESSAGE } from "./types";
 import { GET_CONVERSATIONS } from "./types";
 import { GET_SELECTED_CONVERSATION } from "./types";
 import { CLEAR_SELECTED_CONVERSATION } from "./types";
+import { GET_NEW_SELECTED_CONVO } from "./types";
 
 
 
@@ -518,10 +519,10 @@ export const getConversations = (convoData) => dispatch => {
         else {
             console.log("params is defined");
             //Else, if users is defined and there is something in the array, dispatch a GET_SELECTED_CONVERSATION instead
-            /* dispatch({
+            dispatch({
                 type: GET_SELECTED_CONVERSATION,
                 payload: res.data 
-            }) */
+            })
         }
     })
     .catch(err => {
@@ -540,19 +541,17 @@ export const getSelectedConversation = (convoData) => dispatch => {
 
     axios.get(url, convoData)
     .then(res => {
-        dispatch({
+        return dispatch({
             type: GET_SELECTED_CONVERSATION,
             payload: res.data
         })
     })
     .catch(err =>{
-        dispatch({
+        return dispatch({
             type: SET_CURRENT_ERROR,
             payload: err
         })
     })
-
-
 }
 
 export const clearSelectedConvo = () => dispatch => {
@@ -587,7 +586,7 @@ export const createConversation = (convoData) => dispatch => {
     axios.post(url, convoData)
     .then(res => {
         dispatch({
-            type: GET_SELECTED_CONVERSATION,
+            type: GET_NEW_SELECTED_CONVO, //GET_SELECTED_CONVERSATION //replace this with GET_NEW_CONVO
             payload: res.data
         })
     })

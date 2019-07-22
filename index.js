@@ -275,7 +275,7 @@ app.post("/api/login", function(req, res){
 });
 
 //Get Request, to get our events
-app.get('/api/events/', verifyToken, function(req, res){
+app.get('/api/events/', verifyToken, async function(req, res){
 
     //Look up querystrings, to determine how to filter your event searches based on a condition set by a user
     //console.log(req.query.eventName);
@@ -1015,6 +1015,10 @@ app.get("/api/user/:id/messages", function(req, res){
 
     */
 
+    
+
+    console.log(req.query.users); //this will output our returned array for us
+
     //this is our default queryString
     let queryString = {
         "$and": [
@@ -1025,12 +1029,12 @@ app.get("/api/user/:id/messages", function(req, res){
     //creating for test purposes
     //solution to problem? see below
     //pass the users array in req.body, check if req.body is not empty and if it isn't use queryString2 instead
-    let queryString2 = {
+    /* let queryString2 = {
         "and": [
             {users: {"$all": [] } },
             {users: {"$siz": 2}} //set size equal to array.length
         ]
-    }
+    } */
 
     //get all conversations of the currently logged in user
     //get a message based on it's users
@@ -1045,12 +1049,14 @@ app.get("/api/user/:id/messages", function(req, res){
     })
 })
 
-//Get one conversation and all of it's messages
+//Get one conversation and all of it's messages based on users passed to us in queryString
+//use req.query to retreive a query thaa's being passed down from the frontend
+
+//app.get("/api/user/:id/messages")
+
+//Get one conversation and all of it's messages based on a messageID
  app.get("/api/user/:id/messages/:messageID", function(req, res){
 
-    console.log("hello world!!");
-    console.log(req.body.users);
-    console.log(req.body.authUserID);
 
     let queryString = {
         _id: req.params.messageID

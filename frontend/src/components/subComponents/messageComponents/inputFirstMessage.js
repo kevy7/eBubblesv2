@@ -74,12 +74,16 @@ class inputFirstMessage extends Component {
 
             Find a way in the backend to search for conversations, that exactly matches the list of users given
         */
-        await this.props.createConversation(convoData);
+        await this.props.createConversation(convoData)
+        //console.log(this.props.selectedConversation.selectedConversation);
+
+        
         
     }
 
     //Use the react lifecycle method to redirect user to a new page right after a conversation is created
     componentWillReceiveProps = async (nextProps) => {
+
 
         //When a new conversation is added to the database, the getConversations action will execute
         if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
@@ -95,9 +99,14 @@ class inputFirstMessage extends Component {
             if(isEmpty(nextProps.selectedConversation.selectedConversation) === false){
                 //if the object above is not empty, then execute the following code here
 
+                console.log("redirecting the user now...");
                 let url = "/messages/user/" + nextProps.selectedConversation.selectedConversation._id;
 
                 nextProps.history.push(url);
+
+                //This works and will redirect the user when a conversation is selected
+                //However, when searching for a conversation based on users, this will redirect us to that conversation when we don't want it to
+                //We only want to be redirected to a conversation that was newly created in the database
 
             }
             

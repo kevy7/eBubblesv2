@@ -1,9 +1,14 @@
-import { GET_SELECTED_CONVERSATION, LOAD_COMPONENT, CLEAR_SELECTED_CONVERSATION } from "../actions/types";
+import { 
+    GET_SELECTED_CONVERSATION, 
+    GET_NEW_SELECTED_CONVO, 
+    LOAD_COMPONENT, 
+    CLEAR_SELECTED_CONVERSATION } from "../actions/types";
 
 const initialState = {
     selectedConversation: {},
     loading: false,
-    error: null
+    error: null,
+    isNewConvo: false
 }
 
 const selectedConvoReducer = (state=initialState, action) => {
@@ -12,14 +17,25 @@ const selectedConvoReducer = (state=initialState, action) => {
             ...state,
             selectedConversation: action.payload,
             loading: false,
-            error: null
+            error: null,
+            isNewConvo: false
+        }
+    }
+    else if (action.type === GET_NEW_SELECTED_CONVO){
+        return {
+            ...state,
+            selectedConversation: action.payload,
+            loading: false,
+            error: null,
+            isNewConvo: true
         }
     }
     else if (action.type === LOAD_COMPONENT){
         return {
             ...state,
             loading: true,
-            error: null
+            error: null,
+            isNewConvo: false
         }
     }
     else if (action.type === CLEAR_SELECTED_CONVERSATION){
@@ -27,7 +43,8 @@ const selectedConvoReducer = (state=initialState, action) => {
             ...state,
             selectedConversation: {},
             loading: false,
-            error: null
+            error: null,
+            isNewConvo: false
         }
     }
     else {

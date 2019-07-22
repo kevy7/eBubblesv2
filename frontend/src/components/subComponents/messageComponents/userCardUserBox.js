@@ -41,7 +41,7 @@ class userCardUserBox extends Component {
     
 
 
-        let users = await this.props.selectUsersReducers.selectedUsers || [];
+        /* let users = await this.props.selectUsersReducers.selectedUsers || [];
         let userIDs = [];
 
         await users.forEach(user => {
@@ -55,22 +55,7 @@ class userCardUserBox extends Component {
             users: userIDs
         }
 
-        await this.props.getConversations(convoData);
-
-        /*
-        let userIDs = [];
-
-        await users.forEach(user => {
-            userIDs.push(user.userID);
-        })
-
-        const convoData = {
-            authUserID: this.props.auth.userInfo.id,
-            users: "userIDs"
-        }
-
         await this.props.getConversations(convoData); */
-
 
     }
 
