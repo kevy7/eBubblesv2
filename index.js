@@ -1035,23 +1035,6 @@ app.get("/api/user/:id/messages", async function(req, res){
         }
     }
 
-    console.log(queryString);
-    
-    /* console.log(queryString);
-    console.log(req.query.users);
-    console.log(req.query.users.length); */
-    
-
-    //creating for test purposes
-    //solution to problem? see below
-    //pass the users array in req.body, check if req.body is not empty and if it isn't use queryString2 instead
-    /* let queryString2 = {
-        "and": [
-            {users: {"$all": [] } },
-            {users: {"$siz": 2}} //set size equal to array.length
-        ]
-    } */
-
     //get all conversations of the currently logged in user
     //get a message based on it's users
     Conversation.find(queryString).populate("messages").populate("users").exec(function(err, conversation){
