@@ -39,9 +39,7 @@ class userCardUserBox extends Component {
 
         //an ajax call needs to be made to get a selectedconversation based on the users in
     
-
-
-        /* let users = await this.props.selectUsersReducers.selectedUsers || [];
+        let users = await this.props.selectUsersReducers.selectedUsers || [];
         let userIDs = [];
 
         await users.forEach(user => {
@@ -55,7 +53,7 @@ class userCardUserBox extends Component {
             users: userIDs
         }
 
-        await this.props.getConversations(convoData); */
+        await this.props.getConversations(convoData); //get conversations is being executed twice and i'm not sure why
 
     }
 

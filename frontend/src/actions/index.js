@@ -496,6 +496,7 @@ export const removeSelectedUser = (user) => dispatch => {
 //Create an action to GET_CONVERSATIONS
 
 export const getConversations = (convoData) => dispatch => {
+    //console.log(convoData.users);
 
     const parameter = {
         params: {
@@ -539,6 +540,8 @@ export const getSelectedConversation = (convoData) => dispatch => {
     const url = "/api/user/" + convoData.authUserID + "/messages/" + convoData.messageID;
     //console.log(convoData.users);
 
+    //GET_NEW_SELECTED_CONVO user this when a new conversation is created
+
     axios.get(url, convoData)
     .then(res => {
         return dispatch({
@@ -562,9 +565,6 @@ export const clearSelectedConvo = () => dispatch => {
     })
 
 }
-
-
-
 
 //Create an action to POST a conversation into a database
 export const createConversation = (convoData) => dispatch => {

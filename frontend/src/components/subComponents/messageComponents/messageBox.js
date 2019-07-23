@@ -13,12 +13,14 @@ import { clearSelectedConvo } from "../../../actions";
 class messageBox extends Component {
 
     componentWillUpdate = async (nextProps) => {
+
         if(this.props.match.params.id !== nextProps.match.params.id){
             const convoData = {
                 authUserID: this.props.auth.userInfo.id,
                 messageID: nextProps.match.params.id,
                 users: ""
             }
+
             this.props.getSelectedConversation(convoData);
         }
     }
@@ -37,9 +39,8 @@ class messageBox extends Component {
         }
         else{
             await this.props.clearSelectedConvo();
-            //console.log(await this.props.selectedConversation.selectedConversation);
         }
-        
+
         //this.props.getSelectedConversation(convoData);
 
     }
@@ -91,5 +92,5 @@ const mapStateToProps = (state) => {
 
 export default withRouter(connect(mapStateToProps, {
     getSelectedConversation: getSelectedConversation,
-    clearSelectedConvo: clearSelectedConvo
+    clearSelectedConvo: clearSelectedConvo,
 })(messageBox));

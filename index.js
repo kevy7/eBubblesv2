@@ -1004,27 +1004,41 @@ app.post("/api/user/:id/conversation", function(req, res){
 
 
 //GET request to receive all conversations of a user
-app.get("/api/user/:id/messages", function(req, res){
-    /*
-        Use this as reference
+app.get("/api/user/:id/messages", async function(req, res){
 
-        db.collection.find({ "$and": [ 
-            { "members": { "$all": [ "some id 1", "some id 2" ] } },
-            { "members": { "$size": 2 } }
-        ]})
+    //console.log(req.query.users);
 
-    */
-
-    
-
-    console.log(req.query.users); //this will output our returned array for us
-
-    //this is our default queryString
     let queryString = {
         "$and": [
             {users: req.params.id}
         ]
     }
+
+    if(req.query.users){
+        queryString = {
+            "$and": [
+                {users: {"$all": req.query.users} },
+                {users: {"$size": req.query.users.length || 0}} 
+            ]
+        }
+    }
+    else if(req.query.users == undefined){
+        console.log("\n");
+        console.log("this is equal to undefined");
+
+        queryString = {
+            "$and": [
+                {users: req.params.id}
+            ]
+        }
+    }
+
+    console.log(queryString);
+    
+    /* console.log(queryString);
+    console.log(req.query.users);
+    console.log(req.query.users.length); */
+    
 
     //creating for test purposes
     //solution to problem? see below
@@ -1045,6 +1059,8 @@ app.get("/api/user/:id/messages", function(req, res){
         else {
             res.send(conversation);
             //display list of messages within this conversation
+            console.log("\n");
+            console.log(conversation);
         }
     })
 })
