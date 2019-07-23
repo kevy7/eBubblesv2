@@ -946,6 +946,8 @@ app.post("/api/user/:id/connections", function(req, res){
 //if no conversation exists between users, then create a conversation
 app.post("/api/user/:id/conversation", function(req, res){
 
+    //Work on finding if a conversation already exists between two users before creating a whole new conversation in the backend
+
     const users = req.body.users;
     const message = req.body.message;
     const conversationName = req.body.conversationName;
