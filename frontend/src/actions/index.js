@@ -493,6 +493,17 @@ export const removeSelectedUser = (user) => dispatch => {
 
 }
 
+//remove all selected users
+export const removeAllSelectedUsers = () => dispatch => {
+    dispatch({
+        type: LOAD_COMPONENT
+    })
+
+    dispatch({
+        type: REMOVE_ALL_USERS
+    })
+}
+
 //Create an action to GET_CONVERSATIONS
 
 export const getConversations = (convoData) => dispatch => {

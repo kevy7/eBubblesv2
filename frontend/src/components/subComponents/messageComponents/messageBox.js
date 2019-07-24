@@ -9,6 +9,7 @@ import UserMessageCard from './userMessageCard';
 
 import { getSelectedConversation } from "../../../actions";
 import { clearSelectedConvo } from "../../../actions";
+import { removeAllSelectedUsers } from "../../../actions";
 
 class messageBox extends Component {
 
@@ -39,6 +40,7 @@ class messageBox extends Component {
         }
         else{
             await this.props.clearSelectedConvo();
+            await this.props.removeAllSelectedUsers();
         }
 
         //this.props.getSelectedConversation(convoData);
@@ -93,4 +95,5 @@ const mapStateToProps = (state) => {
 export default withRouter(connect(mapStateToProps, {
     getSelectedConversation: getSelectedConversation,
     clearSelectedConvo: clearSelectedConvo,
+    removeAllSelectedUsers: removeAllSelectedUsers
 })(messageBox));
