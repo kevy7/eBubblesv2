@@ -70,7 +70,6 @@ const selectUsersReducer = (state=initialState, action) => {
     else if (action.type === REMOVE_USER){
 
         if(checkArrayObject(state.selectedUsers, action) === true){
-            console.log("this is true")
             return {
                 ...state,
                 loading: false,

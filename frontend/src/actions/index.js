@@ -510,7 +510,6 @@ export const getConversations = (convoData) => dispatch => {
     .then(res => {
 
         if(parameter.params.users == undefined){
-            console.log("params is undefined");
             //if users is undefined, then we should dispatch GET_CONVERSATIONS to get all conversations of a user instead
             dispatch({
                 type: GET_CONVERSATIONS,
@@ -518,7 +517,6 @@ export const getConversations = (convoData) => dispatch => {
             })
         }
         else {
-            console.log("params is defined");
             //Else, if users is defined and there is something in the array, dispatch a GET_SELECTED_CONVERSATION instead
             dispatch({
                 type: GET_SELECTED_CONVERSATION,

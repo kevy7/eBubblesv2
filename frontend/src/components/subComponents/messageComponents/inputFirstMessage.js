@@ -86,7 +86,6 @@ class inputFirstMessage extends Component {
         //When a new conversation is added to the database, the getConversations action will execute
         if(nextProps.selectedConversation.selectedConversation !== this.props.selectedConversation.selectedConversation){
 
-            console.log("this is being executed when selecting a new user");
             const getConvoData = {
                 authUserID: this.props.auth.userInfo.id
             }

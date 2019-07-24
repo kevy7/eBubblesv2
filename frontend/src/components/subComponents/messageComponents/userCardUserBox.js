@@ -38,28 +38,8 @@ class userCardUserBox extends Component {
         await this.props.selectUsers(userInfo);
 
         //an ajax call needs to be made to get a selectedconversation based on the users in
-    
-        let users = await this.props.selectUsersReducers.selectedUsers || [];
-        let userIDs = [];
-
-        await users.forEach(user => {
-            userIDs.push(user.userID);
-        })
-
-        userIDs.push(this.props.auth.userInfo.id);
-
-        const convoData = {
-            authUserID: this.props.auth.userInfo.id,
-            users: userIDs
-        }
-
-        await this.props.getConversations(convoData); //get conversations is being executed twice and i'm not sure why
-
-    }
-
-    componentWillUpdate = (nextProps) => {
-        //console.log()
-        //console.log(nextProps.selectUsersReducers.selectedUsers);
+        //Check the contactChipContainer, contactChipContainer will be making an api call to get conversations based on matched array of users
+        
     }
 
     render(){

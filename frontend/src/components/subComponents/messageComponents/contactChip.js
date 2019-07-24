@@ -4,10 +4,11 @@ import { withRouter, Route } from 'react-router-dom';
 
 //import actions below here
 import { removeSelectedUser } from "../../../actions";
+import { getConversations } from "../../../actions";
 
 class contactChip extends Component {
 
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
 
 
@@ -16,7 +17,7 @@ class contactChip extends Component {
             userName: this.props.userName
         }
 
-        this.props.removeSelectedUser(userInfo);
+        await this.props.removeSelectedUser(userInfo);
         
     }
 
@@ -33,10 +34,12 @@ class contactChip extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectUsersReducers: state.selectUsersReducers
+        selectUsersReducers: state.selectUsersReducers,
+        auth: state.auth
     }
 }
 
 export default withRouter(connect(mapStateToProps, {
-    removeSelectedUser: removeSelectedUser
+    removeSelectedUser: removeSelectedUser,
+    getConversations: getConversations
 })(contactChip));
