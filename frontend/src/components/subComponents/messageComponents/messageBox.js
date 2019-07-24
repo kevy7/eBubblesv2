@@ -27,7 +27,6 @@ class messageBox extends Component {
     }
 
     componentWillMount = async () => {
-        //this.props.getSelectedConversation
 
         const convoData = {
             authUserID: this.props.auth.userInfo.id,
@@ -42,8 +41,6 @@ class messageBox extends Component {
             await this.props.clearSelectedConvo();
             await this.props.removeAllSelectedUsers();
         }
-
-        //this.props.getSelectedConversation(convoData);
 
     }
 
