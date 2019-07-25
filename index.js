@@ -950,8 +950,8 @@ app.post("/api/user/:id/conversation", function(req, res){
     const message = req.body.message;
     const conversationName = req.body.conversationName;
     const convoData = {
-        timeStamp: new Date(),
-        conversationName: conversationName
+        timeStamp: new Date()
+        //conversationName: conversationName
     }
 
     //before creating a conversation check if a conversation exists between the users

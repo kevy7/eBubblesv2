@@ -53,7 +53,7 @@ class inputFirstMessage extends Component {
         usersArray.push(this.props.auth.userInfo.id); //Push the logged in user to the array as well
 
         //convert usersNamesArray into a string
-        const conversationName = usersNamesArray.join(", ");
+        //const conversationName = usersNamesArray.join(", ");
         
         const convoData = {
            authUserID: this.props.auth.userInfo.id,
@@ -61,7 +61,7 @@ class inputFirstMessage extends Component {
            message: this.state.userMessage,
            authUserID: this.props.auth.userInfo.id,
            authName: this.props.auth.userInfo.name,
-           conversationName: conversationName
+           //conversationName: conversationName
         }
 
         /*
