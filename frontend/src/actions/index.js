@@ -24,8 +24,6 @@ import { GET_SELECTED_CONVERSATION } from "./types";
 import { CLEAR_SELECTED_CONVERSATION } from "./types";
 import { GET_NEW_SELECTED_CONVO } from "./types";
 
-
-
 //const nothing = null;
 
 export const registerUserAction = (userInfo, history) => dispatch => {
@@ -610,11 +608,40 @@ export const createConversation = (convoData) => dispatch => {
 
 }
 
+//push message into an existing conversation between usrs
+//app.post("/api/user/:id/messages/:messageID", function(req, res){
+
 export const postMessage = (messageData) => dispatch => {
-    dispatch({
-        type: POST_MESSAGE,
-        payload: messageData
+
+    /*
+        Data to pass down via our post message request
+
+        authUserID: messageData.authUserID
+        messageID: messageData.messageID
+
+        message: req.body.message,
+        sender: req.params.id, //same as authUserID
+        senderName: req.body.authName,
+        timeStamp: new Date()
+
+    */
+
+    const url = "/api/user/" + messageData.authUserID + "/messages/" + messageData.messageID;
+
+    axios.post(url, messageData)
+    .then(res => {
+        dispatch({
+            type: POST_MESSAGE,
+            payload: res.data //We want to return an updated conversation
+        })
     })
+    .catch(err => {
+        dispatch({
+            type: SET_CURRENT_ERROR,
+            payload: err
+        })
+    })
+
 }
 
 

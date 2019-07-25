@@ -11,7 +11,6 @@ class contactChipContainer extends Component {
 
         //as the selected users change, get a selected conversation based on selected match of users within an array
         if(this.props.selectUsersReducers.selectedUsers !== nextProps.selectUsersReducers.selectedUsers){
-            console.log("this code is being executed");
 
             let users = await nextProps.selectUsersReducers.selectedUsers || [];
             let userIDs = [];

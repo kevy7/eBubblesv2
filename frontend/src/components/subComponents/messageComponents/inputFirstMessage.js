@@ -75,8 +75,21 @@ class inputFirstMessage extends Component {
             Find a way in the backend to search for conversations, that exactly matches the list of users given
         */
 
-        await this.props.createConversation(convoData)
-        //console.log(this.props.selectedConversation.selectedConversation);
+        //if there is a conversation between users, then just send a message to the existing conversation
+        //if no conversation is being returned and a user is selected, then create a new conversation
+        if(this.props.selectedConversation.selectedConversation == 0 && this.props.selectUsersReducers.selectedUsers != 0){
+            //await this.props.createConversation(convoData)
+            console.log("conversation does not exist for selected user");
+        }
+        //A conversation already exists for the selected users or, no users are being selected
+        else{
+            console.log("A conversation for this user(s) exists");
+            //if a conversation exists and a user is selected, just push the current message into the selected conversation
+            if(this.props.selectUsersReducers.selectedUsers != 0){
+                console.log("a user was selected");
+                //Create an action to make a post request to push message into a conversation
+            }
+        }
 
     }
 

@@ -1022,12 +1022,8 @@ app.post("/api/user/:id/conversation", function(req, res){
             else {
                 res.status(400).json({error: "You already have a conversation with this user"});
             }
-
         }
-
     })
-
-
 })
 
 
@@ -1109,6 +1105,7 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
             
             //console.log(message._id);
             //Conversation.findById
+            //req.params.messageID is the id of the conversation, not the id of a specific message
 
             Conversation.findById({_id: req.params.messageID}, function(err, convo){
                 if(err){
@@ -1122,7 +1119,7 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
                             res.send(err);
                         }
                         else {
-                            res.send(data);
+                            res.send(data); //This should return an updated conversation
                         }
                     }) 
                 }
