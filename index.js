@@ -946,69 +946,93 @@ app.post("/api/user/:id/connections", function(req, res){
 //if no conversation exists between users, then create a conversation
 app.post("/api/user/:id/conversation", function(req, res){
 
-    //Work on finding if a conversation already exists between two users before creating a whole new conversation in the backend
-
-    const users = req.body.users;
+    const users = req.body.users; //contains array of all users that are in the conversation
     const message = req.body.message;
     const conversationName = req.body.conversationName;
-
-    //filter our auth user
-
     const convoData = {
         timeStamp: new Date(),
         conversationName: conversationName
     }
 
-    Conversation.create(convoData, function(err, conversation){
+    //before creating a conversation check if a conversation exists between the users
+
+    //create a queryString
+    const queryString = {
+        "$and": [
+            {users: {"$all": users}},
+            {users: {"$size": users.length || 0}}
+        ]
+    }
+
+    Conversation.find(queryString, function(err, existingConversation){ 
+
         if(err){
             res.send(err);
         }
         else {
+            //console.log(existingConversation.length);
+            //If no conversation doesn't exist, then create a new one
+            if(existingConversation.length == 0){
 
-            users.forEach(user => {
-                //for each user, push them into the newly created conversation
-                conversation.users.push(user); //Each user will be passed in to the conversation collection
-            })
-            
-            //Push the very first message to this conversation here
-            //We have to create the message first and then push it's id into the conversation
-            
-            const messageData = {
-                message: req.body.message,
-                sender: req.body.authUserID,
-                senderName: req.body.authName,
-                timeStamp: new Date()
+                Conversation.create(convoData, function(err, conversation){
+                    if(err){
+                        res.send(err);
+                    }
+                    else {
+
+                        users.forEach(user => {
+                            //for each user, push them into the newly created conversation
+                            conversation.users.push(user); //Each user will be passed in to the conversation collection
+                        })
+                        
+                        //Push the very first message to this conversation here
+                        //We have to create the message first and then push it's id into the conversation
+                        
+                        const messageData = {
+                            message: req.body.message,
+                            sender: req.body.authUserID,
+                            senderName: req.body.authName,
+                            timeStamp: new Date()
+                        }
+
+                        Message.create(messageData, function(err, message){
+                            if(err){
+                                res.send(err);
+                            }
+                            else {
+                                //push message id to conversation in here
+                                conversation.messages.push(message._id);
+
+                                conversation.save(function(err, newConvo){
+                                    if(err){
+                                        res.send(err);
+                                    }
+                                    else {
+                                        conversation.populate('users').populate('messages', function(err, populatedConversation){
+                                            res.send(populatedConversation);
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+            //if a conversation does exists, then return an error
+            else {
+                res.status(400).json({error: "You already have a conversation with this user"});
             }
 
-            Message.create(messageData, function(err, message){
-                if(err){
-                    res.send(err);
-                }
-                else {
-                    //push message id to conversation in here
-                    conversation.messages.push(message._id);
-
-                    conversation.save(function(err, newConvo){
-                        if(err){
-                            res.send(err);
-                        }
-                        else {
-                            conversation.populate('users').populate('messages', function(err, populatedConversation){
-                                res.send(populatedConversation);
-                            })
-                        }
-                    })
-                }
-            })
         }
+
     })
+
+
 })
 
 
 //GET request to receive all conversations of a user
 app.get("/api/user/:id/messages", async function(req, res){
-
-    //console.log(req.query.users);
 
     let queryString = {
         "$and": [
@@ -1025,9 +1049,6 @@ app.get("/api/user/:id/messages", async function(req, res){
         }
     }
     else if(req.query.users == undefined){
-        console.log("\n");
-        console.log("this is equal to undefined");
-
         queryString = {
             "$and": [
                 {users: req.params.id}
@@ -1035,25 +1056,15 @@ app.get("/api/user/:id/messages", async function(req, res){
         }
     }
 
-    //get all conversations of the currently logged in user
-    //get a message based on it's users
     Conversation.find(queryString).populate("messages").populate("users").exec(function(err, conversation){
         if(err){
             res.send(err);
         }
         else {
             res.send(conversation);
-            //display list of messages within this conversation
-            console.log("\n");
-            console.log(conversation);
         }
     })
 })
-
-//Get one conversation and all of it's messages based on users passed to us in queryString
-//use req.query to retreive a query thaa's being passed down from the frontend
-
-//app.get("/api/user/:id/messages")
 
 //Get one conversation and all of it's messages based on a messageID
  app.get("/api/user/:id/messages/:messageID", function(req, res){
