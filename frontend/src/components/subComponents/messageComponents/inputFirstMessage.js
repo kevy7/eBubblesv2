@@ -16,6 +16,7 @@ import isEmpty from "is-empty";
 import "../../../styles/inputMessage.css";
 import { createConversation } from "../../../actions";
 import { getConversations } from "../../../actions";
+import { postMessage } from "../../../actions";
 
 class inputFirstMessage extends Component {
 
@@ -32,13 +33,6 @@ class inputFirstMessage extends Component {
 
     sendMessage = async (e) => {
         e.preventDefault();
-        /*
-            Issue with this code:
-
-            We cannot create a new conversation if there is already a conversation created for these users
-            They should be pushing messages to an already created conversation if it exists
-
-        */
         const usersArray = [];
         const usersNamesArray = [];
 
@@ -64,17 +58,6 @@ class inputFirstMessage extends Component {
            //conversationName: conversationName
         }
 
-        /*
-            What if I do this. Compare the usersArray with this.props.selectedConversation.users
-            if both of these array matches and have the same users and amounts, then do not initiate the
-            createConversation action, instead initiate a different action called pushMessage
-
-            issue: every time a user is selected for a new conversation, initiate an action that wil return a conversation that contains
-            those users in it's conversation.users array
-
-            Find a way in the backend to search for conversations, that exactly matches the list of users given
-        */
-
         //if there is a conversation between users, then just send a message to the existing conversation
         //if no conversation is being returned and a user is selected, then create a new conversation
         if(this.props.selectedConversation.selectedConversation == 0 && this.props.selectUsersReducers.selectedUsers != 0){
@@ -82,12 +65,17 @@ class inputFirstMessage extends Component {
             console.log("conversation does not exist for selected user");
         }
         //A conversation already exists for the selected users or, no users are being selected
-        else{
-            console.log("A conversation for this user(s) exists");
+        else {
             //if a conversation exists and a user is selected, just push the current message into the selected conversation
             if(this.props.selectUsersReducers.selectedUsers != 0){
-                console.log("a user was selected");
                 //Create an action to make a post request to push message into a conversation
+                const messageData = {
+                    authUserID: this.props.auth.userInfo.id,
+                    messageID: this.props.selectedConversation.selectedConversation[0]._id,
+                    message: this.state.userMessage,
+                    authName: this.props.auth.userInfo.name
+                }
+                this.props.postMessage(messageData);
             }
         }
 
@@ -157,5 +145,6 @@ const mapStateToProps = (state) => {
 
 export default withRouter(connect(mapStateToProps, {
     createConversation: createConversation,
-    getConversations: getConversations
+    getConversations: getConversations,
+    postMessage: postMessage
 })(inputFirstMessage));

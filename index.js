@@ -1102,9 +1102,6 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
             res.send(err);
         }
         else {
-            
-            //console.log(message._id);
-            //Conversation.findById
             //req.params.messageID is the id of the conversation, not the id of a specific message
 
             Conversation.findById({_id: req.params.messageID}, function(err, convo){
@@ -1119,7 +1116,15 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
                             res.send(err);
                         }
                         else {
-                            res.send(data); //This should return an updated conversation
+                            data.populate("messages", function(err, populatedConversation){
+                                if(err){
+                                    res.send(err);
+                                }
+                                else{
+                                    //console.log(populatedConversation);
+                                    res.send(populatedConversation);
+                                }
+                            })
                         }
                     }) 
                 }
