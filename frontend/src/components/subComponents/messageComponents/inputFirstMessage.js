@@ -28,7 +28,6 @@ class inputFirstMessage extends Component {
         //e.preventDefault();
 
         await this.setState({[e.target.name]: e.target.value});
-        //console.log(this.state.userMessage)
     }
 
     sendMessage = async (e) => {

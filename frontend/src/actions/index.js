@@ -609,8 +609,6 @@ export const createConversation = (convoData) => dispatch => {
 }
 
 //push message into an existing conversation between usrs
-//app.post("/api/user/:id/messages/:messageID", function(req, res){
-
 export const postMessage = (messageData) => dispatch => {
 
     /*
