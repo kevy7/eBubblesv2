@@ -3,7 +3,8 @@ import {
     GET_NEW_SELECTED_CONVO, 
     LOAD_COMPONENT, 
     CLEAR_SELECTED_CONVERSATION,
-    POST_MESSAGE } from "../actions/types";
+    POST_MESSAGE,
+    POST_NEW_MESSAGE } from "../actions/types";
 
 const initialState = {
     selectedConversation: {},
@@ -31,13 +32,22 @@ const selectedConvoReducer = (state=initialState, action) => {
             isNewConvo: true
         }
     }
-    else if(action.type === POST_MESSAGE){
+    else if(action.type === POST_NEW_MESSAGE){
         return {
             ...state,
             selectedConversation: action.payload,
             loading: false,
             error: null,
             isNewConvo: true 
+        }
+    }
+    else if(action.type === POST_MESSAGE){
+        return {
+            ...state,
+            selectedConversation: action.payload,
+            loading: false,
+            error: null,
+            isNewConvo: false
         }
     }
     else if (action.type === LOAD_COMPONENT){
