@@ -16,7 +16,7 @@ import isEmpty from "is-empty";
 import "../../../styles/inputMessage.css";
 import { createConversation } from "../../../actions";
 import { getConversations } from "../../../actions";
-import { postMessage } from "../../../actions";
+import { postNewMessage } from "../../../actions";
 
 class inputFirstMessage extends Component {
 
@@ -74,7 +74,7 @@ class inputFirstMessage extends Component {
                     message: this.state.userMessage,
                     authName: this.props.auth.userInfo.name
                 }
-                this.props.postMessage(messageData);
+                this.props.postNewMessage(messageData);
             }
         }
 
@@ -145,5 +145,5 @@ const mapStateToProps = (state) => {
 export default withRouter(connect(mapStateToProps, {
     createConversation: createConversation,
     getConversations: getConversations,
-    postMessage: postMessage
+    postNewMessage: postNewMessage
 })(inputFirstMessage));

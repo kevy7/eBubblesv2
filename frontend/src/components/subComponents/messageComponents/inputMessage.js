@@ -44,7 +44,6 @@ class inputMessage extends Component {
 
     }
 
-
     render(){
         return (
             <div className="inputMessage">
