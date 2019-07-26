@@ -18,6 +18,7 @@ import { REMOVE_USER } from "./types";
 import { REMOVE_ALL_USERS } from "./types";
 import { CREATE_CONVERSATION } from "./types";
 import { POST_MESSAGE } from "./types";
+import { POST_NEW_MESSAGE } from "./types";
 import { EDIT_MESSAGE } from "./types";
 import { GET_CONVERSATIONS } from "./types";
 import { GET_SELECTED_CONVERSATION } from "./types";
@@ -640,6 +641,23 @@ export const postMessage = (messageData) => dispatch => {
         })
     })
 
+}
+
+export const postNewMessage = (messageData) => dispatch => {
+    const url = "/api/user/" + messageData.authUserID + "/messages/" + messageData.messageID;
+    axios.post(url, messageData)
+    .then(res => {
+        dispatch({
+            type: POST_NEW_MESSAGE,
+            payload: res.data //We want to return an updated conversation
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: SET_CURRENT_ERROR,
+            payload: err
+        })
+    })
 }
 
 
