@@ -35,12 +35,8 @@ class inputMessage extends Component {
             authName: this.props.auth.userInfo.name
         }
 
+        this.props.postMessage(messageData);
         //if I post a message, it will redirect the user to a new page and we don't want that
-
-
-
-        //If a conversation does exist for these users, then the send button shouldn't be creating another conversation
-        alert("Alert, you're clicking on a different button");
 
     }
 

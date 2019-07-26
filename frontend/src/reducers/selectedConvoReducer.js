@@ -35,7 +35,7 @@ const selectedConvoReducer = (state=initialState, action) => {
     else if(action.type === POST_NEW_MESSAGE){
         return {
             ...state,
-            selectedConversation: action.payload,
+            selectedConversation: action.payload, //Not sure if this needs to be within an array as well
             loading: false,
             error: null,
             isNewConvo: true 
@@ -44,7 +44,7 @@ const selectedConvoReducer = (state=initialState, action) => {
     else if(action.type === POST_MESSAGE){
         return {
             ...state,
-            selectedConversation: action.payload,
+            selectedConversation: [action.payload],
             loading: false,
             error: null,
             isNewConvo: false
