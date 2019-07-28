@@ -23,12 +23,25 @@ class displayMiniUserCard extends Component {
         let conversations = this.props.conversations.conversations || [];
 
         let mapConversations = conversations.map((convo) => {
-            
+            let convoNameArray = [];
+            let convoName;
+            let message;
+
+            convo.users.forEach(user => {
+                if(user._id !== this.props.auth.userInfo.id){
+                    convoNameArray.push(user.userName); //push each username into the convoName array
+                }
+            });
+            convoName = convoNameArray.join(", ", convoNameArray);
+            //This is just a temporary way to display a message in the miniUserCard, should think of a better way
+            message = convo.messages[convo.messages.length-1].message;
+
             return <MiniUserCard
-                        convoName={convo.conversationName}
-                        key={convo._id}
-                        convoID = {convo._id}
-                    />
+                convoName={convoName}
+                key={convo._id}
+                convoID = {convo._id}
+                message={message}
+            />
         })
 
         return (
