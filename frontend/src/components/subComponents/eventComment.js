@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-//import { strictEqual } from 'assert'; //what is this? I never imported this
 
 import { removeComment } from "../../actions/index";
 import { editComment } from "../../actions/index";
-//import Axios from 'axios';
 
 class eventComment extends Component {
     state = {
@@ -17,17 +15,10 @@ class eventComment extends Component {
         this.setState({userComment: this.props.userComment})
 
     }
-    componentWillReceiveProps =(nextProps) => {
-        /* this.setState({
-            userComment: nextProps.userComment
-        }) */
-
-    }
     
     //used to delete an event comment
     onSubmit = (e) => {
         //e.preventDefault();
-        //console.log(this.props.commentID);
         const commentInfo = {
             commentID: this.props.commentID,
             eventID: this.props.eventID
@@ -43,9 +34,7 @@ class eventComment extends Component {
     //submit a comment via an api call with axios
     onEnterKeyPress = (target) => {
         if(target.charCode==13){
-            //alert('Enter clicked!!!');  
             
-            //Axios.post()
             const commentInfo = {
                 comment: this.state.userComment,
                 eventID: this.props.eventID,
@@ -56,7 +45,6 @@ class eventComment extends Component {
 
             this.commentBox.classList.toggle("is-hidden");
             this.commentInput.classList.toggle("is-hidden");
-            //console.log(commentInfo.comment);
         } 
     }
 
@@ -113,7 +101,6 @@ class eventComment extends Component {
             }
         }
 
-
         return (
             <div className="eventComment">
                 <article className="media">
@@ -136,15 +123,12 @@ class eventComment extends Component {
                             onChange={this.handleInputChanges}
                             onKeyPress={this.onEnterKeyPress}
                         />
-                        
 
                         <p className="" ref = {(el) => { this.commentBox = el; }}>
                             <strong>{this.props.userName}</strong> <small>usernamehere</small> <small>days ago this comment was made?</small>
                             <br />
                             {this.props.userComment}
                         </p>
-
-
 
                         </div>
                         <nav className="level is-mobile">
@@ -161,47 +145,9 @@ class eventComment extends Component {
                         </div>
                         </nav>
                     </div>
-                    {/* This should only be displayed to the user who created this comment */}
-
-                    {/* This is the dropdown box  */}
 
                     {editButton}
 
-                    {/*
-                    <div className="media-right">
-
-                        <div className="dropdown is-right dropButton" onClick={this.displayDropDown} ref={(el) => this._input = el}>
-                            <div className="dropdown-trigger">
-                                <button className="button" aria-haspopup="true" aria-controls="dropdown-menu2">
-                                    <span className="icon is-small">
-                                        <i className="fas fa-ellipsis-h" aria-hidden="true"></i>
-                                    </span>
-                                </button>
-                            </div>
-
-
-                            <div className="dropdown-menu" id="dropdown-menu2" role="menu">
-                                <div className="dropdown-content">
-                                    <a href="#" className="dropdown-item" onClick={this.editButton}>
-                                        Edit
-                                    </a>
-                                    <hr className="dropdown-divider" />
-                                    <a href="#" className="dropdown-item" onClick={this.onSubmit}>
-                                        Delete
-                                    </a>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        
-                    </div>
-                    */}
-
-
-                    {/* <div className="media-right">
-                        <button className="delete" onClick={this.onSubmit}></button>
-                    </div> */}
                 </article>
                 <br />
             </div>

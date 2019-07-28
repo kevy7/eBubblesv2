@@ -25,8 +25,6 @@ class inputFirstMessage extends Component {
     }
 
     handleInputChanges = async (e) => {
-        //e.preventDefault();
-
         await this.setState({[e.target.name]: e.target.value});
     }
 

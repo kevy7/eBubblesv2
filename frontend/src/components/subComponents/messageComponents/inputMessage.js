@@ -12,7 +12,6 @@ import "../../../styles/inputMessage.css";
 import { postMessage } from "../../../actions";
 
 
-
 class inputMessage extends Component {
 
     state = {
