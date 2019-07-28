@@ -22,7 +22,6 @@ export const store = createStore(
     persistedReducer,
     initialState,
     //applyMiddleware(...middleware)
-
     
     compose(
         applyMiddleware(...middleware),

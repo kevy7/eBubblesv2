@@ -116,12 +116,6 @@ class SignUpModal extends Component {
     }
 }
 
-/*
-It's good practice to use propTypes. You should place your propTypes in here.
-
-*/
-
-
 //All of the data inside of our redux 'store' will be passed in as an argument called 'state'
 const mapStateToProps = (state) => {
 
@@ -132,9 +126,6 @@ const mapStateToProps = (state) => {
     };
 
 }
-
-
-
 
 //Gaining access to an action will be passed down in here
 export default withRouter(connect(mapStateToProps, {
