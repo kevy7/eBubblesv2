@@ -1,9 +1,3 @@
-/*
-
-git push -u origin master
-
-*/
-
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -19,12 +13,6 @@ var uri = require("./config/key").mongoURI;
 //app.use(express.static(path.join(__dirname, 'frontend/build')))
 
 
-
-
-
-
-
-
 //const olduri = "mongodb://localhost:27017/reference_demo";
 mongoose.connect(uri, { useNewUrlParser: true }, function(err, client) {
     if(err){
@@ -36,9 +24,6 @@ mongoose.connect(uri, { useNewUrlParser: true }, function(err, client) {
     }
 });
 port = process.env.PORT || 5000;
-
-
-
 
 /*
 User authentication libraries are going to be declared in here
