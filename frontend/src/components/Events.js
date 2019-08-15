@@ -39,7 +39,6 @@ class Events extends Component {
             <div>
                 <UserHero />
                 <EventsNavigation />
-                <AddButton />
                 <div className="container is-mobile">
                     <hr />
                     {/*<div className="contianer is-multiline columns">*/}

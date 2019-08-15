@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/eventsNavigation.css';
 import { getEvents } from '../../actions';
+import AddButton from './addButton';
+import { ADDRCONFIG } from 'dns';
 
 class eventsNavigation extends Component {
 
@@ -42,7 +44,9 @@ class eventsNavigation extends Component {
                             value={this.state.searchBar} 
                             onChange={this.handleInputChanges}
                         ></input>
+                        <AddButton />
                     </ul>
+                    
                 </nav>
             </div>
         )
