@@ -1150,7 +1150,6 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
 
 
 
-
 //check to see if we're on heroku
 if(process.env.NODE_ENV === 'production') {
     //Basically, if we're in production then run the code below

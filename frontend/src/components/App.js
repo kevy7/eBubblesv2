@@ -22,7 +22,7 @@ import DisplayMessages from './subComponents/displayMessages';
 
 
 class App extends React.Component {
-
+    
     //don't need to declare a state here since we don't need data for this page
     //<Route path='/about' component={About} />
     render(){
