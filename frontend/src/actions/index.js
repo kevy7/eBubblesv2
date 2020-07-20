@@ -129,7 +129,7 @@ export const setEvents = (events) => {
 
 export const postEvent = (event, history) => dispatch => {
     //make an post api call here to post your event to your database
-    axios.post("/api/events", event)
+    axios.post("/api/events", event) //Is event the body of the html request?
     .then(resp => {
 
         //response will go in here
