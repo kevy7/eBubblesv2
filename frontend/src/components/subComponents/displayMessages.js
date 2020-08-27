@@ -7,9 +7,6 @@ import NewMessage from "./messageComponents/newMessage";
 import DisplayMiniUserCard from "./messageComponents/displayMiniUserCard";
 import UserMessagePage from "./messageComponents/userMessagePage";
 import { getConversations } from "../../actions";
-
-
-
 import "../../styles/displayMessages.css";
 
 class displayMessages extends Component {
