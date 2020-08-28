@@ -42,6 +42,9 @@ export const registerUserAction = (userInfo, history) => dispatch => {
 
 export const loginUserAction = (userInfo, history) => dispatch => {
 
+    //dispatch the following action type here
+    //LOAD_LOGIN_COMPONENT
+
     axios.post("/api/login", userInfo)
     .then(response => {
         /*
