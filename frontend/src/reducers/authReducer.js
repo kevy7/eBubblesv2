@@ -1,11 +1,16 @@
 import authenticate from "../services/authenticate";
 
-import { SET_CURRENT_USER, LOAD_LOGIN_COMPONENT } from '../actions/types';
+import { 
+    SET_CURRENT_USER, 
+    LOAD_LOGIN_COMPONENT, 
+    SET_USER_ERROR 
+} from '../actions/types';
 
 const initialState ={
     isAuthenticated: false,
     userInfo: {},
-    loading: false
+    loading: false,
+    error: null
 }
 
 //This reducer will run when the user is trying to login
@@ -22,6 +27,13 @@ export default (state = initialState, action) => {
         return {
             ...state,
             loading: true
+        }
+    }
+    else if(action.type === SET_USER_ERROR){
+        return {
+            ...state,
+            error: action.payload,
+            loading: false
         }
     }
     else {

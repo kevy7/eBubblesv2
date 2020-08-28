@@ -4,6 +4,7 @@ import axios from 'axios';
 import setAuthTokenHeader from '../utils/setAuthTokenHeader'; //Setting our authorization header to contain our token so that it can be passed for authnetication purposes
 import decodeToken from '../services/decodeToken'; //This function will get the token from localStorage and decode it for us and return the user info
 import { SET_CURRENT_USER } from './types';
+import { SET_USER_ERROR } from './types';
 import { SET_CURRENT_ERROR } from './types';
 import { GET_EVENTS } from './types';
 import { SELECT_EVENT } from './types';
@@ -45,6 +46,11 @@ export const loginUserAction = (userInfo, history) => dispatch => {
     //dispatch the following action type here
     //LOAD_LOGIN_COMPONENT
 
+    //this will set loading to true for the authReducer
+    dispatch({
+        type: LOAD_LOGIN_COMPONENT
+    })
+
     axios.post("/api/login", userInfo)
     .then(response => {
         /*
@@ -67,7 +73,13 @@ export const loginUserAction = (userInfo, history) => dispatch => {
         history.push("/events");
     })
     .catch(err => {
-        dispatch(setCurrentError(err));
+        //update this function to only set an error within the authReducer
+        //dispatch(setCurrentError(err));
+        //This will set our loading status to false
+        dispatch({
+            type: SET_USER_ERROR,
+            payload: err
+        })
     });
 }
 
