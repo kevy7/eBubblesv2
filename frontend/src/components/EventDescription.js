@@ -179,8 +179,6 @@ class EventDescription extends Component {
         }
 
 
-
-
         return(
             <div className="eventDescription">
 
