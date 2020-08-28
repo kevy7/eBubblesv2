@@ -60,7 +60,8 @@ export const loginUserAction = (userInfo, history) => dispatch => {
         window.localStorage.setItem("token", token); //This will return to us the whole token which will contain Bearer
 
         setAuthTokenHeader(token);
-
+        
+        //this will be dispatched to the AuthReducer
         dispatch(setCurrentUser(decodeToken())); //decodeToken will work without the need of passing in the token as an argument
 
         history.push("/events");
