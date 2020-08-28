@@ -9,6 +9,7 @@ import { GET_EVENTS } from './types';
 import { SELECT_EVENT } from './types';
 import { REMOVE_EVENT } from './types';
 import { LOAD_COMPONENT } from './types';
+import { LOAD_LOGIN_COMPONENT } from './types';
 import { GET_USER_LOGS } from './types';
 import { GET_USER_PROFILE } from './types';
 import { GET_USERS } from "./types";
