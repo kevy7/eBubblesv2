@@ -142,7 +142,6 @@ class Navbar extends Component {
                                     </a> */}
                                     {signUpButton}
                                     {this.loutOrLinButton()}
-                                    
                                 </div>
                             </div>
                         </div>
