@@ -7,6 +7,7 @@ import propTypes from 'prop-types';
 //import jwtDecode from 'jwt-decode';
 
 //importing code from my own personal files will be placed below
+import ProgressBar from '../components/subComponents/progressBar';
 import { loginUserAction } from '../actions';
 
 class Login extends Component {
@@ -32,6 +33,11 @@ class Login extends Component {
         
     }
     render(){
+
+        if(this.props.auth.loading){
+            return <ProgressBar />
+        }
+
         return (
             <div className="Login">
                     
