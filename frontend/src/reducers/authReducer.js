@@ -10,7 +10,8 @@ const initialState ={
     isAuthenticated: false,
     userInfo: {},
     loading: false,
-    error: null
+    error: null,
+    hasError: false
 }
 
 //This reducer will run when the user is trying to login
@@ -20,7 +21,8 @@ export default (state = initialState, action) => {
             ...state,
             isAuthenticated: authenticate(), //authenticate is going to return true or false based on if we can decode the user's jwt token
             userInfo: action.payload,
-            loading: false
+            loading: false,
+            hasError: false
         }
     }
     else if (action.type === LOAD_LOGIN_COMPONENT){
@@ -33,7 +35,8 @@ export default (state = initialState, action) => {
         return {
             ...state,
             error: action.payload,
-            loading: false
+            loading: false,
+            hasError: true
         }
     }
     else {

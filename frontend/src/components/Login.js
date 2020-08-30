@@ -34,7 +34,7 @@ class Login extends Component {
     }
     render(){
 
-        if(this.props.auth.loading === false){
+        if(this.props.auth.loading){
             return <ProgressBar />
         }
 
@@ -47,14 +47,17 @@ class Login extends Component {
                             <div className="field">
                                 <label className="label">User Name</label>
                                 <div className="control">
+                                    {/* add classname is-danger to make the textbox red */}
                                     <input className="input" value={this.state.userName} name="userName" type="text" placeholder="User Name Here" onChange={this.handleInputChanges}/>
                                 </div>
+                                {this.props.auth.hasError && <p class="help is-danger">This email is invalid</p>}
                             </div>
                             <div className="field">
                                 <label className="label">Password</label>
                                 <div className="control">
                                     <input className="input is-half" value={this.state.password} name="password" type="password" placeholder="" onChange={this.handleInputChanges}/>
                                 </div>
+                                {this.props.auth.hasError && <p class="help is-danger">The password is invalid</p>}
                             </div>
 
                             <div className="field is-grouped">
