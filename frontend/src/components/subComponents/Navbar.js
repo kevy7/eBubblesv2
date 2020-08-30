@@ -65,6 +65,7 @@ class Navbar extends Component {
 
         let url = "/user/" + this.props.auth.userInfo.id;
         let userNavItem;
+        let signUpButton;
 
         //authenticate the user first
 
@@ -73,6 +74,14 @@ class Navbar extends Component {
                 <Link to={url} className="navbar-item">
                     {this.props.auth.userInfo.name}
                 </Link>
+            )
+        }
+
+        if(this.props.auth.isAuthenticated === false){
+            signUpButton = (
+                <a className="button is-info" onClick={this.displaySignUpModal}>
+                    <strong>Sign up</strong>
+                </a>
             )
         }
         
@@ -128,9 +137,10 @@ class Navbar extends Component {
                         <div className="navbar-menu navbar-end">
                             <div className="navbar-item">
                                 <div className="buttons">
-                                    <a className="button is-info" onClick={this.displaySignUpModal}>
+                                    {/* <a className="button is-info" onClick={this.displaySignUpModal}>
                                         <strong>Sign up</strong>
-                                    </a>
+                                    </a> */}
+                                    {signUpButton}
                                     {this.loutOrLinButton()}
                                     
                                 </div>
