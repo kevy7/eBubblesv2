@@ -34,7 +34,7 @@ class Login extends Component {
     }
     render(){
 
-        if(this.props.auth.loading){
+        if(this.props.auth.loading === false){
             return <ProgressBar />
         }
 
