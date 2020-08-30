@@ -73,9 +73,6 @@ export const loginUserAction = (userInfo, history) => dispatch => {
         history.push("/events");
     })
     .catch(err => {
-        //update this function to only set an error within the authReducer
-        //dispatch(setCurrentError(err));
-        //This will set our loading status to false
         dispatch({
             type: SET_USER_ERROR,
             payload: err
