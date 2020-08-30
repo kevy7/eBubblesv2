@@ -34,6 +34,7 @@ class Login extends Component {
     }
     render(){
 
+        //progress bar will be displayed when user is trying to log in and loading is set to true
         if(this.props.auth.loading){
             return <ProgressBar />
         }
