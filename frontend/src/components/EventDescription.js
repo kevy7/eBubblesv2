@@ -13,6 +13,7 @@ import EventHero from './subComponents/eventHero';
 import EventComment from './subComponents/eventComment';
 import ProgressBar from './subComponents/progressBar';
 import Participants from './subComponents/participants';
+import Styles from '../styles/eventDescription.module.css';
 import "../styles/eventDescription.css";
 
 class EventDescription extends Component {
@@ -50,7 +51,7 @@ class EventDescription extends Component {
             return this.props.selectedEvent.selectedEvent.createdby.userName;
         }
         else {
-            return "nothing";
+            return "unknown";
         }
     }
 
@@ -202,58 +203,66 @@ class EventDescription extends Component {
 
 
                 {/* we should probably wrap these elements within a div component  */}
-                <div className="DescriptionContainer">
+                <div className="eventBodyContainer">
 
-                <div className="container">
-                    <div className="content">
-                        <h4 className="title is-4">Created By</h4>
-                        <p className="is-marginless">{this.returnUser()}</p>
+                    <div className="infoContainer">
+
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title is-4">Created By</h4>
+                                <p className="is-marginless">{this.returnUser()}</p>
+                            </div>
+                        </div>
+
+
+                        <hr />
+
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title is-4">Description</h4>
+                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventDescription}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title is-4">Location</h4>
+                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventStreetAddress}</p>
+                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventCity}, {this.props.selectedEvent.selectedEvent.eventState}</p>
+                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventZipCode}</p>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title is-4">Date</h4>
+                                <p>{this.props.selectedEvent.selectedEvent.eventDate}</p>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title -s-4">Photos</h4>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title -s-4">Participants</h4>
+                                {/* Place participants element in here  */}
+
+                            </div>
+                        </div>
+                        <hr />
+
+                    </div> {/* infoContainer */}
+
+                    <div className="suggestionsContainer">
+
                     </div>
-                </div>
-
-
-                <hr />
-
-                <div className="container">
-                    <div className="content">
-                        <h4 className="title is-4">Description</h4>
-                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventDescription}</p>
-                    </div>
-                </div>
-                <hr />
-                <div className="container">
-                    <div className="content">
-                        <h4 className="title is-4">Location</h4>
-                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventStreetAddress}</p>
-                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventCity}, {this.props.selectedEvent.selectedEvent.eventState}</p>
-                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventZipCode}</p>
-                    </div>
-                </div>
-                <hr />
-
-                <div className="container">
-                    <div className="content">
-                        <h4 className="title is-4">Date</h4>
-                        <p>{this.props.selectedEvent.selectedEvent.eventDate}</p>
-                    </div>
-                </div>
-                <hr />
-
-                <div className="container">
-                    <div className="content">
-                        <h4 className="title -s-4">Photos</h4>
-                    </div>
-                </div>
-                <hr />
-
-                <div className="container">
-                    <div className="content">
-                        <h4 className="title -s-4">Participants</h4>
-                        {/* Place participants element in here  */}
-
-                    </div>
-                </div>
-                <hr />
 
                 </div>
 
