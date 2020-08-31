@@ -202,6 +202,8 @@ class EventDescription extends Component {
 
 
                 {/* we should probably wrap these elements within a div component  */}
+                <div className="DescriptionContainer">
+
                 <div className="container">
                     <div className="content">
                         <h4 className="title is-4">Created By</h4>
@@ -253,6 +255,8 @@ class EventDescription extends Component {
                 </div>
                 <hr />
 
+                </div>
+
 
 
                 {/* container for comments  */}
@@ -298,6 +302,7 @@ class EventDescription extends Component {
                         <br />
                     </div>
                 </div>
+
                 <br /> 
             </div>
         );
