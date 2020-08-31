@@ -198,14 +198,12 @@ class EventDescription extends Component {
                 </div>
 
                 <EventHero />
-                <br />
-
-
+                {/* <br /> */}
 
                 {/* we should probably wrap these elements within a div component  */}
-                <div className="eventBodyContainer">
+                <div className={Styles.eventBodyContainer}>
 
-                    <div className="infoContainer">
+                    <div className={Styles.infoContainer}>
 
                         <div className="container">
                             <div className="content">
@@ -256,11 +254,11 @@ class EventDescription extends Component {
 
                             </div>
                         </div>
-                        <hr />
+                        {/* <hr /> */}
 
                     </div> {/* infoContainer */}
 
-                    <div className="suggestionsContainer">
+                    <div className={Styles.suggestionsContainer}>
 
                     </div>
 
