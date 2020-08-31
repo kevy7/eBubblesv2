@@ -6,7 +6,7 @@ import decodeToken from '../services/decodeToken'; //This function will get the 
 import { SET_CURRENT_USER } from './types';
 import { SET_USER_ERROR } from './types';
 import { SET_CURRENT_ERROR } from './types';
-import { GET_EVENTS } from './types';
+import { GET_EVENTS, LOAD_EVENTS } from './types';
 import { SELECT_EVENT } from './types';
 import { REMOVE_EVENT } from './types';
 import { LOAD_COMPONENT } from './types';

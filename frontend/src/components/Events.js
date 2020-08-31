@@ -20,6 +20,7 @@ class Events extends Component {
     componentDidMount = () => {
         
         //this.props.getEvents(); //This action is called to make an api request to get a list of events from our database for us
+        //this is called with the eventBubbles component
         //const values = queryString.parse(this.props.location.search);
         
     }
