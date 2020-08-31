@@ -16,13 +16,12 @@ class eventBubbles extends Component {
     render(){
 
         if(this.props.events.loading === true){
-            return <span></span>
+            return <ProgressBar />
         }
 
         return (
             <div className="eventBubbles contianer is-multiline columns">
                 {
-                    //This code doesn't work when we refresh the page
                     this.props.events && this.props.events.events.map(event => {
                         return <EventBubble 
                                 img={event.eventImage}
@@ -32,7 +31,7 @@ class eventBubbles extends Component {
                                 userID={event.createdby}
                             />
                     }) 
-                            //console.log(this.props.events.events) //it says no token was sent
+                    //console.log(this.props.events.events) //it says no token was sent
                 }
             </div>
         )
