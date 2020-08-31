@@ -6,7 +6,7 @@ import decodeToken from '../services/decodeToken'; //This function will get the 
 import { SET_CURRENT_USER } from './types';
 import { SET_USER_ERROR } from './types';
 import { SET_CURRENT_ERROR } from './types';
-import { GET_EVENTS, LOAD_EVENTS } from './types';
+import { GET_EVENTS, LOAD_EVENTS, EVENTS_ERROR } from './types';
 import { SELECT_EVENT } from './types';
 import { REMOVE_EVENT } from './types';
 import { LOAD_COMPONENT } from './types';
@@ -116,7 +116,7 @@ export const getEvents = (queryString) => dispatch => {
     setAuthTokenHeader(window.localStorage.getItem("token"));
 
     dispatch({
-        type: LOAD_COMPONENT
+        type: LOAD_EVENTS
     })
 
     const parameter = {
@@ -130,7 +130,10 @@ export const getEvents = (queryString) => dispatch => {
         dispatch(setEvents(response.data));
     })
     .catch((err) => {
-        dispatch(setCurrentError(err));
+        dispatch({
+            type: EVENTS_ERROR,
+            payload: err
+        })
     });
 }
 
