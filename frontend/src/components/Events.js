@@ -16,20 +16,6 @@ class Events extends Component {
         fakeData: [],
         fakeErrors: null
     }
-   
-    componentDidMount = () => {
-        
-        //this.props.getEvents(); //This action is called to make an api request to get a list of events from our database for us
-        //this is called with the eventBubbles component
-        //const values = queryString.parse(this.props.location.search);
-        
-    }
-
-    //This is needed for when events are deleted, when events are deleted, reload this page with new events
-    //There is an error with this function, the page will constantly be refreshing because this page will aways be receiving new props
-    componentWillReceiveProps = (nextProps) => {
-
-    }
 
     render(){
         /* if(this.props.events.loading === true){
@@ -55,7 +41,6 @@ class Events extends Component {
 }
 
 const mapStateToProps = (state) => {
-
     return { 
         auth: state.auth,
         events: state.events
