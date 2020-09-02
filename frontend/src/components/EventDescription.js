@@ -154,7 +154,6 @@ class EventDescription extends Component {
         if(this.props.selectedEvent.selectedEvent.eventParticipants){
             //console.log("There is a list of participants")
             const listOfParticipants = this.props.selectedEvent.selectedEvent.eventParticipants;
-            //console.log(listOfParticipants);
 
             if(listOfParticipants.includes(this.props.auth.userInfo.id)){
                 //If there is a match, that means that the user is currently participating in this event
