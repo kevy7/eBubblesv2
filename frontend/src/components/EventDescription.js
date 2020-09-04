@@ -272,7 +272,7 @@ class EventDescription extends Component {
 
 
                 {/* container for comments  */}
-
+                <hr/>
                 <div className="container">
                     <div className="content">
                         <h4 className="title -s-4">Comments</h4>

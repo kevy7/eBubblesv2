@@ -1,14 +1,15 @@
 .eventBodyContainer {
     display: flex;
+    flex-direction: column;
 }
 
 .infoContainer {
     padding-left: 5%;
     padding-top: 2%;
+    
 }
 
 .suggestionsContainer {
-    /* height: 500px; */
+    height: 500px;
     background: gray;
-    width: 100%;
 }
