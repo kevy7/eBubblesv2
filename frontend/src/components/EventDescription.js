@@ -10,11 +10,13 @@ import { logUserToEvent } from '../actions';
 import { removeUserFromEvent } from '../actions';
 
 import EventHero from './subComponents/eventHero';
+import suggestionsContainer from './subComponents/SuggestionsContainer';
 import EventComment from './subComponents/eventComment';
 import ProgressBar from './subComponents/progressBar';
 import Participants from './subComponents/participants';
 import Styles from '../styles/eventDescription.module.css';
 import "../styles/eventDescription.css";
+import SuggestionsContainer from './subComponents/SuggestionsContainer';
 
 class EventDescription extends Component {
     state = {
@@ -261,11 +263,7 @@ class EventDescription extends Component {
 
                     {/* split between the infoContainer and the suggestionsContainer */}
 
-
-
-                    <div className={Styles.suggestionsContainer}>
-
-                    </div>
+                    <SuggestionsContainer />
 
                 </div>
 
