@@ -257,6 +257,12 @@ class EventDescription extends Component {
 
                     </div> {/* infoContainer */}
 
+
+
+                    {/* split between the infoContainer and the suggestionsContainer */}
+
+
+
                     <div className={Styles.suggestionsContainer}>
 
                     </div>
