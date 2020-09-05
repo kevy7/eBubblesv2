@@ -8,16 +8,27 @@ import Styles from './Droppable.module.css';
 
 class DroppableComponent extends Component {
     render (){
+        
         return (
             <div className="droppableComponent">
+                <Droppable droppableId={this.props.droppableId}>
+                    { (provided, snapshot) => {
+                        //return a div element here
+                        <div>
+                            {/* dragabble components needs to be in here */}
+                            
+                        </div>
 
+                    }}
+
+                </Droppable>
             </div>
         )
     }
 }
 
 DroppableComponent.propTypes = {
-    dropID = PropTypes.string //the droppable id given to our columns. helps us identify the column, we're dragging items into
+    droppableId = PropTypes.string //the droppable id given to our droppable columns (we will have 2). helps us identify the column, we're dragging items into
 }
 
 export default DroppableComponent;
