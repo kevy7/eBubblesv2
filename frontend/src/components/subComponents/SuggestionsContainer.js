@@ -14,7 +14,9 @@ Idea: Users can recommend suggestions or tasks to do on a planned trip
 
 class SuggestionsContainer extends Component {
     render(){
-        onDragEnd = (result) => {
+
+        //function used to handle dragged elements
+        const onDragEnd = (result) => {
             //pulls the needed data from the result argument
             let { destination, source, draggableId } = result;
 
