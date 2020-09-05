@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext} from 'react-beautiful-dnd';
 import Styles from '../../styles/suggestionsContainer.module.css';
 
+import DroppableComponent from './DnDComponents/DroppableComponent/DroppableComponent';
 
 /*
 
@@ -42,6 +43,12 @@ class SuggestionsContainer extends Component {
                     onDragEnd={this.onDragEnd}
                 >
                     {/* droppable components will go in here */}
+                    <DroppableComponent 
+                        droppableId="suggestionsCol"
+                    />
+                    <DroppableComponent 
+                        droppableId="activitiesCol"
+                    />
 
                 </DragDropContext>
             </div>

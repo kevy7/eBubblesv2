@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 
+
 import Styles from './Droppable.module.css';
 
 class DroppableComponent extends Component {
@@ -12,14 +13,23 @@ class DroppableComponent extends Component {
         return (
             <div className="droppableComponent">
                 <Droppable droppableId={this.props.droppableId}>
-                    { (provided, snapshot) => {
-                        //return a div element here
-                        <div>
+                    { (provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            style={{backgroundColor: snapshot.isDraggingOver ? 'blue': 'grey'}} //background color of this droppable column will change based on isDraggingOver event
+                            {...provided.droppableProps}
+                        >
                             {/* dragabble components needs to be in here */}
+                            {/* <DraggableComponent /> */}
+
                             
+
+
+                            I am droppable {this.props.droppableId}
+                            {provided.placeholder} {/* used for extending this column if new items get dragged into the droppable column */}
                         </div>
 
-                    }}
+                    )}
 
                 </Droppable>
             </div>
@@ -28,7 +38,7 @@ class DroppableComponent extends Component {
 }
 
 DroppableComponent.propTypes = {
-    droppableId = PropTypes.string //the droppable id given to our droppable columns (we will have 2). helps us identify the column, we're dragging items into
+    droppableId: PropTypes.string //the droppable id given to our droppable columns (we will have 2). helps us identify the column, we're dragging items into
 }
 
 export default DroppableComponent;
