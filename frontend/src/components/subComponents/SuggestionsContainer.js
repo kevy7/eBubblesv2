@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Styles from '../../styles/suggestionsContainer.module.css';
 import { DragDropContext} from 'react-beautiful-dnd';
+import Styles from '../../styles/suggestionsContainer.module.css';
 
 
 /*
