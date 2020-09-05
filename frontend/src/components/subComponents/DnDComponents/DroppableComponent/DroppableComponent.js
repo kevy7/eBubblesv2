@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 
-
+import DraggableComp from '../DraggableComp/DraggableComp';
 import Styles from './Droppable.module.css';
 
 class DroppableComponent extends Component {
@@ -20,8 +20,8 @@ class DroppableComponent extends Component {
                             {...provided.droppableProps}
                         >
                             {/* dragabble components needs to be in here */}
-                            {/* <DraggableComponent /> */}
-
+                            {/* use .map function to render a alot of Draggable functions here <DraggableComponent /> */}
+                            <DraggableComp index={1} draggableId={"item1"}/>
                             
 
 

@@ -9,10 +9,29 @@ class DraggableComp extends Component {
     render(){
         return (
             <div className="draggableComp">
-                
+                <Draggable
+                    draggableId={this.props.draggableId}
+                    index={this.props.index}
+                >
+                    { (provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                        >   
+                            Drag me!
+                        </div>
+                    )}
+                </Draggable>
+
             </div>
         )
     }
+}
+
+DraggableComp.propTypes = {
+    index: PropTypes.number,
+    draggableId: PropTypes.string
 }
 
 export default DraggableComp;
