@@ -31,7 +31,8 @@ class DraggableComp extends Component {
 
 DraggableComp.propTypes = {
     index: PropTypes.number,
-    draggableId: PropTypes.string
+    draggableId: PropTypes.string,
+    event: PropTypes.string
 }
 
 export default DraggableComp;

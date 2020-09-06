@@ -22,10 +22,17 @@ class DroppableComponent extends Component {
                             {/* dragabble components needs to be in here */}
                             {/* use .map function to render a alot of Draggable functions here <DraggableComponent /> */}
                             {/* <DraggableComp index={1} draggableId={"item1"}/> */}
-                            
+                            {
+                                this.state.activities.map((activity, index) => {
+                                    return <DraggableComp 
+                                        index={index}
+                                        draggableId={activity.id}
+                                    />
+                                })
+                            }
 
 
-                            I am droppable {this.props.droppableId}
+                            {/* I am droppable {this.props.droppableId} */}
                             {provided.placeholder} {/* used for extending this column if new items get dragged into the droppable column */}
                         </div>
 

@@ -45,10 +45,12 @@ class SuggestionsContainer extends Component {
                     {/* droppable components will go in here */}
                     <DroppableComponent 
                         droppableId="suggestionsCol"
+                        activities={this.state.suggestions}
                         //we also need to pass in each components, their own arrays. This one should be suggestions
                     />
                     <DroppableComponent 
                         droppableId="activitiesCol"
+                        activities={this.state.activities}
                         //pass in the activities array here
                     />
 
