@@ -34,7 +34,7 @@ class SuggestionsContainer extends Component {
     onDragEnd = result => {
 
         //pulls the needed data from the result argument
-        let { destination, source, draggableId } = result;
+        let { destination, source } = result;
 
         //if the item was dropped out of bounds and into no destination, then return nothing
         if(!destination){
@@ -45,8 +45,8 @@ class SuggestionsContainer extends Component {
         if(source.droppableId === destination.droppableId){
             /*
                 variables to use
-                source.index
-                destination.index
+                source.index - index of the draggable element that user selected and is trying to move
+                destination.index - index of where that draggable element was placed in
             */
 
             const newList = this.reorderList(source.droppableId, source.index, destination.index); //Will return an updated array list
@@ -65,7 +65,14 @@ class SuggestionsContainer extends Component {
         }
         //else, item must've been moved from one droppable component to another
         else {
-            const newList = this.moveAndReorder(source.droppableId, destination.droppableId, source.index, destination.index);
+            const newLists = this.moveAndReorder(source.droppableId, destination.droppableId, source.index, destination.index);
+
+            //update the state with the newly return list of suggestions/activities
+            this.setState({
+                ...this.state,
+                suggestions: newLists["suggestions"],
+                activities: newLists["activities"]
+            })
         }
 
     }
@@ -73,11 +80,6 @@ class SuggestionsContainer extends Component {
 
     //function used to reorder your list of elements that are within the same droppable component
     reorderList = (droppableId, sourceIdx, destIdx) => {
-        /*
-
-            given the droppableID, sourceIdx, and destIdx. How would you reorder your immutable state array
-
-        */
 
         //First, let's retreive our state array, it should be the suggestions or activity list based on the droppableID that's given to us
         const activities = Array.from(this.state[droppableId])
@@ -86,7 +88,6 @@ class SuggestionsContainer extends Component {
         //re-add the activity to it's new index
         activities.splice(destIdx, 0, removedActivity);
 
-
         return activities;
     }
 
@@ -94,8 +95,19 @@ class SuggestionsContainer extends Component {
         //retreive copy of activities from suggestions/activities array within our state
         const sourceActivities = Array.from(this.state[sourceDropId]);
         const destActivities = Array.from(this.state[destDropId]);
+        let result = {};
 
-        
+        //remove item from your sourceActivities array
+        let [removedActivity] = sourceActivities.splice(sourceIdx, 1);
+
+        //add the removed item into the destActivites array
+        destActivities.splice(destIdx, 0, removedActivity);
+
+        //add arrays into the result object
+        result[sourceDropId] = sourceActivities;
+        result[destDropId] = destActivities;
+
+        return result;
     }
 
     render(){
