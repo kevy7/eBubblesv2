@@ -27,6 +27,7 @@ class DroppableComponent extends Component {
                                         index={index}
                                         draggableId={activity.id}
                                         event={activity.event}
+                                        key={activity.id} //I guess it is really important to include a key for your draggable components
                                     />
                                 })
                                 
