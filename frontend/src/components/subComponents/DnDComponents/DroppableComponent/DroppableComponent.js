@@ -19,11 +19,6 @@ class DroppableComponent extends Component {
                             style={{backgroundColor: snapshot.isDraggingOver ? 'rgb(163, 192, 240)': 'grey'}} //background color of this droppable column will change based on isDraggingOver event
                             {...provided.droppableProps}
                         >
-                            {/* dragabble components needs to be in here */}
-                            {/* use .map function to render a alot of Draggable functions here <DraggableComponent /> */}
-                            {/* <DraggableComp index={1} draggableId={"item1"} event={"event1"}/>
-                            <DraggableComp index={2} draggableId={"item2"} event={"event2"}/>
-                            <DraggableComp index={3} draggableId={"item3"} event={"event3"}/> */}
                             <h1>{this.props.title}</h1>
 
                             {
@@ -36,7 +31,6 @@ class DroppableComponent extends Component {
                                 })
                                 
                             }
-
 
                             {/* I am droppable {this.props.droppableId} */}
                             {provided.placeholder} {/* used for extending this column if new items get dragged into the droppable column */}

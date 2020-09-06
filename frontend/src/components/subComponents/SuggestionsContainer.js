@@ -25,6 +25,7 @@ class SuggestionsContainer extends Component {
             { id: "e4", event: "event 4" },
             { id: "e5", event: "event 5" },
             { id: "e6", event: "event 6" },
+            { id: "e7", event: "event 7" },
         ] //static at the moment, these are list of suggestions that everyone agreed to go to
     }
 
