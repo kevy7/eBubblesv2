@@ -19,7 +19,7 @@ class DraggableComp extends Component {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                         >   
-                            Drag me!
+                            Drag me! {this.props.event}
                         </div>
                     )}
                 </Draggable>

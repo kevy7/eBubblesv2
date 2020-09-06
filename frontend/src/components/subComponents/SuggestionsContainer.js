@@ -17,14 +17,14 @@ class SuggestionsContainer extends Component {
     //For now, we're creating static temporary data for the suggestions and activities array. The backend will be worked on later.
     state = {
         suggestions: [
-            { id: 1, event: "event 1" },
-            { id: 2, event: "event 2" },
-            { id: 3, event: "event 3" },
+            { id: "e1", event: "event 1" },
+            { id: "e2", event: "event 2" },
+            { id: "e3", event: "event 3" },
         ], //static at the moment, these are list of suggestions on a trip
         activities: [
-            { id: 4, event: "event 4" },
-            { id: 5, event: "event 5" },
-            { id: 6, event: "event 6" },
+            { id: "e4", event: "event 4" },
+            { id: "e5", event: "event 5" },
+            { id: "e6", event: "event 6" },
         ] //static at the moment, these are list of suggestions that everyone agreed to go to
     }
 
@@ -46,11 +46,13 @@ class SuggestionsContainer extends Component {
                     <DroppableComponent 
                         droppableId="suggestionsCol"
                         activities={this.state.suggestions}
+                        title="Suggestions"
                         //we also need to pass in each components, their own arrays. This one should be suggestions
                     />
                     <DroppableComponent 
                         droppableId="activitiesCol"
                         activities={this.state.activities}
+                        title="Activities"
                         //pass in the activities array here
                     />
 
