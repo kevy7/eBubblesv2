@@ -38,7 +38,8 @@ class DroppableComponent extends Component {
 }
 
 DroppableComponent.propTypes = {
-    droppableId: PropTypes.string //the droppable id given to our droppable columns (we will have 2). helps us identify the column, we're dragging items into
+    droppableId: PropTypes.string, //the droppable id given to our droppable columns (we will have 2). helps us identify the column, we're dragging items into
+    activities: PropTypes.array
 }
 
 export default DroppableComponent;
