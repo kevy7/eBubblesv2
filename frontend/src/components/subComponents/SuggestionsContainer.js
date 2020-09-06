@@ -3,7 +3,6 @@ import { DragDropContext} from 'react-beautiful-dnd';
 import Styles from '../../styles/suggestionsContainer.module.css';
 
 import DroppableComponent from './DnDComponents/DroppableComponent/DroppableComponent';
-import { SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG } from 'constants';
 
 /*
 
@@ -30,43 +29,74 @@ class SuggestionsContainer extends Component {
         ] //static at the moment, these are list of suggestions that everyone agreed to go to
     }
 
-    render(){
-        //function used to handle dragged elements
-        const onDragEnd = (result) => {
-            //pulls the needed data from the result argument
-            let { destination, source, draggableId } = result;
 
-            //if the item was dropped out of bounds and into no destination, then return nothing
-            if(!destination){
-                return;
-            }
+    //function used to handle dragged elements
+    onDragEnd = result => {
 
-            //if an item was moved within the same droppable element, then perform the following function below
-            if(source.droppableId === destination.droppableId){
+        console.log("onDragEnd is being executed");
 
-            }
-            //else, item must've been moved from one droppable component to another
-            else {
-                
-            }
+        //pulls the needed data from the result argument
+        let { destination, source, draggableId } = result;
+
+        //if the item was dropped out of bounds and into no destination, then return nothing
+        if(!destination){
+            this.setState({
+                suggestions: [
+                    { id: "enew", event: "test event"}
+                ]
+            })
+            return;
+        }
+
+        //if an item was moved within the same droppable element, then perform the following function below
+        if(source.droppableId === destination.droppableId){
+            /*
+                variables to use
+                source.index
+                destination.index
+            */
+
+            const newList = this.reorderList(source.droppableId, source.index, destination.index);
+
+
+        }
+        //else, item must've been moved from one droppable component to another
+        else {
 
         }
 
+    }
+
+
+    //function used to reorder your list of elements
+    reorderList = (droppableId, sourceIdx, destIdx) => {
+        /*
+
+            given the droppableID, sourceIdx, and destIdx. How would you reorder your immutable state array
+
+        */
+
+        //First, let's retreive our state array, it should be the suggestions or activity list based on the droppableID that's given to us
+
+    }
+
+    render(){
         return (
             <div className={Styles.suggestionsContainer}>
                 {/* create two droppable components here */}
                 <DragDropContext
+                    draggable="true"
                     onDragEnd={this.onDragEnd}
                 >
                     {/* droppable components will go in here */}
                     <DroppableComponent 
-                        droppableId="suggestionsCol"
+                        droppableId="suggestions"
                         activities={this.state.suggestions}
                         title="Suggestions"
                         //we also need to pass in each components, their own arrays. This one should be suggestions
                     />
                     <DroppableComponent 
-                        droppableId="activitiesCol"
+                        droppableId="activities"
                         activities={this.state.activities}
                         title="Activities"
                         //pass in the activities array here
