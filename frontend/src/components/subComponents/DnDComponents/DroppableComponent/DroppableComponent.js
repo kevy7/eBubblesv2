@@ -21,7 +21,7 @@ class DroppableComponent extends Component {
                         >
                             {/* dragabble components needs to be in here */}
                             {/* use .map function to render a alot of Draggable functions here <DraggableComponent /> */}
-                            <DraggableComp index={1} draggableId={"item1"}/>
+                            {/* <DraggableComp index={1} draggableId={"item1"}/> */}
                             
 
 
