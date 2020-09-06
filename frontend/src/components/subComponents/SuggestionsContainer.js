@@ -12,7 +12,6 @@ Idea: Users can recommend suggestions or tasks to do on a planned trip
 
 */
 
-
 class SuggestionsContainer extends Component {
     //For now, we're creating static temporary data for the suggestions and activities array. The backend will be worked on later.
     state = {
@@ -28,7 +27,6 @@ class SuggestionsContainer extends Component {
             { id: "e7", event: "event 7" },
         ] //static at the moment, these are list of suggestions that everyone agreed to go to
     }
-
 
     //function used to handle dragged elements
     onDragEnd = result => {
@@ -76,7 +74,6 @@ class SuggestionsContainer extends Component {
         }
 
     }
-
 
     //function used to reorder your list of elements that are within the same droppable component
     reorderList = (droppableId, sourceIdx, destIdx) => {
