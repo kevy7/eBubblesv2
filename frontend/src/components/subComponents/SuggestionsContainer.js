@@ -3,6 +3,7 @@ import { DragDropContext} from 'react-beautiful-dnd';
 import Styles from '../../styles/suggestionsContainer.module.css';
 
 import DroppableComponent from './DnDComponents/DroppableComponent/DroppableComponent';
+import { SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG } from 'constants';
 
 /*
 
@@ -35,8 +36,22 @@ class SuggestionsContainer extends Component {
             //pulls the needed data from the result argument
             let { destination, source, draggableId } = result;
 
+            //if the item was dropped out of bounds and into no destination, then return nothing
+            if(!destination){
+                return;
+            }
+
+            //if an item was moved within the same droppable element, then perform the following function below
+            if(source.droppableId === destination.droppableId){
+
+            }
+            //else, item must've been moved from one droppable component to another
+            else {
+                
+            }
 
         }
+
         return (
             <div className={Styles.suggestionsContainer}>
                 {/* create two droppable components here */}

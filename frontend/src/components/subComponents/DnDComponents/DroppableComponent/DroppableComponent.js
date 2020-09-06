@@ -37,7 +37,6 @@ class DroppableComponent extends Component {
                         </div>
 
                     )}
-
                 </Droppable>
             </div>
         )
