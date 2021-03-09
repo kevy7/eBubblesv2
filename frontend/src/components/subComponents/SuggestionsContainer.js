@@ -110,6 +110,7 @@ class SuggestionsContainer extends Component {
     render(){
         return (
             <div className={Styles.suggestionsContainer}>
+                <div className={Styles.suggestions}>
                 {/* create two droppable components here */}
                 <DragDropContext
                     draggable="true"
@@ -130,6 +131,7 @@ class SuggestionsContainer extends Component {
                     />
 
                 </DragDropContext>
+                </div>
             </div>
         )
     }

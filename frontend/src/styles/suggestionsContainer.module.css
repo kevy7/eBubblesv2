@@ -1,4 +1,13 @@
 .suggestionsContainer {
     height: 5000px;
     background: gray;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.suggestions {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
 }

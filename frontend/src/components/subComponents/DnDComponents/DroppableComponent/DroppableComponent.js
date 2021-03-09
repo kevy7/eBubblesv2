@@ -11,7 +11,7 @@ class DroppableComponent extends Component {
     render (){
         
         return (
-            <div className="droppableComponent">
+            <div className={Styles.droppableComponent}>
                 <Droppable droppableId={this.props.droppableId}>
                     { (provided, snapshot) => (
                         <div

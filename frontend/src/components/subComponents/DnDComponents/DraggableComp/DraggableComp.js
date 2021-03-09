@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 
+import DraggableCard from './DraggableCard/DraggableCard';
+
 class DraggableComp extends Component {
 
     render(){
@@ -19,7 +21,8 @@ class DraggableComp extends Component {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                         >   
-                            Drag me! {this.props.event}
+                            <DraggableCard />
+                            {/* Drag me! {this.props.event} */}
                         </div>
                     )}
                 </Draggable>
