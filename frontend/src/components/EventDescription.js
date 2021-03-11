@@ -208,35 +208,35 @@ class EventDescription extends Component {
 
                         <div className="container">
                             <div className="content">
-                                <h4 className="title is-4">Created By</h4>
-                                <p className="is-marginless">{this.returnUser()}</p>
-                            </div>
-                        </div>
-
-
-                        <hr />
-
-                        <div className="container">
-                            <div className="content">
                                 <h4 className="title is-4">Description</h4>
                                 <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventDescription}</p>
                             </div>
                         </div>
                         <hr />
-                        <div className="container">
-                            <div className="content">
-                                <h4 className="title is-4">Location</h4>
-                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventStreetAddress}</p>
-                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventCity}, {this.props.selectedEvent.selectedEvent.eventState}</p>
-                                <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventZipCode}</p>
-                            </div>
-                        </div>
-                        <hr />
 
                         <div className="container">
-                            <div className="content">
-                                <h4 className="title is-4">Date</h4>
-                                <p>{this.props.selectedEvent.selectedEvent.eventDate}</p>
+                            <div className={Styles.eventInfoContainer}>
+                                <div className={Styles.eventInfo}>
+                                    <div className="content">
+                                        <h4 className="title is-6 is-marginless">Created By</h4>
+                                        <p className="is-marginless">{this.returnUser()}</p>
+                                    </div>
+                
+                                    <div className="content">
+                                        <h4 className="title is-6 is-marginless">Date</h4>
+                                        <p>{this.props.selectedEvent.selectedEvent.eventDate}</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="">
+                                    <div className="content">
+                                        <h4 className="title is-6 is-marginless">Location</h4>
+                                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventStreetAddress}</p>
+                                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventCity}, {this.props.selectedEvent.selectedEvent.eventState}</p>
+                                        <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventZipCode}</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <hr />
@@ -268,9 +268,12 @@ class EventDescription extends Component {
                     </div> {/* infoContainer */}
 
                     {/* split between the infoContainer and the suggestionsContainer */}
-                    <SuggestionsContainer />
+                    {/* <SuggestionsContainer /> */}
 
                 </div>
+
+                {/* split between the infoContainer and the suggestionsContainer */}
+                <SuggestionsContainer />
 
 
 

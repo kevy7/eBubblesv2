@@ -8,3 +8,11 @@
     padding-top: 2%;
     
 }
+
+.eventInfoContainer {
+    display: flex;
+}
+
+.eventInfo {
+    margin-right: 150px;
+}
