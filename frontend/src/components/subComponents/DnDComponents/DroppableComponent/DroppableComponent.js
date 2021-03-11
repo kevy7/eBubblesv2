@@ -19,7 +19,7 @@ class DroppableComponent extends Component {
                             style={{backgroundColor: snapshot.isDraggingOver ? 'rgb(163, 192, 240)': 'grey'}} //background color of this droppable column will change based on isDraggingOver event
                             {...provided.droppableProps}
                         >
-                            <h1>{this.props.title}</h1>
+                            <h1 className={Styles.droppableTitle}>{this.props.title}</h1>
 
                             {
                                 this.props.activities.map((activity, index) => {

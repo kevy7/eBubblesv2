@@ -255,14 +255,19 @@ class EventDescription extends Component {
 
                             </div>
                         </div>
-                        {/* <hr /> */}
+                        <hr />
+
+                        <div className="container">
+                            <div className="content">
+                                <h4 className="title -s-4">Suggestions</h4>
+                                {/* Place participants element in here  */}
+
+                            </div>
+                        </div>
 
                     </div> {/* infoContainer */}
 
-
-
                     {/* split between the infoContainer and the suggestionsContainer */}
-
                     <SuggestionsContainer />
 
                 </div>

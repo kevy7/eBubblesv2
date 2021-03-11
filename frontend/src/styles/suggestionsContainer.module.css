@@ -1,8 +1,5 @@
 .suggestionsContainer {
-    height: 5000px;
-    background: gray;
-    /* display: flex;
-    justify-content: center; */
+
 }
 
 .suggestions {
@@ -10,4 +7,13 @@
     justify-content: center;
     width: 70%;
     margin: auto;
+}
+
+.buttonWrapper {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
 }

@@ -88,6 +88,7 @@ class SuggestionsContainer extends Component {
         return activities;
     }
 
+    //function used to reorder your list of elements that are dropped and placed in a different droppable component
     moveAndReorder = (sourceDropId, destDropId, sourceIdx, destIdx) => {
         //retreive copy of activities from suggestions/activities array within our state
         const sourceActivities = Array.from(this.state[sourceDropId]);
@@ -110,6 +111,9 @@ class SuggestionsContainer extends Component {
     render(){
         return (
             <div className={Styles.suggestionsContainer}>
+                <div className={Styles.buttonWrapper}>
+                    <button className="button is-info is-fullwidth is-medium">New Activity</button>
+                </div>
                 <div className={Styles.suggestions}>
                 {/* create two droppable components here */}
                 <DragDropContext

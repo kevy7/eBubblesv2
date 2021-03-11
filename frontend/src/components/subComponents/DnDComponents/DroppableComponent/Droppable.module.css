@@ -2,3 +2,10 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
+.droppableTitle {
+    text-align: center;
+    font-size: 25px;
+    background: white;
+    font-weight: bold;
+}
