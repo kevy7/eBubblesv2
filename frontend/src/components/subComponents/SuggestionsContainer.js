@@ -3,6 +3,7 @@ import { DragDropContext} from 'react-beautiful-dnd';
 import Styles from '../../styles/suggestionsContainer.module.css';
 
 import DroppableComponent from './DnDComponents/DroppableComponent/DroppableComponent';
+import NewSuggestionsModal from './suggestionContSubComponents/NewSuggestionsModal/NewSuggestionsModal';
 
 /*
 
@@ -108,9 +109,14 @@ class SuggestionsContainer extends Component {
         return result;
     }
 
+    handleClick = (e) => {
+
+    }
+
     render(){
         return (
             <div className={Styles.suggestionsContainer}>
+                <NewSuggestionsModal />
                 <div className={Styles.buttonWrapper}>
                     <button className="button is-info is-fullwidth is-medium">New Activity</button>
                 </div>

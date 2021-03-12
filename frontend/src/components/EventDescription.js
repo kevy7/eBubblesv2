@@ -208,7 +208,7 @@ class EventDescription extends Component {
 
                         <div className="container">
                             <div className="content">
-                                <h4 className="title is-4">Description</h4>
+                                <h4 className="title is-6 is-marginless">Description</h4>
                                 <p className="is-marginless">{this.props.selectedEvent.selectedEvent.eventDescription}</p>
                             </div>
                         </div>
@@ -266,9 +266,6 @@ class EventDescription extends Component {
                         </div>
 
                     </div> {/* infoContainer */}
-
-                    {/* split between the infoContainer and the suggestionsContainer */}
-                    {/* <SuggestionsContainer /> */}
 
                 </div>
 
