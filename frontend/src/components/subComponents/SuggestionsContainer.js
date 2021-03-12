@@ -26,7 +26,8 @@ class SuggestionsContainer extends Component {
             { id: "e5", event: "event 5" },
             { id: "e6", event: "event 6" },
             { id: "e7", event: "event 7" },
-        ] //static at the moment, these are list of suggestions that everyone agreed to go to
+        ], //static at the moment, these are list of suggestions that everyone agreed to go to
+        showModal: false,
     }
 
     //function used to handle dragged elements
@@ -110,15 +111,21 @@ class SuggestionsContainer extends Component {
     }
 
     handleClick = (e) => {
+        e.preventDefault();
+        this.setState({showModal: true});
+    }
 
+    handleClose = (e) => {
+        e.preventDefault();
+        this.setState({showModal: false});
     }
 
     render(){
         return (
             <div className={Styles.suggestionsContainer}>
-                <NewSuggestionsModal />
+                {this.state.showModal === true && <NewSuggestionsModal handleClose={this.handleClose}/>}
                 <div className={Styles.buttonWrapper}>
-                    <button className="button is-info is-fullwidth is-medium">New Activity</button>
+                    <button className="button is-info is-fullwidth is-medium" onClick={this.handleClick}>New Activity</button>
                 </div>
                 <div className={Styles.suggestions}>
                 {/* create two droppable components here */}

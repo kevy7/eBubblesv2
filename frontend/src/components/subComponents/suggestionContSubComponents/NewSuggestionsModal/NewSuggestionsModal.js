@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Styles from './NewSuggestionsModal.module.css';
 
@@ -8,11 +9,10 @@ This component is the module that pops up when the user clicks on the New Activi
 
 */
 
-const NewSuggestionsModal = (prop) => {
+const NewSuggestionsModal = (props) => {
     return (
         <div>
-            {/* use is-active to show the modal */}
-            <div className="modal">
+            <div className="modal is-active">
                 <div className="modal-background"></div>
                 <div className="modal-content">
                     <div className="box">
@@ -36,15 +36,19 @@ const NewSuggestionsModal = (prop) => {
                                 <button className="button is-link">Submit</button>
                             </div>
                             <div className="control">
-                                <button className="button is-link is-light">Cancel</button>
+                                <button className="button is-link is-light" onClick={props.handleClose}>Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button className="modal-close is-large" aria-label="close"></button>
+                <button className="modal-close is-large" aria-label="close" onClick={props.handleClose}></button>
             </div>
         </div>
     )
+}
+
+NewSuggestionsModal.propTypes = {
+    handleClose: PropTypes.func,
 }
 
 export default NewSuggestionsModal;
