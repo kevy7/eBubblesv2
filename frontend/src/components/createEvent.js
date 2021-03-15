@@ -1,3 +1,9 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import { postEvent } from '../actions';
+
 /*
 This is the create event page 
 
@@ -5,12 +11,6 @@ note: I thin eventDate and eventZipCode are returned as strings rather than date
 
 createEventPage
 */
-
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-
-import { postEvent } from '../actions';
 
 class createEvent extends Component {
 

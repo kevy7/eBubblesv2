@@ -10,7 +10,6 @@ This component is the module that pops up when the user clicks on the New Activi
 
 */
 
-
 const NewSuggestionsModal = (props) => {
 
     const { 
