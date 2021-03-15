@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { formInputHook } from '../../../../customHooks/formInputHook';
 import Styles from './NewSuggestionsModal.module.css';
 
 /*
@@ -9,7 +10,19 @@ This component is the module that pops up when the user clicks on the New Activi
 
 */
 
+
 const NewSuggestionsModal = (props) => {
+
+    const { 
+        value:activityNameVal,
+        onChange: activityValOnChange
+    } = formInputHook('');
+
+    const { 
+        value:activityDescVal,
+        onChange: activityDescValOnChange
+    } = formInputHook('');
+
     return (
         <div>
             <div className="modal is-active">
@@ -18,16 +31,16 @@ const NewSuggestionsModal = (props) => {
                     <div className="box">
                         <h1 className="title">New Activity</h1>
                         <div className="field">
-                            <label className="label">Name</label>
+                            <label className="label">Activity Name</label>
                             <div className="control">
-                                <input class="input" type="text" placeholder="Text input" />
+                                <input className="input" type="text" value={activityNameVal} onChange={activityValOnChange}/>
                             </div>
                         </div>
 
                         <div className="field">
-                            <label className="label">Message</label>
+                            <label className="label">Activity Description</label>
                             <div className="control">
-                                <textarea className="textarea" placeholder="Textarea"></textarea>
+                                <textarea className="textarea" value={activityDescVal} onChange={activityDescValOnChange}></textarea>
                             </div>
                         </div>
 
