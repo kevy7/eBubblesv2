@@ -53,6 +53,7 @@ var Comments = require("./models/comments");
 var Logs = require("./models/logs");
 var Message = require("./models/message");
 var Conversation = require("./models/conversation");
+var Activity = require("./models/activity");
 
 
 /*
