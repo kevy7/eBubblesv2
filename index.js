@@ -498,7 +498,6 @@ app.post('/api/events/:id/comment', function(req, res){
     });
 });
 
-
 //add route to edit comments
 app.put('/api/events/:id/comment', function(req, res){
     const commentID = req.body.commentID;
@@ -555,6 +554,14 @@ app.delete('/api/events/:id/comment', function(req, res){
 
 
 //Api requests here
+
+//Request to create a suggestion (aka activity)
+app.post('/api/events/:id/activity', (req, res) => {
+    //we want to create the activity here
+
+    
+
+})
 
 
 
@@ -1120,6 +1127,7 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
 })
 
 
+
 //db.inventory.find( { tags: ["red", "blank"] } )
 //Example of how to search for collections in an array based on a match with a collections specified value within an array
 
@@ -1128,28 +1136,10 @@ app.post("/api/user/:id/messages/:messageID", function(req, res){
 })
  */
 
-
-
-
 //Creating route to retrieve list of connections from a user
 
 
-
-
-
-
-
-
 //make sure to review RESTful routing
-
-
-
-
-
-
-
-
-
 
 //check to see if we're on heroku
 if(process.env.NODE_ENV === 'production') {
@@ -1161,9 +1151,6 @@ if(process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     });
 }
- 
-
-
 
 //We're going to make our express app run on port 3000
 app.listen(port, function(){
