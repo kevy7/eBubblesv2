@@ -559,8 +559,16 @@ app.delete('/api/events/:id/comment', function(req, res){
 app.post('/api/events/:id/activity', (req, res) => {
     //we want to create the activity here
 
-    
+    //console.log(req.body);
+    let eventId = req.params.id;
 
+    let activity = {
+        activityName: req.body.activityName,
+        activityDescription: req.body.activityDescription,
+        activityDate: new Date(),
+        createdby: req.body.createdby,
+    }
+    
 })
 
 
