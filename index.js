@@ -566,9 +566,9 @@ app.post('/api/events/:id/activity', (req, res) => {
         activityName: req.body.activityName,
         activityDescription: req.body.activityDescription,
         activityDate: new Date(),
-        createdby: req.body.createdby,
+        createdby: req.body.createdby, //the user's id
     }
-    
+
 })
 
 
