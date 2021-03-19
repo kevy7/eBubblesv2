@@ -577,7 +577,18 @@ app.post('/api/events/:id/activity', (req, res) => {
         }
         else {
             //Activity is now created, now we want to push the activity into our event
-            
+            Events.findById(eventId).populate("eventActivities").exec((err, event) => {
+                event.eventActivities.push(activity);
+
+                event.save((saveErr, activityData) => {
+                    if(err){
+                        res.send(saveErr);
+                    }
+                    else {
+                        res.send(activityData); //send the activity back to the user
+                    }
+                })
+            });
         }
     })
 
