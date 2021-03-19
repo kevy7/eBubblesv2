@@ -29,7 +29,14 @@ var eventSchema = new mongoose.Schema({
     eventStreetAddress: String,
     eventCity: String,
     eventState: String,
-    eventZipCode: String
+    eventZipCode: String,
+    eventActivities: [
+        {
+            //List of activities/suggestions in this event
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Activity'
+        }
+    ]
 
     /*
     eventParticipants: [

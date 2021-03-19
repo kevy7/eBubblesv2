@@ -562,12 +562,25 @@ app.post('/api/events/:id/activity', (req, res) => {
     //console.log(req.body);
     let eventId = req.params.id;
 
-    let activity = {
+    let activityInfo = {
         activityName: req.body.activityName,
         activityDescription: req.body.activityDescription,
         activityDate: new Date(),
         createdby: req.body.createdby, //the user's id
     }
+
+    //example for creating an activity
+    //Events.create(eventData, function(err, event){
+    Activity.create(activityInfo, (err, activity) => {
+        if(err){
+            req.send(err);
+        }
+        else {
+            //Activity is now created, now we want to push the activity into our event
+            
+        }
+    })
+
 
 })
 
