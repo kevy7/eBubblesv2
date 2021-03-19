@@ -586,12 +586,13 @@ app.post('/api/events/:id/activity', (req, res) => {
                     }
                     else {
                         res.send(activityData); //send the activity back to the user
+                        //return the list of activities for an event back to the user
+                        console.log("The activity was succesfully created")
                     }
                 })
             });
         }
     })
-
 
 })
 
