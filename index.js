@@ -352,7 +352,7 @@ app.get("/api/events/:id", verifyToken, function(req, res){
     var eventID = req.params.id; //This will allow us to gain access to the id placed in the url
 
     //populate("eventParticipants")
-    Events.findById(eventID).populate("eventComments").populate("createdby").exec(function(err, event){
+    Events.findById(eventID).populate("eventComments").populate("createdby").populate("eventActivities").exec(function(err, event){
         if(err){
             res.send(err);
         }
