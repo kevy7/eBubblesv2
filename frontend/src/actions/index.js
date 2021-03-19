@@ -680,5 +680,29 @@ export const postNewMessage = (messageData) => dispatch => {
 
 //Create an action to POST a message into a conversation
 
+//action to post a new suggestion into a user event
+export const postNewActivity = (activityData) => dispatch => {
+    /*
+        activity data object should contain the following
+
+        activityName: req.body.activityName,
+        activityDescription: req.body.activityDescription,
+        activityDate: new Date(),
+        createdby: req.body.createdby, //the user's id
+        eventID <-- this is simply needed to identify the event that the activity is created under
+
+    */
+    const url = "/api/events/" + activityData.eventID + "/activity";
+
+    axios.post(url, activityData)
+    .then(
+        //dispatch the returned evernt along with it's list of user activities
+
+    )
+    .catch(
+        //dispatch something here if there is an error
+    )
+}
+
 
 
