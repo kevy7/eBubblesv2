@@ -454,7 +454,7 @@ app.post('/api/events/:id/comment', function(req, res){
         }
         else {
             //find the event based on it's id above
-            Events.findById(eventId).populate("eventComments").exec(function(err, event){
+            Events.findById(eventId).populate("createdby").populate("eventComments").populate("eventActivities").exec(function(err, event){
                 if(err){
                     res.send(err);
                 }
