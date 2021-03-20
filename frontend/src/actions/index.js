@@ -695,13 +695,17 @@ export const postNewActivity = (activityData) => dispatch => {
     const url = "/api/events/" + activityData.eventID + "/activity";
 
     axios.post(url, activityData)
-    .then(
-        //dispatch the returned evernt along with it's list of user activities
-
-    )
-    .catch(
-        //dispatch something here if there is an error
-    )
+    .then(res => {
+        //set a dispatch to return the res.data
+        dispatch({
+            type: SELECT_EVENT,
+            payload: res.data
+        });
+    })
+    .catch(err => {
+        //dispatch and return the error message when it is retreived
+        //for now, we won't dispatch an error to our reducer
+    })
 }
 
 
