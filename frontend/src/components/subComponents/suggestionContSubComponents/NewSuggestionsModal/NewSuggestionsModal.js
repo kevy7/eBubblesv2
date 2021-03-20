@@ -1,7 +1,10 @@
 import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { formInputHook } from '../../../../customHooks/formInputHook';
+import { postNewActivity } from '../../../../actions/index';
 import Styles from './NewSuggestionsModal.module.css';
 
 /*
@@ -21,6 +24,13 @@ const NewSuggestionsModal = (props) => {
         value:activityDescVal,
         onChange: activityDescValOnChange
     } = formInputHook('');
+
+    //used to make an api call for creating a new suggestion/event
+    const handleClick = (e) => {
+        e.preventDefault();
+        
+
+    }
 
     return (
         <div>
@@ -45,7 +55,7 @@ const NewSuggestionsModal = (props) => {
 
                         <div className="field is-grouped">
                             <div className="control">
-                                <button className="button is-link">Submit</button>
+                                <button className="button is-link" onClick={handleClick}>Submit</button>
                             </div>
                             <div className="control">
                                 <button className="button is-link is-light" onClick={props.handleClose}>Cancel</button>
@@ -63,4 +73,14 @@ NewSuggestionsModal.propTypes = {
     handleClose: PropTypes.func,
 }
 
-export default NewSuggestionsModal;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+    }
+}
+
+// export default NewSuggestionsModal;
+
+export default withRouter(connect(mapStateToProps, {
+    postNewActivity
+})(NewSuggestionsModal));
